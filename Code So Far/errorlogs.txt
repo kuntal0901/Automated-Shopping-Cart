@@ -1,0 +1,13 @@
+Error asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\fruits\Apple\z_Apple1.txtName isappleError asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\vegetables\lemon\lemon_752.iniName islemonError asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\fruits\Apple\z_Apple1.txtName isappleError asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\vegetables\lemon\lemon_752.iniName islemonError asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\fruits\Apple\z_Apple1.txtName isappleError asOpenCV(4.5.5) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\resize.cpp:4052: error: (-215:Assertion failed) !ssize.empty() in function 'cv::resize'
+
+Occuring for filename..\dataset\train\vegetables\lemon\lemon_752.iniName islemon
