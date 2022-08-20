@@ -1,22 +1,49 @@
-Try using validation set on model -->Kuntal
-Identify new classes of fruits and vegetables and download data for the same close to 30fruits and 30 veggies
+Work do to as of 17/8
+					Try using validation set on model -->Kuntal
+					Identify new classes of fruits and vegetables and download data for the same close to 20fruits and 20 veggies
 
-Option 1:
-	Append new images to existing dataset such that each class now has ~1k images for training
-	Code to make all category data same ready
+					Option 1:
+						Append new images to existing dataset such that each class now has ~1k images for training
+						Code to make all category data same ready
 
-Option 2:
-	Use existing images to augment the same to generate equal no of images at end
-	Augmentaion Code needs to be explored
+					Option 2:
+						Use existing images to augment the same to generate equal no of images at end
+						Augmentaion Code needs to be explored
 
-Option 3:
-	Use the existing dataset but on different models and sees it working for same no of epochs.
+					Option 3:
+						Use the existing dataset but on different models and sees it working for same no of epochs.
 
 
-Retrain again and see performance
+					Retrain again and see performance
 
-We already have one model giving close to 76%accuracy save that and try intergating
-Simulatenously work on the app to show some models working
+					We already have one model giving close to 76%accuracy save that and try intergating
+					Simulatenously work on the app to show some models working
+
+Work to do as on 20/08
+				First get clear filtered images of all new classes of fruits and vegggies
+				Split to test and val
+				Retrain Model when we have data ready
+				Start Learning AS working
+				Build an small scale app to first make use of camera.
+				Explore on how model trained in python can be added to app.
+				Rough Design of all pages(not real implemnteation).--> Vijay and Skanda
+				Get PPT.
+				Database Exploration.
+				
+
+
+Expected to show on 29:
+
+	Show diff models comparasion
+	Rough Design of all pages(not real implemnteation)
+	Login->Estalish->Cart->AddiTem->How add item->
+	Camera module+Mi Model.
+	Think about how cloud can be used to manage Database and Model if stored. 
+
+
+
+
+
 
 
 Work done so far:
@@ -35,7 +62,15 @@ Work done so far:
 	Came across Selenium and Beautifulsoup to extract images from google images and create dataset of needed size
 	Faced Problems with using .screnshot as resolution changed or modified code to use original resolution images.
 	Fixed or debugged the changes to get desired number of images.
-	Git Issues fixed by creating branches 
+	Git Issues fixed by creating branches
+	Tried InceptionV3 model to see the accuracy which can be acheived.
+	Acheived an accuracy of 94% on test data which also worked out reasonably well with real life images.
+	Base and MobilenetV2 has been used to acheive the same but gave bad accuracy so left them out.
+	We have 4 models saved (BaseModel 5,10 epochs, MobilenetV2 5epochs and InceptionV3 5epochs)
+	Using Beautifulsoup to extract images for the classes not present frm Gimages took time with multiple crashes of browser.
+	So after a long wait we have images of the classes newly added each around 400-600 images downloaded without filtering.
+	
+	   
 	
 
 git add .
@@ -91,6 +126,7 @@ Veggies:
 	Ginger
 	Sweet Potato
 	
+
 
 
 
