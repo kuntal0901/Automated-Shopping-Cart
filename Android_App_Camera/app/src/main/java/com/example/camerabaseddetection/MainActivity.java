@@ -86,6 +86,19 @@ public class MainActivity extends AppCompatActivity {
             // Runs model inference and gets result.
             EfficentNetv2.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+            float[] data=outputFeature0.getFloatArray();
+            int i=0;
+            String [] arr={"Apple","Bean","Beetroot","Bitter_Gourd","Bottle_Gourd","Brinjal","Broccoli","Cabbage","Capsicum","Carrot","Cauliflower","Cucumber","DragonFruit","Garlic","Ginger","Guava","Kiwi","Mosambi","Muskmelon","Okra","Papaya","Pineapple","Pomegranate","Potato","Pumpkin","Radish","Sapodilla","Sweet potato","Tomato","banana","custard_apple","fig","grape","jackfruit","lemon","mango","onion","orange","pear","peas","strawberry","watermelon"};
+            double maxval=-1000000.0;
+            int classes=-1;
+            for(i=0;i<data.length;i++){
+                if(data[i]>maxval)
+                {
+                    maxval=data[i];
+                    classes=i;
+                }
+            }
+            result.setText("Class belonging to is "+arr[classes]);
 
 
             // Releases model resources if no longer used.
