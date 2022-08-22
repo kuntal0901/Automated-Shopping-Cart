@@ -69,7 +69,15 @@ Work done so far:
 	We have 4 models saved (BaseModel 5,10 epochs, MobilenetV2 5epochs and InceptionV3 5epochs)
 	Using Beautifulsoup to extract images for the classes not present frm Gimages took time with multiple crashes of browser.
 	So after a long wait we have images of the classes newly added each around 400-600 images downloaded without filtering.
-	
+	Data Vizualtion. 
+	Combine new dataset.
+	Trained InceptionV3 on new dataset acheiving accuracy of 90%.
+	Tried MobilenetV2 and EfficientNet on dataset with augumentation.
+	Built an app with button to choose image and mixed it with the model developed on python
+	H5 to .tflite conversion
+
+
+
 	   
 	
 
