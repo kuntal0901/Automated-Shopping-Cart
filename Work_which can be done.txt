@@ -75,6 +75,13 @@ Work done so far:
 	Tried MobilenetV2 and EfficientNet on dataset with augumentation.
 	Built an app with button to choose image and mixed it with the model developed on python
 	H5 to .tflite conversion
+	Reconvert image to desired style to work with tflite in Java
+	recreated new dataset which is combination of all train+test+val
+	Retrained the model n dataset
+	Tested model working with static image frm folder in phone using app
+	Integrate model to work with images clicked with camera in app.
+	Created 2 new models MobilenetV3 Large and nasnetmobile to see working.
+	 
 
 
 
