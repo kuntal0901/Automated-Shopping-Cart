@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.camerabaseddetection.ml.EfficentNetv2;
+import com.example.camerabaseddetection.ml.MobilenetV3;
+import com.example.camerabaseddetection.ml.NasnetMobile;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -61,8 +63,13 @@ public class MainActivity extends AppCompatActivity {
     public void classifyImage(Bitmap image){
         try {
             EfficentNetv2 model = EfficentNetv2.newInstance(getApplicationContext());
+            MobilenetV3 model1 = MobilenetV3.newInstance(getApplicationContext());
+            NasnetMobile model2 = NasnetMobile.newInstance(getApplicationContext());
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+//            TensorBuffer inputFeature1 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+//            TensorBuffer inputFeature2 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
 
@@ -82,23 +89,42 @@ public class MainActivity extends AppCompatActivity {
             }
 
             inputFeature0.loadBuffer(byteBuffer);
+//            inputFeature1.loadBuffer(byteBuffer);
+//            inputFeature2.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
             EfficentNetv2.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+            MobilenetV3.Outputs outputs1 = model1.process(inputFeature0);
+            TensorBuffer outputFeature1 = outputs1.getOutputFeature0AsTensorBuffer();
+            NasnetMobile.Outputs outputs2 = model2.process(inputFeature0);
+            TensorBuffer outputFeature2 = outputs2.getOutputFeature0AsTensorBuffer();
+
             float[] data=outputFeature0.getFloatArray();
+            float[] data1=outputFeature1.getFloatArray();
+            float[] data2=outputFeature2.getFloatArray();
+            double[] finaldata=new double[data.length];
+//            float weights[3]={0.5,0.3,0.2};
             int i=0;
             String [] arr={"Apple","Bean","Beetroot","Bitter_Gourd","Bottle_Gourd","Brinjal","Broccoli","Cabbage","Capsicum","Carrot","Cauliflower","Cucumber","DragonFruit","Garlic","Ginger","Guava","Kiwi","Mosambi","Muskmelon","Okra","Papaya","Pineapple","Pomegranate","Potato","Pumpkin","Radish","Sapodilla","Sweet potato","Tomato","banana","custard_apple","fig","grape","jackfruit","lemon","mango","onion","orange","pear","peas","strawberry","watermelon"};
+            for(i=0;i<data.length;i++)
+            {
+                finaldata[i]=(0.5*data[i])+(0.3*data1[i])+(0.2*data2[i]);
+            }
+            i=0;
             double maxval=-1000000.0;
             int classes=-1;
-            for(i=0;i<data.length;i++){
-                if(data[i]>maxval)
+            for(i=0;i<finaldata.length;i++){
+                if(finaldata[i]>maxval)
                 {
-                    maxval=data[i];
+                    maxval=finaldata[i];
                     classes=i;
                 }
             }
-            result.setText("Class belonging to is "+arr[classes]);
+            String str="Model1 "+data[0]+" Model2 "+data1[0]+" Model3 "+data2[0];
+//            result.setText("Class belonging to is "+arr[classes]);
+            result.setText(str+"Class belonging to is "+arr[classes]);
+
 
 
             // Releases model resources if no longer used.

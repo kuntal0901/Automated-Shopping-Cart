@@ -40,8 +40,9 @@ Expected to show on 29:
 	Camera module+Mi Model.
 	Think about how cloud can be used to manage Database and Model if stored. 
 
-
-
+Ensemble Learning
+Data Visualization.
+Database conection exploring. If possible show entry of item + weight into Database.
 
 
 

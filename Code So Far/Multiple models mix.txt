@@ -1,0 +1,26 @@
+
+
+    // Creates inputs for reference.
+TensorBuffer inputFeature1 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+inputFeature1.loadBuffer(byteBuffer);
+
+    // Runs model inference and gets result.
+MobilenetV3.Outputs outputs1 = model1.process(inputFeature0);
+TensorBuffer outputFeature1 = outputs1.getOutputFeature1AsTensorBuffer();
+
+    // Releases model resources if no longer used.
+model1.close();
+
+
+NasnetMobile model2 = NasnetMobile.newInstance(context);
+
+    // Creates inputs for reference.
+TensorBuffer inputFeature2 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+inputFeature2.loadBuffer(byteBuffer);
+
+    // Runs model inference and gets result.
+NasnetMobile.Outputs outputs2 = model2.process(inputFeature0);
+TensorBuffer outputFeature2 = outputs2.getOutputFeature2AsTensorBuffer();
+
+    // Releases model resources if no longer used.
+model2.close();
