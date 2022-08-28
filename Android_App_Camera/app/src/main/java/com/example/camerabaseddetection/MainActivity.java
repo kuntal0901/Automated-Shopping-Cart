@@ -33,6 +33,35 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     Button picture;
     int imageSize = 224;
+    public static float min(float[] arr)
+    {
+        int size=arr.length;
+        int i=0;
+        float minval=10000000;
+        for (i=0;i<size;i++)
+        {
+            if(arr[i]<minval)
+            {
+                minval=arr[i];
+            }
+        }
+        return minval;
+    }
+
+    public static float max(float[] arr)
+    {
+        int size=arr.length;
+        int i=0;
+        float maxval=-100000000;
+        for (i=0;i<size;i++)
+        {
+            if(arr[i]>maxval)
+            {
+                maxval=arr[i];
+            }
+        }
+        return maxval;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             int final_pred=0;
             for(i=0;i<data.length;i++)
             {
+                data[i]=2*(data[i]-min(data))/(max(data)-min(data))-1;
                 if(data[i]>maxval)
                 {
                     maxval=data[i];
@@ -118,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
             i=0;
             for(i=0;i<data1.length;i++)
             {
+                data1[i]=2*(data1[i]-min(data1))/(max(data1)-min(data1))-1;
                 if(data1[i]>maxval)
                 {
                     maxval=data1[i];
@@ -129,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
             i=0;
             for(i=0;i<data2.length;i++)
             {
+                data2[i]=2*(data2[i]-min(data2))/(max(data2)-min(data2))-1;
                 if(data2[i]>maxval)
                 {
                     maxval=data2[i];

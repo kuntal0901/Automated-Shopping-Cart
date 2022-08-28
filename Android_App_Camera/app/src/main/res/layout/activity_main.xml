@@ -35,6 +35,7 @@
         android:id="@+id/textView"
         android:layout_width="343dp"
         android:layout_height="153dp"
+        android:fontFamily="@font/akaya_telivigala"
         android:textColor="#3F51B5"
         android:textColorHighlight="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
