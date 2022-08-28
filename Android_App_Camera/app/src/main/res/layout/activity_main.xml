@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1E8FF"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="279dp"
-        android:layout_height="260dp"
+        android:layout_width="196dp"
+        android:layout_height="210dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,33 +21,27 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFA722"
-        android:backgroundTint="#E91E63"
+        android:layout_width="134dp"
+        android:layout_height="57dp"
         android:text="Add Item"
-        android:textColor="#2196F3"
-        app:cornerRadius="@dimen/cardview_compat_inset_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528" />
+        app:layout_constraintVertical_bias="0.554" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="276dp"
-        android:layout_height="132dp"
-        android:text="TextView"
+        android:layout_width="343dp"
+        android:layout_height="153dp"
         android:textColor="#3F51B5"
         android:textColorHighlight="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.632"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.808"
-        tools:text="@tools:sample/cities" />
+        app:layout_constraintVertical_bias="0.871" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
