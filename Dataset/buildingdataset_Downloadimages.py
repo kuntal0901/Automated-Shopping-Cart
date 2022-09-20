@@ -22,8 +22,8 @@ def download_images_name(name,class_bel):
     folder_name =".\\NewDataset\\"+name
     if not os.path.isdir(folder_name):
         os.makedirs(folder_name)
-    else:
-        os.rmdir(folder_name)
+    # else:
+    #     os.rmdir(folder_name)
     def download_image(url, folder_name, num):
         reponse = requests.get(url)
         if reponse.status_code==200:
