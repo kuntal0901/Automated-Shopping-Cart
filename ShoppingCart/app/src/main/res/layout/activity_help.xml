@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpActivity">
+
+    <TextView
+        android:id="@+id/ezkart_ek6"
+        android:layout_width="107dp"
+        android:layout_height="41dp"
+        android:text="@string/ezkart_ek6_string"
+        android:textColor="@color/email_id_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <View
+        android:id="@+id/ellipse_3_ek3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ellipse_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.672"
+        app:layout_constraintStart_toEndOf="@+id/ezkart_ek6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <View
+        android:id="@+id/line_40_ek1"
+        android:layout_width="315dp"
+        android:layout_height="1dp"
+        android:background="@drawable/line_40_ek1_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <TextView
+        android:id="@+id/step_1_"
+        android:layout_width="105dp"
+        android:layout_height="42dp"
+        android:text="@string/step_1__string"
+        android:textColor="@color/connect_to_a_cart_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_40_ek1"
+        app:layout_constraintVertical_bias="0.041" />
+
+    <TextView
+        android:id="@+id/step_2_"
+        android:layout_width="108dp"
+        android:layout_height="42dp"
+        android:text="@string/step_2__string"
+        android:textColor="@color/connect_to_a_cart_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.138"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connect_to_device__scan_to_connect_"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <TextView
+        android:id="@+id/step_3_"
+        android:layout_width="109dp"
+        android:layout_height="42dp"
+        android:text="@string/step_3__string"
+        android:textColor="@color/connect_to_a_cart_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_items_to_add_"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/step_4_"
+        android:layout_width="109dp"
+        android:layout_height="42dp"
+        android:text="@string/step_4__string"
+        android:textColor="@color/connect_to_a_cart_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weigh_items_on_weight_sensor_"
+        app:layout_constraintVertical_bias="0.145" />
+
+    <TextView
+        android:id="@+id/connect_to_device__scan_to_connect_"
+        android:layout_width="288dp"
+        android:layout_height="69dp"
+        android:text="@string/connect_to_device__scan_to_connect__string"
+        android:textColor="@color/_0_25kg_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/homebar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_1_"
+        app:layout_constraintVertical_bias="0.001" />
+
+    <TextView
+        android:id="@+id/scan_items_to_add_"
+        android:layout_width="221dp"
+        android:layout_height="42dp"
+        android:text="@string/scan_items_to_add__string"
+        android:textColor="@color/_0_25kg_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_2_"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/weigh_items_on_weight_sensor_"
+        android:layout_width="269dp"
+        android:layout_height="69dp"
+        android:text="@string/weigh_items_on_weight_sensor__string"
+        android:textColor="@color/_0_25kg_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.288"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_3_"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/place_items_in_the_cart_"
+        android:layout_width="265dp"
+        android:layout_height="42dp"
+        android:text="@string/place_items_in_the_cart__string"
+        android:textColor="@color/_0_25kg_color"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step_4_" />
+
+    <RelativeLayout
+        android:id="@+id/homebar"
+        android:layout_width="410dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/homebar_ek1"
+        app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"><![CDATA[>
+
+        ]]></RelativeLayout>
+
+    <View
+        android:id="@+id/homebar_ek1"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/homebar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connectbutt3"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="31.77dp"
+        android:layout_height="30dp"
+        android:contentDescription="vector_ek6"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/homebar_ek1"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
+        app:layout_constraintVertical_bias="0.644" />
+
+
+
+    <ImageView
+        android:id="@+id/cart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="vector_ek7"
+        android:src="@drawable/cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
+        app:layout_constraintVertical_bias="0.644" />
+
+    <ImageView
+        android:id="@+id/inputscan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_items_in_the_cart_"
+        app:srcCompat="@drawable/ic_scan1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
