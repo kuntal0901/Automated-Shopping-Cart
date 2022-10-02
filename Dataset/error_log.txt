@@ -254,3 +254,87 @@ Error Could not find a backend to open `NewDataset\Cleared\Yellow Zuchini\212_z.
 Error Could not find a backend to open `NewDataset\Cleared\Yellow Zuchini\233_z.jpeg`` with iomode `ri`.
 Error Could not find a backend to open `NewDataset\Cleared\Yellow Zuchini\465_z.jpeg`` with iomode `ri`.
 Error Could not find a backend to open `NewDataset\Cleared\Yellow Zuchini\603_z.jpeg`` with iomode `ri`.
+Error Could not find a backend to open `NewDataset\Cleared\Baby Potato\134_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Baby Potato\229_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Baby Potato\331_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Baby Potato\69_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Baby Potato\74_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\CauliFlower\258_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\CauliFlower\260_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\CauliFlower\43_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ginger\53_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\143_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\220_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\243_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\24_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\405_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\416_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\463_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\566_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\56_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Green Chilli\9_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ooty Carrot\142_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ooty Carrot\231_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ooty Carrot\331_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ooty Carrot\39_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Ooty Carrot\90_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Potato\14_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Potato\286_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Tomato\117_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
+Error Could not find a backend to open `NewDataset\Cleared\Tomato\211_z.jpeg`` with iomode `ri`.
+Based on the extension, the following plugins might add capable backends:
+  pyav:  pip install imageio[pyav]
