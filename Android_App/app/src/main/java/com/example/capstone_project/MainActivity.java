@@ -12,10 +12,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.capstone_project.ml.EfficentNetv2;
-import com.example.capstone_project.ml.Efficentnetv2Augumented98;
-import com.example.capstone_project.ml.NasnetMobileAugSan98;
+import com.example.capstone_project.ml.Efficentnetv2Nonaugumented;
+import com.example.capstone_project.ml.MobilenetNonAugumented;
+import com.example.capstone_project.ml.NasnetNonAugumented;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.image.TensorImage;
@@ -90,9 +89,11 @@ public class MainActivity extends AppCompatActivity {
                     try {
 
 
-                        EfficentNetv2 model = EfficentNetv2.newInstance(getApplicationContext());
-                        Efficentnetv2Augumented98 model1 = Efficentnetv2Augumented98.newInstance(getApplicationContext());
-                        NasnetMobileAugSan98 model2 = NasnetMobileAugSan98.newInstance(getApplicationContext());
+
+
+                        Efficentnetv2Nonaugumented model =  Efficentnetv2Nonaugumented.newInstance(getApplicationContext());
+                        MobilenetNonAugumented model1 = MobilenetNonAugumented.newInstance(getApplicationContext());
+                        NasnetNonAugumented model2 = NasnetNonAugumented.newInstance(getApplicationContext());
                         TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
 
                         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
@@ -112,11 +113,11 @@ public class MainActivity extends AppCompatActivity {
                         inputFeature0.loadBuffer(byteBuffer);
 
                         // Runs model inference and gets result.
-                        EfficentNetv2.Outputs outputs = model.process(inputFeature0);
+                        Efficentnetv2Nonaugumented.Outputs outputs = model.process(inputFeature0);
                         TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-                        Efficentnetv2Augumented98.Outputs outputs1 = model1.process(inputFeature0);
+                        MobilenetNonAugumented.Outputs outputs1 = model1.process(inputFeature0);
                         TensorBuffer outputFeature1 = outputs1.getOutputFeature0AsTensorBuffer();
-                        NasnetMobileAugSan98.Outputs outputs2 = model2.process(inputFeature0);
+                        NasnetNonAugumented.Outputs outputs2 = model2.process(inputFeature0);
                         TensorBuffer outputFeature2 = outputs2.getOutputFeature0AsTensorBuffer();
 
                         float[] data=outputFeature0.getFloatArray();
@@ -124,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
                         float[] data2=outputFeature2.getFloatArray();
                         double[] finaldata=new double[data.length];
                         double[] weights= {0.35,0.33,0.32};
-                        String [] arr={"Apple","Banana","Bean","Beetroot","Bitter gourd","Bottle gourd","Brinjal","Broccoli","Cabbage","Capsicum","Carrot","Cauliflower","Cucumber","Custard apple","Dragonfruit","Fig","Garlic","Ginger","Grape","Guava","Jackfruit","Kiwi","Lemon","Mango","Mosambi","Muskmelon","Okra","Onion","Orange","Papaya","Pear","Peas","Pineapple","Pomegranate","Potato","Pumpkin","Radish","Sapodilla","Strawberry","Sweet potato","Tomato","Watermelon"};
-                        String [] Model_names={"EfficientNetV2 Without Augumentation","EfficientNetV2 With Augumentation","NasNet With Augumentaion"};
+
+                        String [] arr={"Beetroot","Bittergourd","Black brinjal","Broad Beans","Cabbage","Drumstick","French Beans","Garlic","Green Apple","Green Capscium","Green Pumpkin","Green Zuchini","Kiran Watermelon","Lemon","Orange Carrot","Papaya","Pointed gourd","Red Apple","Yam","Yellaki Banana","Yellow Zuchini"};
+                        String [] Model_names={"EfficientNetV2 Without Augumentation","MobileNet V2 without Augumentation","NasnetNonAugumented"};
                         int i;
                         double maxval;
                         maxval=-1000000.0;
