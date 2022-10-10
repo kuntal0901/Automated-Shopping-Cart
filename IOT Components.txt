@@ -1,0 +1,11 @@
+1) Firsly we need to figure a way to attach a base and the top of the weighing scale to the load cell
+2) A tool to peel the protective film around a wire.
+3) Jumper wire cable i.e connect the red white green black wires to pins to make its working easier. --> Crimp pins
+4) connector housing for those jumper wires
+5) Verify the resistance between opposite pairs and it has to be above 1000 ohms
+	any other pair makes it between 750-850
+	So we might need an Multimeter
+6) Battery to power up aurdino
+7) Usb to arduino connector
+8) battery to arduino connector
+9) Connect the pins to pins of amplifier and make it have connectors housing
