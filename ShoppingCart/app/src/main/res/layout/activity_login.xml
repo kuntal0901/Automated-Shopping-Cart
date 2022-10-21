@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <EditText
@@ -17,6 +18,8 @@
         android:hint="@string/password_string"
         android:inputType="textPassword"
         android:paddingStart="10dp"
+        android:textColor="@color/email_id_color"
+        android:textColorHint="#14274E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -40,7 +43,6 @@
         app:layout_constraintVertical_bias="0.066" />
 
 
-
     <TextView
         android:id="@+id/forgot_password_"
         android:layout_width="128dp"
@@ -59,7 +61,8 @@
         android:layout_width="264.5dp"
         android:layout_height="28.5dp"
         android:text="@string/don_t_have_an_account__sign_up_now__string"
-        android:textColor="@color/email_id_color"
+        android:textColor="#607EAA"
+        android:textColorHint="@color/email_id_color"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +93,8 @@
         android:hint="@string/email_id_string"
         android:inputType="textPersonName"
         android:paddingStart="10dp"
+        android:textColor="@color/email_id_color"
+        android:textColorHint="#14274E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.259"

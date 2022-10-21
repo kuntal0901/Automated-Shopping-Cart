@@ -1,0 +1,13 @@
+Regarding IOT:
+1) As ma'am recommended it would be better if we shift to using the other type of loadcell and use a rigid base like carboard which could fit into cart and then make use of the weights from that as final loadcell config.
+
+2) For that because we would not need an amplifier again we can just order the loadcells 4 in number to support upto 200kg and then connect the wires using tape and just finish it up.
+
+3) Using this loadcell would again end up with one problem as we would need an holder like thingy into which the loadcell can fit and that enclosing would have screws to attach loadcell to.
+
+4) We can tare after adding base and then it would work absolutely fine upto 200kg with changes from some 10grams also detected. 
+
+5) In order to send data to mobile app from microcontroller we could use USB/Wifi hotspot/Bluetooth. Arduino doesnot have inbuilt wifi module but vijay gave us that but bluetooth again would add that component. So if you dont like adding a new component then the best would to change to ESP32 which has both wifi and bluetooth inbuilt. The other advanatge is that ESP32 is ultra low power consuming.
+
+6) We can continue to use Aurdrino IDE to code on ESP32 as well and ESP32 cost is around 200-300.
+
