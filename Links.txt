@@ -1,0 +1,15 @@
+New 4 load cell : https://www.youtube.com/watch?v=sxzoAGf1kOo
+Same guys website : https://circuitjournal.com/50kg-load-cells-with-HX711#video-tutorial
+Figma App design : https://www.figma.com/file/wMjnUsy1chWw6UOK55uAho/Capstone-team-library?node-id=0%3A1
+
+ Bleuttoth Connection of HC05: https://www.youtube.com/watch?v=ykgt4v7_4y4
+
+Bluetooth ref 1 link : https://www.instructables.com/How-to-Receive-Arduino-Sensor-Data-on-Your-Android/
+Bluetooth ref 2 link : https://roboindia.com/tutorials/bluetooth-terminal-android/
+Bluetooth ref 3 link : https://stackoverflow.com/questions/13450406/how-to-receive-serial-data-using-android-bluetooth
+https://www.digikey.in/en/maker/projects/how-to-use-your-android-to-communicate-with-your-arduino/aed1f8e3fa044264a4310c6b3b2a4364
+https://www.instructables.com/Arduin-Adroid-USB-Serial-Communication/
+
+
+Video Ref 1: https://www.youtube.com/watch?v=xBh8qh2zZ0k
+Video Ref 2: https://www.youtube.com/watch?v=6hpIjx8d15s
