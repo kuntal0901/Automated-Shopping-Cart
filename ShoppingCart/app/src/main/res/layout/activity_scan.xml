@@ -57,4 +57,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.566" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="391dp"
+        android:layout_height="58dp"
+        android:text="Click on Add Item Button to Click an Image and then As soon as weight change is detected we add it to the cart"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

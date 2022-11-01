@@ -2,6 +2,7 @@ package com.example.recievebluetoothdata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
         search.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View arg0) {
                 mBTAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -191,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected List<BluetoothDevice> doInBackground(Void... params) {
+            @SuppressLint("MissingPermission")
             Set<BluetoothDevice> pairedDevices = mBTAdapter.getBondedDevices();
             List<BluetoothDevice> listDevices = new ArrayList<BluetoothDevice>();
             for (BluetoothDevice device : pairedDevices) {
@@ -270,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
             return myList;
         }
 
+        @SuppressLint("MissingPermission")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View vi = convertView;

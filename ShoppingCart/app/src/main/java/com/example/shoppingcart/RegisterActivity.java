@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         btnlogin=findViewById(R.id.AlreayhaveanAccount);
 
-        inputEmail = findViewById(R.id.inputEmail);
+        inputEmail = findViewById(R.id.inputCartName);
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
         btnRegister=findViewById(R.id.btn_register);

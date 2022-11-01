@@ -33,9 +33,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         btn=findViewById(R.id.createnewAccount);
-        inputEmail = findViewById(R.id.inputEmail);
+        inputEmail = findViewById(R.id.inputCartName);
         inputPassword = findViewById(R.id.inputPassword);
-        btnlogin = findViewById(R.id.btn_login);
+        btnlogin = findViewById(R.id.connect_cart);
 
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();

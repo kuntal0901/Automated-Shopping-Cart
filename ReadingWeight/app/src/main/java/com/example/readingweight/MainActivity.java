@@ -1,6 +1,7 @@
 package com.example.readingweight;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -115,12 +116,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
     void openBT() throws IOException {
 
 
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         myLabel.setText(mmDevice.getName());
-
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
         mmOutputStream = mmSocket.getOutputStream();
@@ -188,13 +189,13 @@ public class MainActivity extends AppCompatActivity {
         workerThread.start();
     }
 
-    void sendData() throws IOException
-    {
-        String msg = myTextbox.getText().toString();
-        msg += "\n";
-        mmOutputStream.write(msg.getBytes());
-        myLabel.setText("Data Sent");
-    }
+//    void sendData() throws IOException
+//    {
+//        String msg = myTextbox.getText().toString();
+//        msg += "\n";
+//        mmOutputStream.write(msg.getBytes());
+//        myLabel.setText("Data Sent");
+//    }
 
     void closeBT() throws IOException
     {

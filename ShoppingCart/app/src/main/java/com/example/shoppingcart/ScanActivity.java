@@ -41,12 +41,19 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import android.app.ProgressDialog;
 
 public class ScanActivity extends AppCompatActivity {
+    ArrayList <Float> arrli1=new ArrayList<>(1);
+    ConnecttoCartActivity ct=new ConnecttoCartActivity();
     TextView result;
     ImageView imageView;
     Button picture,back;
     int imageSize = 224;
+    ProgressDialog pg;
+    int counter=0;
+
     public static float min(float[] arr)
     {
         int size=arr.length;
@@ -81,7 +88,8 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
-
+        arrli1.add(0.0f);
+        pg=new ProgressDialog(this);
         result = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.imageView);
         picture = (Button) findViewById(R.id.button);
@@ -113,6 +121,8 @@ public class ScanActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image){
         try {
+            pg.setTitle("Model Prediction");
+            pg.setMessage("Predicting .............");
             Efficentnetv2Augumented model =  Efficentnetv2Augumented.newInstance(getApplicationContext());
             MobilenetAugumented model1 = MobilenetAugumented.newInstance(getApplicationContext());
 //            NasnetNonAugumented model2 = NasnetNonAugumented.newInstance(getApplicationContext());
@@ -216,11 +226,29 @@ public class ScanActivity extends AppCompatActivity {
             // Releases model resources if no longer used.
             model.close();
             model1.close();
+            pg.dismiss();
 //            model2.close();
 //            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+Model_names[2]+" Gives Prediction: "+arr[class_model_3]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n";
-            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n";
 
+            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n";
             result.setText(res);
+            pg.setTitle("Detecting Weight");
+            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
+
+//            if(counter==0 && )
+//            {
+//
+//            }
+
+            while((ct.return_last_val()-arrli1.get(arrli1.size()-1))<150)
+            {
+
+            }
+            arrli1.add(ct.return_last_val());
+            pg.dismiss();
+            res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n"+"Weight as received is "+ct.return_last_val()+"\n";
+            result.setText(res);
+//            (ct.return_last_val()-arrli1.get(arrli1.size()-1))>=150
         } catch (IOException e) {
             // TODO Handle the exception
         }
