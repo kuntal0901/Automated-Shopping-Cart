@@ -99,6 +99,7 @@
         app:layout_constraintVertical_bias="0.062">
 
         <ImageView
+            android:id="@+id/profilepic"
             android:layout_width="115dp"
             android:layout_height="114dp"
             android:src="@drawable/home" />
@@ -161,7 +162,6 @@
         android:layout_width="272dp"
         android:layout_height="36dp"
         android:fontFamily="sans-serif"
-        android:hint="Username"
         android:textAlignment="center"
         android:textColor="#14274E"
         android:textColorHint="#14274E"
@@ -176,9 +176,8 @@
     <TextView
         android:id="@+id/email"
         android:layout_width="273dp"
-        android:layout_height="23dp"
+        android:layout_height="31dp"
         android:fontFamily="sans-serif"
-        android:hint="Email ID"
         android:textAlignment="center"
         android:textColor="#969696"
         android:textColorHint="#969696"

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +18,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView btnlogin;
-    private EditText inputPassword,inputEmail,inputConfirmPassword;
+    private EditText inputPassword,inputEmail,inputConfirmPassword,inputUsername;
     Button btnRegister;
     String EmailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
@@ -32,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         btnlogin=findViewById(R.id.AlreayhaveanAccount);
-
+        inputUsername=findViewById(R.id.inputUsername);
         inputEmail = findViewById(R.id.inputCartName);
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
@@ -59,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email =inputEmail.getText().toString();
         String Password = inputPassword.getText().toString();
         String ConfirmPassword = inputConfirmPassword.getText().toString();
-
+        String username=inputUsername.getText().toString();
         if (!email.matches(EmailPattern)){
             showError(inputEmail,"Your email is invalid!");
         }
@@ -81,9 +83,22 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(username)
+                                .build();
+                        user.updateProfile(profileUpdates)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("Action", "User profile updated.");
+                                        }
+                                    }
+                                });
                         progressDialog.dismiss();
                         sendUsertoNextActivity();
-                        Toast.makeText(RegisterActivity.this,"Registration Sucessful",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();
 
                     }
                     else{

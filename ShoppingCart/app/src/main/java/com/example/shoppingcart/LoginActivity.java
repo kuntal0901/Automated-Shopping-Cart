@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     Button btnlogin;
     String EmailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
-
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
@@ -79,13 +79,11 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         progressDialog.dismiss();
                         sendUsertoNextActivity();
-                        Toast.makeText(LoginActivity.this,"Login Sucessful",Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
                     }
                     else{
                         progressDialog.dismiss();
                         Toast.makeText(LoginActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
-
                     }
                 }
             });
@@ -100,5 +98,6 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 
 }
