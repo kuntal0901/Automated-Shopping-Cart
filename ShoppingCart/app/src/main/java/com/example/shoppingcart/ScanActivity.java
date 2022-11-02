@@ -15,6 +15,7 @@
 
 package com.example.shoppingcart;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,8 +45,14 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import android.app.ProgressDialog;
+import android.widget.Toast;
 
 public class ScanActivity extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ScanActivity.this,HomeActivity.class));
+    }
+
     ArrayList <Float> arrli1=new ArrayList<>(1);
     ConnecttoCartActivity ct=new ConnecttoCartActivity();
     TextView result;
@@ -86,7 +94,19 @@ public class ScanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ConnecttoCartActivity ct=new ConnecttoCartActivity();
+        if(ct.connected==false){
+            Toast.makeText(ScanActivity.this,"Moving to Connect to cart Page because you are not connected to cart",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
+        }
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
+
         setContentView(R.layout.activity_scan);
         arrli1.add(0.0f);
         pg=new ProgressDialog(this);
@@ -119,8 +139,11 @@ public class ScanActivity extends AppCompatActivity {
 
     }
 
+
+
     public void classifyImage(Bitmap image){
         try {
+            Log.i("Action","Inside classify Image");
             pg.setTitle("Model Prediction");
             pg.setMessage("Predicting .............");
             Efficentnetv2Augumented model =  Efficentnetv2Augumented.newInstance(getApplicationContext());
@@ -154,6 +177,7 @@ public class ScanActivity extends AppCompatActivity {
 
             float[] data=outputFeature0.getFloatArray();
             float[] data1=outputFeature1.getFloatArray();
+            Log.i("Action","Prediction Done");
 //            float[] data2=outputFeature2.getFloatArray();
             double[] finaldata=new double[data.length];
             double[] weights= {0.50,0.50};
@@ -227,11 +251,14 @@ public class ScanActivity extends AppCompatActivity {
             model.close();
             model1.close();
             pg.dismiss();
+            Log.i("Action","Model closed");
 //            model2.close();
 //            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+Model_names[2]+" Gives Prediction: "+arr[class_model_3]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n";
 
             String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n";
+            Log.i("Action",res);
             result.setText(res);
+
             pg.setTitle("Detecting Weight");
             pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
 
@@ -264,6 +291,7 @@ public class ScanActivity extends AppCompatActivity {
             imageView.setImageBitmap(image);
 
             image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
+            Log.i("Action","Image stored");
             classifyImage(image);
         }
         super.onActivityResult(requestCode, resultCode, data);

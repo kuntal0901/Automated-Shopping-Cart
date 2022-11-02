@@ -30,10 +30,15 @@ import java.util.Set;
 import java.util.UUID;
 
 public class ConnecttoCartActivity extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class));
+    }
+
     private EditText cartname;
     TextView status;
     Button connect;
-    public boolean connected = false;
+    public boolean connected = true;
     ProgressDialog progressDialog;
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -75,14 +80,17 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                 boolean findable=establishConnection();
                 if(findable && !connected)
                 {
-                    progressDialog.setMessage("Connecting to Blueetoth device ");
+                    progressDialog.setMessage("Connecting to Bluetooth device ");
                     progressDialog.setTitle("Connection");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
                     try {
                         openBT();
+                        progressDialog.dismiss();
+                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
                     } catch (IOException e) {
                         status.setText("Failed");
+                        progressDialog.dismiss();
                     }
                 }
                 else

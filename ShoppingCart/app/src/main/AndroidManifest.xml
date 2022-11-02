@@ -17,31 +17,40 @@
         tools:targetApi="31">
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true"/>
         <activity
             android:name=".OrdersActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".ScanActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".ConnecttoCartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".HelpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".CartActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:clearTaskOnLaunch="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

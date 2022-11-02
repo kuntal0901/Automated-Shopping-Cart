@@ -59,8 +59,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="391dp"
-        android:layout_height="58dp"
+        android:layout_width="336dp"
+        android:layout_height="65dp"
         android:text="Click on Add Item Button to Click an Image and then As soon as weight change is detected we add it to the cart"
         android:textColor="@color/black"
         android:textSize="16sp"
