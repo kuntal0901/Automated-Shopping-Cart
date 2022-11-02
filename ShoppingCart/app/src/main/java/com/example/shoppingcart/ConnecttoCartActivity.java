@@ -38,7 +38,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     private EditText cartname;
     TextView status;
     Button connect;
-    public boolean connected = false;
+    public boolean connected = true;
     ProgressDialog progressDialog;
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -56,20 +56,14 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         arrli.add(0.0f);
-        if(connected)
-        {
-            status.setText("You are already connected to app so taking u to add Scan Page");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
-        }
-//        Log.i("Action", "Works");
         progressDialog= new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connectto_cart);
+        if(connected)
+        {
+            Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Beacuse You are connected to cart",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
+        }
         cartname = (EditText) findViewById(R.id.inputCartName);
         status = findViewById(R.id.statusText);
         connect = (Button) findViewById(R.id.connect_cart);
@@ -90,7 +84,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                         startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
                     } catch (IOException e) {
                         status.setText("Failed");
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                     }
                 }
                 else

@@ -136,9 +136,14 @@
         android:id="@+id/previousorder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#F1F6F9"
         android:text="Previous ORDER"
-        tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="419dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.609" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
