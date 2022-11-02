@@ -9,8 +9,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/edit_profile"
-        android:layout_width="410dp"
-        android:layout_height="79dp"
+        android:layout_width="411dp"
+        android:layout_height="73dp"
         android:background="#F1F6F9"
         android:backgroundTint="#F1F6F9"
         android:drawableLeft="@drawable/image_removebg_preview_1"
@@ -27,12 +27,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699" />
+        app:layout_constraintVertical_bias="0.684" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logout"
-        android:layout_width="410dp"
-        android:layout_height="78dp"
+        android:layout_width="408dp"
+        android:layout_height="72dp"
         android:background="#F1F6F9"
         android:backgroundTint="#F1F6F9"
         android:drawableLeft="@drawable/image_2"
@@ -49,12 +49,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817" />
+        app:layout_constraintVertical_bias="0.794" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/previous_order"
-        android:layout_width="411dp"
-        android:layout_height="72dp"
+        android:layout_width="408dp"
+        android:layout_height="62dp"
         android:background="#F1F6F9"
         android:backgroundTint="#F1F6F9"
         android:drawableLeft="@drawable/image_prev_ui_1"
