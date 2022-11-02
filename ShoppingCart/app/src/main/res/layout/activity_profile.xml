@@ -14,19 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/homebar_ek1"
         app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
-        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"><![CDATA[>
-
-
-
-
-
-
-
-
-
-
-
-        ]]></RelativeLayout>
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"><![CDATA[>]]></RelativeLayout>
 
     <View
         android:id="@+id/ellipse_8"
@@ -40,10 +28,8 @@
         app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.745">
+        app:layout_constraintVertical_bias="0.745"/>
 
-
-    </View>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -116,72 +102,43 @@
         app:layout_constraintTop_toBottomOf="@+id/connectbutt3"
         app:srcCompat="@drawable/ic_scan1" />
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="273dp"
+        android:layout_height="52dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:hint="Username"
+        android:textAlignment="center"
+        android:textColor="#14274E"
+        android:textColorHint="#14274E"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
 
-    <!--    <RelativeLayout-->
-    <!--        android:id="@+id/homebar"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="70dp"-->
-    <!--        android:layout_alignParentLeft="true"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:background="@color/design_default_color_primary_variant"-->
-    <!--        android:backgroundTint="#14274E"-->
-    <!--        android:elevation="4dp"-->
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="273dp"
+        android:layout_height="23dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:hint="Email ID"
+        android:textAlignment="center"
+        android:textColor="#969696"
+        android:textColorHint="#969696"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="356dp" />
 
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.0"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/connectbutt3"-->
-    <!--        app:layout_constraintVertical_bias="1.0">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageView"-->
-    <!--            android:layout_width="71dp"-->
-    <!--            android:layout_height="53dp"-->
-    <!--            android:layout_alignParentStart="true"-->
-    <!--            android:layout_alignParentTop="true"-->
-    <!--            android:layout_alignParentleft="true"-->
-    <!--            android:layout_marginStart="30dp"-->
-    <!--            android:layout_marginTop="6dp"-->
-    <!--            android:layout_marginEnd="224dp"-->
-    <!--            android:layout_toStartOf="@+id/imageView2"-->
-    <!--            app:srcCompat="@drawable/ic_baseline_home_24" />-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/imageView2"-->
-    <!--            android:layout_width="54dp"-->
-    <!--            android:layout_height="55dp"-->
-    <!--            android:layout_alignParentTop="true"-->
-    <!--            android:layout_alignParentEnd="true"-->
-    <!--            android:layout_alignParentRight="true"-->
-    <!--            android:layout_marginTop="6dp"-->
-    <!--            android:layout_marginEnd="32dp"-->
-    <!--            android:layout_marginRight="32dp"-->
-    <!--            app:srcCompat="@drawable/ic_baseline_shopping_basket_24" />-->
-    <!--    </RelativeLayout>-->
-
-    <!--    <RelativeLayout-->
-    <!--        android:id="@+id/icon_park_o"-->
-    <!--        android:layout_width="45dp"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:background="@drawable/icon_park_o"-->
-    <!--        android:clipToOutline="true"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/homebar"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/connectbutt3"-->
-    <!--        app:layout_constraintVertical_bias="1.0"-->
-    <!--        android:orientation = "horizontal">-->
-
-
-    <!--        <View-->
-    <!--            android:id="@+id/vector"-->
-    <!--            android:layout_width="43dp"-->
-    <!--            android:layout_height="47dp"-->
-
-
-    <!--            android:background="@drawable/ic_scanner" />-->
-    <!--    </RelativeLayout>-->
+    <Button
+        android:id="@+id/previousorder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Previous ORDER"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="419dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
