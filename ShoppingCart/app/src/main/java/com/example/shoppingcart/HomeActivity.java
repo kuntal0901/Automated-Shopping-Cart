@@ -10,7 +10,7 @@ import android.widget.ImageView;
 public class HomeActivity extends AppCompatActivity {
 
     private ImageView home,scan,cart;
-    private View connecttocart,previousorder,help;
+    private View connecttocart,previousorder,help,profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         connecttocart = findViewById(R.id.connectocart);
         previousorder = findViewById(R.id.previousord);
         help = findViewById(R.id.connectbutt3);
-
+        profile=findViewById(R.id.ellipse_3);
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +63,13 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,HelpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
             }
         });
     }

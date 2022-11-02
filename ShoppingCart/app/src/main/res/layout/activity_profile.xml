@@ -7,6 +7,73 @@
     android:background="#F1F6F9"
     tools:context=".ProfileActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/edit_profile"
+        android:layout_width="410dp"
+        android:layout_height="79dp"
+        android:background="#F1F6F9"
+        android:backgroundTint="#F1F6F9"
+        android:drawableLeft="@drawable/image_removebg_preview_1"
+        android:drawableRight="@drawable/image_removebg_preview__2__1"
+        android:drawablePadding="50px"
+        android:fontFamily="sans-serif"
+        android:paddingRight="30px"
+        android:text="Edit Profile"
+        android:textAlignment="center"
+        android:textColor="@color/email_id_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout"
+        android:layout_width="410dp"
+        android:layout_height="78dp"
+        android:background="#F1F6F9"
+        android:backgroundTint="#F1F6F9"
+        android:drawableLeft="@drawable/image_2"
+        android:drawablePadding="270px"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
+        android:text="Logout"
+        android:textAlignment="textStart"
+        android:textColor="@color/email_id_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.817" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/previous_order"
+        android:layout_width="411dp"
+        android:layout_height="72dp"
+        android:background="#F1F6F9"
+        android:backgroundTint="#F1F6F9"
+        android:drawableLeft="@drawable/image_prev_ui_1"
+        android:drawableRight="@drawable/image_removebg_preview__2__1"
+        android:drawablePadding="50px"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="-25px"
+        android:paddingRight="30px"
+        android:text="Previous Orders"
+        android:textAlignment="center"
+        android:textColor="@color/email_id_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
+
     <RelativeLayout
         android:id="@+id/homebar"
         android:layout_width="410dp"
@@ -106,7 +173,7 @@
         android:id="@+id/username"
         android:layout_width="273dp"
         android:layout_height="52dp"
-        android:fontFamily="@font/akaya_telivigala"
+        android:fontFamily="sans-serif"
         android:hint="Username"
         android:textAlignment="center"
         android:textColor="#14274E"
@@ -123,27 +190,17 @@
         android:id="@+id/email"
         android:layout_width="273dp"
         android:layout_height="23dp"
-        android:fontFamily="@font/akaya_telivigala"
+        android:fontFamily="sans-serif"
         android:hint="Email ID"
         android:textAlignment="center"
         android:textColor="#969696"
         android:textColorHint="#969696"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="356dp" />
-
-    <Button
-        android:id="@+id/previousorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F1F6F9"
-        android:text="Previous ORDER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.487" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
