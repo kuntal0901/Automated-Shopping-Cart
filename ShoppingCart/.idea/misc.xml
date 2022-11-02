@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/_bg__iphone_11_pro___x___24_ek2_shape.xml" value="0.364" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/circle.xml" value="0.3265" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/connectbutt.xml" value="0.3265" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/ellipse_3.xml" value="0.3265" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/homebar.xml" value="0.364" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/homebar_ek1_shape.xml" value="0.364" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/ic_logo.xml" value="0.364" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/line_40_ek1_shape.xml" value="0.3265" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/rectangle_2_shape.xml" value="0.184" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/drawable/vector.xml" value="0.22" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_connectto_cart.xml" value="0.171875" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_help.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_home_activtiy.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_login.xml" value="0.4290322580645161" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_ordersactivity.xml" value="0.1859375" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/activity_register.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/kunta/AndroidStudioProjects/ShoppingCart/app/src/main/res/layout/rectangle_1_shape.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/circcle.xml" value="0.364" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/connectbutt.xml" value="0.6" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/ellipse_3.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/homebar.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/ic_baseline_shopping_basket_24.xml" value="0.359" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/drawable/vector.xml" value="0.359" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/layout/activity_login.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/kunta/Downloads/ShoppingCart/app/src/main/res/layout/activity_main.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_cart.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_connectto_cart.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_help.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_home_activtiy.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_ordersactivity.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_scan.xml" value="0.25" />
+        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_trial.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
