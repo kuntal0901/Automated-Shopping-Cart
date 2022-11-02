@@ -60,34 +60,23 @@ public class ProfileActivity extends AppCompatActivity {
         prevorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,HomeActivity.class));
+                startActivity(new Intent(ProfileActivity.this,PreviousOrderActivity.class));
             }
         });
 
         editprof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,CartActivity.class));
+                startActivity(new Intent(ProfileActivity.this,EditProfileActivity.class));
             }
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,CartActivity.class));
+                startActivity(new Intent(ProfileActivity.this,LogoutActivity.class));
             }
         });
-
-//        profile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(ProfileActivity.this,CartActivity.class));
-//            }
-//        });
-
-
-
-
 
     }
 }
