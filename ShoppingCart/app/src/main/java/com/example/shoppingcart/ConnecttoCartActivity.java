@@ -33,7 +33,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     private EditText cartname;
     TextView status;
     Button connect;
-    public boolean connected = true;
+    public boolean connected = false;
     ProgressDialog progressDialog;
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -154,6 +154,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         mmInputStream = mmSocket.getInputStream();
         progressDialog.dismiss();
         status.setText("Bluetooth Opened with "+mmDevice.getName());
+        connected=true;
 
     }
 
