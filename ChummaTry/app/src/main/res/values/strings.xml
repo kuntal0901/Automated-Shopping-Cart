@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- profilepage strings -->
+
+	<string name="app_name">Page 1</string>
+	<string name="ek_img_content">ExportKit Image</string>
+	<string name="svsc_santosh_string">Svsc Santosh</string>
+	<string name="santoshsvsc2_gmail_com_string">santoshsvsc2@gmail.com</string>
+	<string name="previous_orders_string">Previous Orders</string>
+	<string name="edit_profile_string">Edit Profile</string>
+	<string name="logout_string">Logout</string>
+</resources>

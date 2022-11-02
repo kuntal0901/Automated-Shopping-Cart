@@ -4,7 +4,8 @@
     package="com.example.shoppingcart">
 
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,40 +18,40 @@
         tools:targetApi="31">
         <activity
             android:name=".ProfileActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true"/>
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".OrdersActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".ScanActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".ConnecttoCartActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".HelpActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".CartActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false"
-            android:clearTaskOnLaunch="true" />
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"
-            android:clearTaskOnLaunch="true">
+            android:clearTaskOnLaunch="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
