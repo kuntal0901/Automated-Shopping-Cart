@@ -215,7 +215,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                                     final String data = new String(encodedBytes, "US-ASCII");
                                     readBufferPosition = 0;
 //                                    Log.i("Action","Connect to cart : Delimiter Found");
-                                    handler.post(new Runnable()
+                                    handler.postDelayed(new Runnable()
                                     {
                                         public void run()
                                         {
@@ -234,7 +234,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                                                 arrli.add(temp);
                                             }
                                         }
-                                    });
+                                    },5000);
                                 }
                                 else
                                 {
