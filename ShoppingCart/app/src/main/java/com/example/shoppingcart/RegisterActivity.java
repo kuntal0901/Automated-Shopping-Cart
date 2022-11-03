@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -86,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(username)
+                                .setPhotoUri(null)
                                 .build();
                         user.updateProfile(profileUpdates)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
