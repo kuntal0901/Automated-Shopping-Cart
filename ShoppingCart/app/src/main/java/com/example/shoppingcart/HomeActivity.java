@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class HomeActivity extends AppCompatActivity {
 
-    private ImageView home,scan,cart;
-    private View connecttocart,previousorder,help,profile;
+    private ImageView home,scan,cart,profile;
+    private View connecttocart,previousorder,help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +25,23 @@ public class HomeActivity extends AppCompatActivity {
         connecttocart = findViewById(R.id.connectocart);
         previousorder = findViewById(R.id.previousord);
         help = findViewById(R.id.connectbutt3);
-        profile=findViewById(R.id.ellipse_3);
-
+        profile=findViewById(R.id.profilepic);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        Log.i("Action",user.getPhotoUrl().toString());
+        if (user.getPhotoUrl() != null) {
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .override(100, 200)
+                    .fitCenter() // scale to fit entire image within ImageView
+                    .into(profile);
+        }
+        else{
+            Glide.with(this)
+                    .load(R.drawable.blankprofile)
+                    .override(100, 500)
+                    .fitCenter() // scale to fit entire image within ImageView
+                    .into(profile);
+        }
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override

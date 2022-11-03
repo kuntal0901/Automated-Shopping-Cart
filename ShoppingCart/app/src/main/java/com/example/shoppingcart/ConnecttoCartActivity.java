@@ -38,7 +38,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     private EditText cartname;
     TextView status;
     Button connect;
-    public boolean connected = true;
+    public static boolean connected;
     ProgressDialog progressDialog;
     BluetoothAdapter mBluetoothAdapter;
     BluetoothSocket mmSocket;
@@ -55,13 +55,14 @@ public class ConnecttoCartActivity extends AppCompatActivity {
 //    int counter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        connected=false;
         arrli.add(0.0f);
         progressDialog= new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connectto_cart);
         if(connected)
         {
-            Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Beacuse You are connected to cart",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Because You are connected to cart",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
         }
         cartname = (EditText) findViewById(R.id.inputCartName);
@@ -80,7 +81,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                     progressDialog.show();
                     try {
                         openBT();
-                        progressDialog.dismiss();
+//                        progressDialog.dismiss();
                         startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
                     } catch (IOException e) {
                         status.setText("Failed");
@@ -105,7 +106,6 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                     }
 
                 }
-
             }
         });
     }
@@ -114,6 +114,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     public boolean establishConnection() {
         String cart = cartname.getText().toString();
         boolean findable = findBT(cart);
+        Log.i("Action","Findable is "+findable);
         return findable;
     }
 
@@ -149,15 +150,17 @@ public class ConnecttoCartActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     void openBT() throws IOException {
+        Log.i("Action","Inside Open Bluetooth");
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
+        Log.i("Action","Connected set to true");
+        connected=true;
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
         progressDialog.dismiss();
         status.setText("Bluetooth Opened with "+mmDevice.getName());
-        connected=true;
-
+        Log.i("Action","End of bluetooth");
     }
 
     void beginListenForData()

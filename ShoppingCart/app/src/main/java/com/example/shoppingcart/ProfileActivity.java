@@ -56,7 +56,6 @@ public class ProfileActivity extends AppCompatActivity {
         editprof=(Button) findViewById(R.id.edit_profile);
         logout=(Button) findViewById(R.id.logout);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        Log.i("Action",user.getPhotoUrl().toString());
         if (user.getPhotoUrl() != null) {
             Glide.with(this)
                     .load(user.getPhotoUrl())
@@ -65,7 +64,6 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(profile);
         }
         else{
-            Log.i("Action","In this"+String.valueOf(R.drawable.blankprofile));
                 Glide.with(this)
                         .load(R.drawable.blankprofile)
                         .override(100, 200)

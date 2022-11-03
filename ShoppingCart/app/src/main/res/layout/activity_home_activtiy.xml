@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F1F6F9"
     tools:context=".HomeActivity">
 
     <View
@@ -154,19 +154,6 @@
         app:layout_constraintTop_toBottomOf="@+id/previousord"
         app:layout_constraintVertical_bias="1.0" />
 
-    <View
-        android:id="@+id/ellipse_3"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/ellipse_3"
-        app:layout_constraintBottom_toBottomOf="@+id/ezkart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
-        app:layout_constraintStart_toEndOf="@+id/ezkart"
-        app:layout_constraintTop_toTopOf="@+id/ezkart" />
-
     <TextView
         android:id="@+id/ready_to_ad"
         android:layout_width="245dp"
@@ -177,9 +164,8 @@
         android:text="@string/ready_to_ad"
         android:textAppearance="@style/ready_to_ad"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/ellipse_3"
-        app:layout_constraintHorizontal_bias="0.565"
-        app:layout_constraintStart_toStartOf="@+id/ezkart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.199" />
 
@@ -277,6 +263,26 @@
         app:layout_constraintTop_toBottomOf="@+id/connectbutt3"
         app:srcCompat="@drawable/ic_scan1" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047">
+
+        <ImageView
+            android:id="@+id/profilepic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/home" />
+    </androidx.cardview.widget.CardView>
 
     <!--    <RelativeLayout-->
     <!--        android:id="@+id/homebar"-->
