@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
         search.setOnClickListener(new View.OnClickListener() {
 
-            @SuppressLint("MissingPermission")
+//            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View arg0) {
                 mBTAdapter = BluetoothAdapter.getDefaultAdapter();

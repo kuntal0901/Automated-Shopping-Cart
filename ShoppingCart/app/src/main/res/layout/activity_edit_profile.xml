@@ -4,6 +4,271 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F6F9"
     tools:context=".EditProfileActivity">
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="138dp"
+        android:layout_height="41dp"
+        android:paddingLeft="20px"
+        android:text="E-mail"
+        android:textColor="@color/email_id_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
+
+    <TextView
+        android:id="@+id/passwordtext"
+        android:layout_width="138dp"
+        android:layout_height="43dp"
+        android:paddingLeft="20px"
+        android:text="Password"
+        android:textColor="@color/email_id_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502" />
+
+    <TextView
+        android:id="@+id/passwordtext2"
+        android:layout_width="138dp"
+        android:layout_height="41dp"
+        android:paddingLeft="15px"
+        android:text="Re-Type Password"
+        android:textColor="@color/email_id_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
+
+    <EditText
+        android:id="@+id/retype_password"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="#14274E"
+        android:textColorHint="#969696"
+        android:textSize="20sp"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.597" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:editable="false"
+        android:fontFamily="sans-serif"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="#14274E"
+        android:textColorHint="#969696"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/homebar"
+        android:layout_width="410dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/homebar_ek1"
+        app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"><![CDATA[>]]></RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_gravity="center_horizontal"
+        android:foregroundGravity="center_horizontal"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062">
+
+        <ImageView
+            android:id="@+id/profilepic"
+            android:layout_width="115dp"
+            android:layout_height="114dp"
+            android:src="@drawable/home" />
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/homebar_ek1"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="@drawable/homebar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="31.77dp"
+        android:layout_height="30dp"
+        android:contentDescription="vector_ek6"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/homebar_ek1"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
+        app:layout_constraintVertical_bias="0.644" />
+
+
+    <ImageView
+        android:id="@+id/cart"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="vector_ek7"
+        android:src="@drawable/cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
+        app:layout_constraintVertical_bias="0.644" />
+
+    <ImageView
+        android:id="@+id/inputscan2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connectbutt3"
+        app:srcCompat="@drawable/ic_scan1" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="#14274E"
+        android:textColorHint="#14274E"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.332" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColor="#14274E"
+        android:textColorHint="#969696"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
+
+    <View
+        android:id="@+id/ellipse_8"
+        android:layout_width="391dp"
+        android:layout_height="328dp"
+        android:layout_marginTop="-160dp"
+        android:background="@drawable/ellipse_8_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="138dp"
+        android:layout_height="41dp"
+        android:paddingLeft="20px"
+        android:text="Username"
+        android:textColor="@color/email_id_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.332" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:backgroundTint="#14274E"
+        android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
+        android:text="Cancel"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/homebar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save_changes"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+
+        android:backgroundTint="#14274E"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:text="SAVE"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.786" />
+
+    <CheckBox
+        android:id="@+id/reset_enable"
+        android:layout_width="139dp"
+        android:layout_height="37dp"
+        android:text="Reset Password"
+        android:textColor="@color/email_id_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.698" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

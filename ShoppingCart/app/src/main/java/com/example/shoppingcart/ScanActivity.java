@@ -96,7 +96,7 @@ public class ScanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         ConnecttoCartActivity ct=new ConnecttoCartActivity();
-        Log.i("Action","Inside here "+ct.connected);
+        Log.i("Action","Scan Activity: On Create Inside here "+ct.connected);
         if(ct.connected==false){
             Toast.makeText(ScanActivity.this,"Moving to Connect to cart Page because you are not connected to cart",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
@@ -139,7 +139,7 @@ public class ScanActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image){
         try {
-            Log.i("Action","Inside classify Image");
+            Log.i("Action","Scan Activity: Inside classify Image");
             pg.setTitle("Model Prediction");
             pg.setMessage("Predicting .............");
             Efficentnetv2Augumented model =  Efficentnetv2Augumented.newInstance(getApplicationContext());

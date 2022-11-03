@@ -66,7 +66,7 @@ public class MonitoringScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        display = (TextView) findViewById(R.id.textView2);
+//        display = (TextView) findViewById(R.id.textView2);
         mDevice = b.getParcelable(MainActivity.DEVICE_EXTRA);
         mDeviceUUID = UUID.fromString(b.getString(MainActivity.DEVICE_UUID));
         display.setText("XYZ");
@@ -113,6 +113,7 @@ public class MonitoringScreen extends AppCompatActivity {
 
             try {
                 inputStream = mBTSocket.getInputStream();
+                Log.i("Action",String.valueOf(inputStream.available()));
                 while (!bStop) {
                     byte[] buffer = new byte[256];
                     if (inputStream.available() > 0) {

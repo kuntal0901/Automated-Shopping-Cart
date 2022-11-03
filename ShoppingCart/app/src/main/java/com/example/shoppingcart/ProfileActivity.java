@@ -56,6 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         editprof=(Button) findViewById(R.id.edit_profile);
         logout=(Button) findViewById(R.id.logout);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        user.
         if (user.getPhotoUrl() != null) {
             Glide.with(this)
                     .load(user.getPhotoUrl())
@@ -75,42 +76,42 @@ public class ProfileActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,HomeActivity.class));
+                startActivity(new Intent(ProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,ScanActivity.class));
+                startActivity(new Intent(ProfileActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,CartActivity.class));
+                startActivity(new Intent(ProfileActivity.this,CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         prevorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,PreviousOrderActivity.class));
+                startActivity(new Intent(ProfileActivity.this,PreviousOrderActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         editprof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,EditProfileActivity.class));
+                startActivity(new Intent(ProfileActivity.this,EditProfileActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,LogoutActivity.class));
+                startActivity(new Intent(ProfileActivity.this,LogoutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 

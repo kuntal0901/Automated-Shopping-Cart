@@ -32,30 +32,30 @@ import java.util.UUID;
 public class ConnecttoCartActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class));
+        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
     private EditText cartname;
     TextView status;
     Button connect;
-    public static boolean connected;
-    ProgressDialog progressDialog;
-    BluetoothAdapter mBluetoothAdapter;
-    BluetoothSocket mmSocket;
-    BluetoothDevice mmDevice;
-    OutputStream mmOutputStream;
-    InputStream mmInputStream;
-    Thread workerThread;
+    public static boolean connected=false;
+    static ProgressDialog progressDialog;
+    static BluetoothAdapter mBluetoothAdapter;
+    static BluetoothSocket mmSocket;
+    static BluetoothDevice mmDevice;
+    static OutputStream mmOutputStream;
+    static InputStream mmInputStream;
+    static Thread workerThread;
     byte[] readBuffer;
     int readBufferPosition;
     int counter;
     volatile boolean stopWorker;
-    public ArrayList<Float> arrli=new ArrayList<>(1);
-    float prev=0.0f;
+    static public ArrayList<Float> arrli=new ArrayList<>(1);
+    static float prev=0.0f;
 //    int counter=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        connected=false;
+
         arrli.add(0.0f);
         progressDialog= new ProgressDialog(this);
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         if(connected)
         {
             Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Because You are connected to cart",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
+            startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
         cartname = (EditText) findViewById(R.id.inputCartName);
         status = findViewById(R.id.statusText);
@@ -82,7 +82,8 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                     try {
                         openBT();
 //                        progressDialog.dismiss();
-                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
+                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        Toast.makeText(ConnecttoCartActivity.this,"Moving to scan item page to add items to cart",Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         status.setText("Failed");
 //                        progressDialog.dismiss();
@@ -98,7 +99,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class));
+                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                     else{
                         status.setText("Device with given name not found");
@@ -114,7 +115,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     public boolean establishConnection() {
         String cart = cartname.getText().toString();
         boolean findable = findBT(cart);
-        Log.i("Action","Findable is "+findable);
+//        Log.i("Action","Connect to cart : Findable is "+findable);
         return findable;
     }
 
@@ -150,54 +151,75 @@ public class ConnecttoCartActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     void openBT() throws IOException {
-        Log.i("Action","Inside Open Bluetooth");
+//        Log.i("Action","Connect to cart : Inside Open Bluetooth");
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
-        Log.i("Action","Connected set to true");
+//        Log.i("Action","Connect to cart : Connected set to true");
         connected=true;
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
+        Log.i("Action", String.valueOf(mmInputStream.available()));
         progressDialog.dismiss();
         status.setText("Bluetooth Opened with "+mmDevice.getName());
-        Log.i("Action","End of bluetooth");
+//        Log.i("Action","Connect to cart : End of bluetooth");
     }
 
     void beginListenForData()
     {
         final Handler handler = new Handler();
         final byte delimiter = 10; //This is the ASCII code for a newline character
-
+//        Log.i("Action","Connect to cart : insidebeginListenForData");
         stopWorker = false;
         readBufferPosition = 0;
         readBuffer = new byte[1024];
         workerThread = new Thread(new Runnable()
         {
+
             public void run()
             {
+//                Log.i("Action","Connect to cart : New THREAD initiated and run insidebeginListenForData");
                 while(!Thread.currentThread().isInterrupted() && !stopWorker)
                 {
+//                    Log.i("Action","Connect to cart : Inside While loop insidebeginListenForData");
                     try
                     {
-                        int bytesAvailable = mmInputStream.available();
+//                        Log.i("Action","Connect to cart : Inside try and run insidebeginListenForData");
+//                        int bytesAvailable=0;
+//                        try{
+                           int bytesAvailable= mmInputStream.available();
+                           Log.i("Action Done","Connect to Cart: "+mmInputStream.toString());
+//                           break;
+
+//                        catch(Exception e)
+//                        {
+////                            Log.i("Action Error","Error here");
+////                            Log.i("Action Exception",e.toString());
+//                        }
+//                        Log.i("Action","Connect to cart : After Available");
                         if(bytesAvailable > 0)
                         {
                             byte[] packetBytes = new byte[bytesAvailable];
+//                            Log.i("Action","Connect to cart : Before Read Data");
                             mmInputStream.read(packetBytes);
+
+//                            Log.i("Action","Connect to cart : After Read Data");
                             for(int i=0;i<bytesAvailable;i++)
                             {
                                 byte b = packetBytes[i];
                                 if(b == delimiter)
                                 {
+//                                    Log.i("Action","Connect to cart : Delimiter Found");
                                     byte[] encodedBytes = new byte[readBufferPosition];
                                     System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
                                     final String data = new String(encodedBytes, "US-ASCII");
                                     readBufferPosition = 0;
-
+//                                    Log.i("Action","Connect to cart : Delimiter Found");
                                     handler.post(new Runnable()
                                     {
                                         public void run()
                                         {
+                                            Log.i("Action Weight","Connect to cart :"+data);
                                             float temp=Float.parseFloat(data);
                                             if(counter>=1)
                                             {
@@ -220,9 +242,13 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                                 }
                             }
                         }
+//                        else{
+//                            Log.i("Action","Connect To cart: No data to work with");
+//                        }
                     }
                     catch (IOException ex)
                     {
+//                        Log.i("Action Error","Connect to cart :"+ex.toString());
                         stopWorker = true;
                     }
                 }
