@@ -164,14 +164,14 @@ public class MainActivity extends AppCompatActivity {
                                     final String data = new String(encodedBytes, "US-ASCII");
                                     readBufferPosition = 0;
 //                                    Log.i("Receiver1","Before hadnler poy"+String.valueOf(counter)+" "+String.valueOf(data));
-                                    handler.postDelayed(new Runnable()
+                                    handler.post(new Runnable()
                                     {
                                         public void run()
                                         {
                                             myLabel.setText(data);
-                                            Log.i("Receiver","Data "+String.valueOf(counter)+" "+String.valueOf(data));
+//                                            Log.i("Receiver","Data "+String.valueOf(counter)+" "+String.valueOf(data));
                                         }
-                                    },5000);
+                                    });
                                 }
                                 else if(b!=10 || b!=13 || b!=0)
                                 {

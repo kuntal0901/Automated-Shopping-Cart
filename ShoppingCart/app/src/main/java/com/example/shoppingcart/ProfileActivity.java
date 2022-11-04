@@ -2,6 +2,7 @@ package com.example.shoppingcart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profile,home,scan,cart;
     TextView username,email;
     Button prevorder,editprof,logout;
+    ProgressDialog pg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,26 @@ public class ProfileActivity extends AppCompatActivity {
         editprof=(Button) findViewById(R.id.edit_profile);
         logout=(Button) findViewById(R.id.logout);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        pg.setMessage("Taking you to profile page");
+//        pg.setTitle("Profile");
+//        pg.show();
+//
+//        long i=0;
+//        while(i<100000)
+//        {
+//            i+=1;
+//        }
+//        pg.dismiss();
+//        FirebaseAuth.getInstance().
+        user.reload();
+        user=FirebaseAuth.getInstance().getCurrentUser();
+
 //        user.
         if (user.getPhotoUrl() != null) {
             Glide.with(this)

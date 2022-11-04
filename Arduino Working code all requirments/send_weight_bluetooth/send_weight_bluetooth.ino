@@ -6,8 +6,10 @@ SoftwareSerial ble_device(10,11); // CC2541 TX/RX pins
 const byte hx711_data_pin = 4;
 const byte hx711_clock_pin = 5;
 float y1 = 183; // calibrated mass to be added
-long x1 =8380274;
-long x0 = 8376204;
+// 8364553
+//  8361618
+long x1 =8364553;
+long x0 = 8361618;
 float avg_size = 15.0; // amount of averages for each mass measurement
 char ble_reading = 'Z'; // Bluetooth char preallocation
 float ratio_2 = 0.0; // for linear fit
