@@ -52,15 +52,15 @@ public class EditProfileActivity extends AppCompatActivity {
     Uri filepath;
     Bitmap bitmap;
     FirebaseUser user;
+    int image_clicked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         getSupportActionBar().hide();
 
-
+        image_clicked=0;
         user = FirebaseAuth.getInstance().getCurrentUser();
         profile=(ImageView) findViewById(R.id.profilepic);
         username= (EditText) findViewById(R.id.username);
@@ -278,17 +278,9 @@ public class EditProfileActivity extends AppCompatActivity {
                                 .setPhotoUri(uri)
                                 .build();
                         user.updateProfile(profileUpdates);
-                        dataholder obj=new dataholder(email.getText().toString(),username.getText().toString(),uri.toString());
-                        Map<String,dataholder> list=new HashMap<>();
-                        list.put("1",obj);
-
-                        root.setValue(list).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Log.i("Action","UPdates");
-                            }
-                        });
-//                        root.child("1").setValue(obj);
+                        dataholder obj=new dataholder(username.getText().toString(),uri.toString(),null);
+//                        root.setValue(obj);
+                        root.child("1").setValue(obj);
                         Log.i("Action",root.toString());
                         Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(EditProfileActivity.this,HomeActivity.class));

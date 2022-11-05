@@ -43,13 +43,6 @@ public class HomeActivity extends AppCompatActivity {
                     .into(profile);
         }
 
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,HomeActivity.class);
-                startActivity(intent);
-            }
-        });
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         cart.setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,CartActivity.class);
                 startActivity(intent);
             }

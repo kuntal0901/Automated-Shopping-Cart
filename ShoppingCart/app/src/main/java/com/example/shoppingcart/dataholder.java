@@ -1,20 +1,16 @@
 package com.example.shoppingcart;
 
-public class dataholder {
-    String email,name,profilephoto;
+import java.util.HashMap;
+import java.util.Map;
 
-    public dataholder(String email, String name, String profilephoto) {
-        this.email = email;
+public class dataholder {
+    String name,profilephoto;
+    Map<String, Map<String,Integer>> orders=new HashMap<String,Map<String,Integer>>();
+
+    public dataholder(String name, String profilephoto, Map<String, Map<String, Integer>> orders) {
         this.name = name;
         this.profilephoto = profilephoto;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        this.orders = orders;
     }
 
     public String getName() {
@@ -31,5 +27,13 @@ public class dataholder {
 
     public void setProfilephoto(String profilephoto) {
         this.profilephoto = profilephoto;
+    }
+
+    public Map<String, Map<String, Integer>> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Map<String, Map<String, Integer>> orders) {
+        this.orders = orders;
     }
 }
