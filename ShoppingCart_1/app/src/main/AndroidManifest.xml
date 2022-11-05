@@ -20,6 +20,9 @@
         android:theme="@style/Theme.ShoppingCart"
         tools:targetApi="31">
         <activity
+            android:name=".itemlist"
+            android:exported="false" />
+        <activity
             android:name=".LogoutActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />

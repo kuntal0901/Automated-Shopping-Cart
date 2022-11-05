@@ -20,8 +20,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView btnlogin;
@@ -76,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else
         {
+//            Toast.makeText(this,"Call Registration Method",Toast.LENGTH_SHORT).show();
             progressDialog.setMessage("Please Wait While Registration...");
             progressDialog.setTitle("Registration");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -95,11 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-//                                            Log.d("Action", "User profile updated.");
-                                            FirebaseDatabase db=FirebaseDatabase.getInstance();
-                                            DatabaseReference root=db.getReference("users");
-                                            dataholder obj=new dataholder(inputUsername.getText().toString(),null,null);
-                                            root.child(email).setValue(obj);
+                                            Log.d("Action", "User profile updated.");
                                         }
                                     }
                                 });

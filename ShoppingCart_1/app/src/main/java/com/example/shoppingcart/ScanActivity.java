@@ -95,12 +95,12 @@ public class ScanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        ConnecttoCartActivity ct=new ConnecttoCartActivity();
+//        ConnecttoCartActivity ct=new ConnecttoCartActivity();
         Log.i("Action","Scan Activity: On Create Inside here "+ct.connected);
-        if(ct.connected==false){
-            Toast.makeText(ScanActivity.this,"Moving to Connect to cart Page because you are not connected to cart",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
-        }
+//        if(ct.connected==false){
+//            Toast.makeText(ScanActivity.this,"Moving to Connect to cart Page because you are not connected to cart",Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
+//        }
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_scan);
@@ -255,23 +255,23 @@ public class ScanActivity extends AppCompatActivity {
             Log.i("Action",res);
             result.setText(res);
 
-            pg.setTitle("Detecting Weight");
-            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
-
-//            if(counter==0 && )
+//            pg.setTitle("Detecting Weight");
+//            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
+//
+////            if(counter==0 && )
+////            {
+////
+////            }
+//            ct.beginListenForData();
+//            while((ct.return_last_val()-arrli1.get(arrli1.size()-1))<150)
 //            {
 //
 //            }
-            ct.beginListenForData();
-            while((ct.return_last_val()-arrli1.get(arrli1.size()-1))<150)
-            {
-
-            }
-            arrli1.add(ct.return_last_val());
-            pg.dismiss();
-            res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n"+"Weight as received is "+(ct.return_last_val()-arrli1.get(arrli1.size()-1))+"\n";
-            result.setText(res);
-//            (ct.return_last_val()-arrli1.get(arrli1.size()-1))>=150
+//            arrli1.add(ct.return_last_val());
+//            pg.dismiss();
+//            res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n"+"Weight as received is "+(ct.return_last_val()-arrli1.get(arrli1.size()-1))+"\n";
+//            result.setText(res);
+////            (ct.return_last_val()-arrli1.get(arrli1.size()-1))>=150
         } catch (IOException e) {
             // TODO Handle the exception
         }
