@@ -236,6 +236,7 @@
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="@+id/homebar_ek1"
         app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
+        android:scaleType="center"
         app:layout_constraintVertical_bias="0.644" />
 
 
@@ -281,6 +282,7 @@
             android:id="@+id/profilepic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="center"
             android:src="@drawable/home" />
     </androidx.cardview.widget.CardView>
 

@@ -31,14 +31,14 @@ public class HomeActivity extends AppCompatActivity {
         if (user.getPhotoUrl() != null) {
             Glide.with(this)
                     .load(user.getPhotoUrl())
-                    .override(100, 200)
+                    .override(200, 200)
                     .fitCenter() // scale to fit entire image within ImageView
                     .into(profile);
         }
         else{
             Glide.with(this)
                     .load(R.drawable.blankprofile)
-                    .override(100, 500)
+                    .override(200, 200)
                     .fitCenter() // scale to fit entire image within ImageView
                     .into(profile);
         }

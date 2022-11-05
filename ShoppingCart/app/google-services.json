@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "897375664651",
+    "firebase_url": "https://automatedshoppingcart-default-rtdb.firebaseio.com",
     "project_id": "automatedshoppingcart",
     "storage_bucket": "automatedshoppingcart.appspot.com"
   },
