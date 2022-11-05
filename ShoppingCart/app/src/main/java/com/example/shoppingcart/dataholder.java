@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class dataholder {
     String name,profilephoto;
-    Map<String, Map<String,Integer>> orders=new HashMap<String,Map<String,Integer>>();
+    Map<String, Map<String,Integer>> orders;
 
     public dataholder(String name, String profilephoto, Map<String, Map<String, Integer>> orders) {
         this.name = name;
