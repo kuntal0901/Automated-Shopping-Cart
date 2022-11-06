@@ -36,19 +36,8 @@ public class itemlist extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<String> items = new ArrayList<>();
-        list = new ArrayList<>();
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("orange", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
-//        list.add(new Item("apple", 123.0f));
+        list = new ArrayList<>();;
+
         myAdapter = new MyAdapter(list);
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
@@ -61,21 +50,17 @@ public class itemlist extends AppCompatActivity {
                 list.clear();
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
 //                    Log.d("s4",snapshot.toString() );
-//                    Item i = snapshot.getValue(Item.class);
-//                    Log.d("keyy", snapshot.getKey());
-//                    Log.d("keyy" , snapshot.getValue().toString());
-//                    String txt = i.getName()+ ":" + i.getPrice();
-                    double count = 0.0;
+                    double price_kg = 0.0;
                     try{
                         // stored data is exactly a double
-                        count = (double)snapshot.getValue();
+                        price_kg = (double)snapshot.getValue();
                     } catch (Exception ex) {
                         // stored data is exactly an integer
-                        count = (double)((long)snapshot.getValue());
+                        price_kg = (double)((long)snapshot.getValue());
                     }
 
 //                    float price = ((Double) Objects.requireNonNull(snapshot.getValue())).floatValue();
-                    list.add(new Item(snapshot.getKey(), (float) count));
+                    list.add(new Item(snapshot.getKey(), (float) price_kg));
                 }
                 myAdapter.notifyDataSetChanged();
             }
