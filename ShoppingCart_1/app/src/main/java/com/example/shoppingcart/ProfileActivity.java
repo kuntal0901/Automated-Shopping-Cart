@@ -1,5 +1,7 @@
 package com.example.shoppingcart;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -7,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +27,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 
@@ -45,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
     ProgressDialog pg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getSupportActionBar().hide();
@@ -57,44 +67,55 @@ public class ProfileActivity extends AppCompatActivity {
         prevorder=(Button) findViewById(R.id.previous_order);
         editprof=(Button) findViewById(R.id.edit_profile);
         logout=(Button) findViewById(R.id.logout);
+        Uri profileuri;
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        String usernames=user.getDisplayName();
+        FirebaseDatabase db=FirebaseDatabase.getInstance();
+        DatabaseReference root=db.getReference("users");
 
-//        pg.setMessage("Taking you to profile page");
-//        pg.setTitle("Profile");
-//        pg.show();
-//
-//        long i=0;
-//        while(i<100000)
-//        {
-//            i+=1;
-//        }
-//        pg.dismiss();
-//        FirebaseAuth.getInstance().
-        user.reload();
-        user=FirebaseAuth.getInstance().getCurrentUser();
-
-//        user.
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .override(500, 500)
-                    .fitCenter() // scale to fit entire image within ImageView
-                    .into(profile);
-        }
-        else{
-                Glide.with(this)
+        username.setText(user.getDisplayName());
+        email.setText(user.getEmail());
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot x: snapshot.getChildren()){
+                    dataholder temp=x.getValue(dataholder.class);
+                    Log.i("Action",String.valueOf(temp.getProfilephoto().isEmpty()));
+                    if(temp.getProfilephoto().isEmpty())
+                    {
+                        Log.i("Action","in");
+                        Glide.with(ProfileActivity.this)
                         .load(R.drawable.blankprofile)
                         .override(500, 500)
                         .fitCenter() // scale to fit entire image within ImageView
                         .into(profile);
-        }
-        username.setText(user.getDisplayName());
-        email.setText(user.getEmail());
+                    }
+                    else{
+                        Glide.with(ProfileActivity.this)
+                                .load(Uri.parse(temp.getProfilephoto()))
+                                .override(500, 500)
+                                .fitCenter() // scale to fit entire image within ImageView
+                                .into(profile);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+//        Log.i("Action",root.child(usernames).get());
+
+//        Glide.with(this)
+//                .load(R.drawable.blankprofile)
+//                .override(500, 500)
+//                .fitCenter() // scale to fit entire image within ImageView
+//                .into(profile);
+
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -24,6 +24,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity {
     TextView btnlogin;
     private EditText inputPassword,inputEmail,inputConfirmPassword,inputUsername;
@@ -90,10 +93,22 @@ public class RegisterActivity extends AppCompatActivity {
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(username)
                                 .build();
-                        user.updateProfile(profileUpdates);
+                        user.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.i("Action",user.getDisplayName());
+                            }
+                        });
                         FirebaseDatabase db=FirebaseDatabase.getInstance();
                         DatabaseReference root=db.getReference("users");
-                        dataholder obj=new dataholder(inputUsername.getText().toString(),null,null);
+                        Map<String,Map<String,Integer>> ma=new HashMap<String, Map<String, Integer>>();
+                        dataholder.Orders x=new dataholder.Orders();
+                        x.setOrderid(" ");
+//                        x.setOrderid("");
+                        dataholder obj=new dataholder();
+                        obj.setName(inputUsername.getText().toString());
+                        obj.setProfilephoto("");
+                        obj.setPrevorder(x);
                         root.child(username).setValue(obj);
                         progressDialog.dismiss();
                         sendUsertoNextActivity();

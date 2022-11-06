@@ -5,12 +5,25 @@ import java.util.Map;
 
 public class dataholder {
     String name,profilephoto;
-    Map<String, Map<String,Integer>> orders;
+    Orders prevorder;
+    public dataholder()
+    {
 
-    public dataholder(String name, String profilephoto, Map<String, Map<String, Integer>> orders) {
-        this.name = name;
-        this.profilephoto = profilephoto;
-        this.orders = orders;
+    }
+    public static class Orders{
+        String orderid;
+
+        public Orders() {
+
+        }
+
+        public String getOrderid() {
+            return orderid;
+        }
+
+        public void setOrderid(String orderid) {
+            this.orderid = orderid;
+        }
     }
 
     public String getName() {
@@ -29,11 +42,19 @@ public class dataholder {
         this.profilephoto = profilephoto;
     }
 
-    public Map<String, Map<String, Integer>> getOrders() {
-        return orders;
+    public Orders getPrevorder() {
+        return prevorder;
     }
 
-    public void setOrders(Map<String, Map<String, Integer>> orders) {
-        this.orders = orders;
+    public void setPrevorder(Orders prevorder) {
+        this.prevorder = prevorder;
     }
+
+//    public dataholder(Orders prevorder,String profilephoto,String name ) {
+//        this.name = name;
+//        this.profilephoto = profilephoto;
+//        this.prevorder = prevorder;
+//    }
+
+
 }
