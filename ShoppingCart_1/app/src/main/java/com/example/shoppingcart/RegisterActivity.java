@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,28 +86,18 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(username)
-                                .setPhotoUri(null)
                                 .build();
-                        user.updateProfile(profileUpdates)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-//                                            Log.d("Action", "User profile updated.");
-                                            FirebaseDatabase db=FirebaseDatabase.getInstance();
-                                            DatabaseReference root=db.getReference("users");
-                                            dataholder obj=new dataholder(inputUsername.getText().toString(),null,null);
-                                            root.child(email).setValue(obj);
-                                        }
-                                    }
-                                });
+                        user.updateProfile(profileUpdates);
+                        FirebaseDatabase db=FirebaseDatabase.getInstance();
+                        DatabaseReference root=db.getReference("users");
+                        dataholder obj=new dataholder(inputUsername.getText().toString(),null,null);
+                        root.child(username).setValue(obj);
                         progressDialog.dismiss();
                         sendUsertoNextActivity();
                         Toast.makeText(RegisterActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();
-
                     }
                     else{
                         progressDialog.dismiss();
