@@ -96,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                         user.updateProfile(profileUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Log.i("Action",user.getDisplayName());
+//                                Log.i("Action",user.getDisplayName());
                             }
                         });
                         FirebaseDatabase db=FirebaseDatabase.getInstance();

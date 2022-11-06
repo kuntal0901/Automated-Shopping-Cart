@@ -81,25 +81,29 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot x: snapshot.getChildren()){
                     dataholder temp=x.getValue(dataholder.class);
-                    Log.i("Action",String.valueOf(temp.getProfilephoto().isEmpty()));
-                    if(temp.getProfilephoto().isEmpty())
+//                    Log.i("Action",String.valueOf(temp.getProfilephoto().isEmpty()));
+                    Log.i("Action","Profile Page Username is"+user.getDisplayName()+"temp username is"+temp.getName()+"comp is"+String.valueOf(user.getDisplayName().equals(temp.getName())));
+                    if(temp.getName().equals(user.getDisplayName()))
                     {
-                        Log.i("Action","in");
-                        Glide.with(ProfileActivity.this)
-                        .load(R.drawable.blankprofile)
-                        .override(500, 500)
-                        .fitCenter() // scale to fit entire image within ImageView
-                        .into(profile);
+                        if(temp.getProfilephoto().isEmpty())
+                        {
+//                            Log.i("Action","in");
+                            Glide.with(ProfileActivity.this)
+                                    .load(R.drawable.blankprofile)
+                                    .override(500, 500)
+                                    .fitCenter() // scale to fit entire image within ImageView
+                                    .into(profile);
+                        }
+                        else{
+                            Glide.with(ProfileActivity.this)
+                                    .load(Uri.parse(temp.getProfilephoto()))
+                                    .override(500, 500)
+                                    .fitCenter() // scale to fit entire image within ImageView
+                                    .into(profile);
+                        }
                     }
-                    else{
-                        Glide.with(ProfileActivity.this)
-                                .load(Uri.parse(temp.getProfilephoto()))
-                                .override(500, 500)
-                                .fitCenter() // scale to fit entire image within ImageView
-                                .into(profile);
-                    }
-                }
 
+                }
             }
 
             @Override
