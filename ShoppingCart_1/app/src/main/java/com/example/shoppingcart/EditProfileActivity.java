@@ -52,15 +52,15 @@ public class EditProfileActivity extends AppCompatActivity {
     Uri filepath;
     Bitmap bitmap;
     FirebaseUser user;
+    int image_clicked;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         getSupportActionBar().hide();
 
-
+        image_clicked=0;
         user = FirebaseAuth.getInstance().getCurrentUser();
         profile=(ImageView) findViewById(R.id.profilepic);
         username= (EditText) findViewById(R.id.username);
@@ -107,8 +107,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         /*
-        * Reset enable is the checkbox which on being selected will provide the user the option to type in the password into the edit text for password
-        */
+         * Reset enable is the checkbox which on being selected will provide the user the option to type in the password into the edit text for password
+         */
         reset_enable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,9 +125,9 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-    /*
-    * Set the profile image of user as set in his database
-    * */
+        /*
+         * Set the profile image of user as set in his database
+         * */
 
         if (user.getPhotoUrl() != null) {
             Glide.with(this)
@@ -180,55 +180,55 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-//                    String email_updated=email.getText().toString();
-//                    String name_updates=username.getText().toString();
-//                    if (!email_updated.matches(EmailPattern)){
-//                        Toast.makeText(EditProfileActivity.this,"Email doesnot match the desire pattern",Toast.LENGTH_SHORT).show();
-//                    }
-//                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//
-//                    boolean pass_set=false;
-//                    if(reset_enable.isChecked()){
-//                        String pass1=password.getText().toString();
-//                        String pass2=retype_password.getText().toString();
-//                        if(pass1.isEmpty()||pass2.isEmpty()||pass1.length()<8 || pass2.length()<8 || !pass1.equals(pass2)){
-//                            Toast.makeText(EditProfileActivity.this,"Password Not updated",Toast.LENGTH_SHORT).show();
-//                        }
-//                        else
-//                        {
-//                            pass_set=true;
-//                            user.updatePassword(pass1);
-//                            Toast.makeText(EditProfileActivity.this,"Password Updated",Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                    else{
-//                        pass_set=true;
-//                    }
-//                if((!name_updates.equals(user.getDisplayName())||(!email_updated.equals(user.getEmail()))&& pass_set))
-//                {
-//                    if(!name_updates.equals(user.getDisplayName()) && !email_updated.equals(user.getEmail())){
-//                        user.updateEmail(email_updated);
-//                        Toast.makeText(EditProfileActivity.this,"Both username and email cant be changed at the same time so email has been updated only",Toast.LENGTH_LONG).show();
-//                    }
-//                    else if(!name_updates.equals(user.getDisplayName()))
-//                    {
-//                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                                .setDisplayName(name_updates)
-//                                .setPhotoUri(null)
-//                                .build();
-//                        user.updateProfile(profileUpdates);
-//                    }
-//                    else{
-//                        user.updateEmail(email_updated);
-//                    }
-//                    startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//
-//                }
-//                else{
-//                    if(pass_set){
-//                        startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                    }
-//                }
+                String email_updated=email.getText().toString();
+                String name_updates=username.getText().toString();
+                if (!email_updated.matches(EmailPattern)){
+                    Toast.makeText(EditProfileActivity.this,"Email doesnot match the desire pattern",Toast.LENGTH_SHORT).show();
+                }
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                boolean pass_set=false;
+                if(reset_enable.isChecked()){
+                    String pass1=password.getText().toString();
+                    String pass2=retype_password.getText().toString();
+                    if(pass1.isEmpty()||pass2.isEmpty()||pass1.length()<8 || pass2.length()<8 || !pass1.equals(pass2)){
+                        Toast.makeText(EditProfileActivity.this,"Password Not updated",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        pass_set=true;
+                        user.updatePassword(pass1);
+                        Toast.makeText(EditProfileActivity.this,"Password Updated",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    pass_set=true;
+                }
+                if((!name_updates.equals(user.getDisplayName())||(!email_updated.equals(user.getEmail()))&& pass_set))
+                {
+                    if(!name_updates.equals(user.getDisplayName()) && !email_updated.equals(user.getEmail())){
+                        user.updateEmail(email_updated);
+                        Toast.makeText(EditProfileActivity.this,"Both username and email cant be changed at the same time so email has been updated only",Toast.LENGTH_LONG).show();
+                    }
+                    else if(!name_updates.equals(user.getDisplayName()))
+                    {
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(name_updates)
+                                .setPhotoUri(null)
+                                .build();
+                        user.updateProfile(profileUpdates);
+                    }
+                    else{
+                        user.updateEmail(email_updated);
+                    }
+                    startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+                }
+                else{
+                    if(pass_set){
+                        startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                }
 
                 uploadtofirebase();
 
@@ -278,17 +278,11 @@ public class EditProfileActivity extends AppCompatActivity {
                                 .setPhotoUri(uri)
                                 .build();
                         user.updateProfile(profileUpdates);
-                        dataholder obj=new dataholder(email.getText().toString(),username.getText().toString(),uri.toString());
-                        Map<String,dataholder> list=new HashMap<>();
-                        list.put("1",obj);
-
-                        root.setValue(list).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Log.i("Action","UPdates");
-                            }
-                        });
-//                        root.child("1").setValue(obj);
+                        dataholder obj;
+//                        obj=root.child(email.getText().toString());
+//                        obj.setProfilephoto(uri.toString());
+//                        dataholder obj=new dataholder(username.getText().toString(),uri.toString(),null);
+//                        root.child((email.getText().toString()).setValue(obj);
                         Log.i("Action",root.toString());
                         Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(EditProfileActivity.this,HomeActivity.class));
@@ -298,8 +292,8 @@ public class EditProfileActivity extends AppCompatActivity {
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-            float percent=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
-            pg.setMessage("Uploaded:"+(int)percent+"%");
+                float percent=(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                pg.setMessage("Uploaded:"+(int)percent+"%");
             }
         });
 
