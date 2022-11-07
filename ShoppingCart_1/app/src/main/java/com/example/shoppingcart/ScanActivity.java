@@ -253,6 +253,7 @@ public class ScanActivity extends AppCompatActivity {
 
             String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n";
             Log.i("Action",res);
+
             result.setText(res);
 
 //            pg.setTitle("Detecting Weight");
