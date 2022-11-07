@@ -47,7 +47,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class EditProfileActivity extends AppCompatActivity {
-    ImageView profile,home,scan,cart;;
+    ImageView profile,home,scan,cart;
     EditText username,email,password,retype_password;
     CheckBox reset_enable;
     Button cancel,save;
