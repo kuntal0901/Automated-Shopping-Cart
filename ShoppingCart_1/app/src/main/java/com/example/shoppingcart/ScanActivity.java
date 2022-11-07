@@ -21,7 +21,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
@@ -36,7 +38,12 @@ import android.widget.TextView;
 
 import com.example.shoppingcart.ml.Efficentnetv2Augumented;
 import com.example.shoppingcart.ml.MobilenetAugumented;
+import com.example.shoppingcart.models.CartItem;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
@@ -48,6 +55,9 @@ import android.app.ProgressDialog;
 import android.widget.Toast;
 
 public class ScanActivity extends AppCompatActivity {
+    public static final String PREFS_TAG = "Cart_Preference_tab_xx";
+    public static final String PRODUCT_TAG = "Product_Preference_tab_xx";
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(ScanActivity.this,HomeActivity.class));
@@ -254,7 +264,8 @@ public class ScanActivity extends AppCompatActivity {
             String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n";
             Log.i("Action",res);
             result.setText(res);
-
+            CartItem ci = new CartItem(res, 9.8f);
+            addToCartSharedPreferences(ci);
 //            pg.setTitle("Detecting Weight");
 //            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
 //
@@ -277,6 +288,30 @@ public class ScanActivity extends AppCompatActivity {
         }
     }
 
+    private void addToCartSharedPreferences(CartItem productToAdd){
+
+        Gson gson = new Gson();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
+
+        String jsonSaved = sharedPref.getString(PRODUCT_TAG, "");
+        String jsonNewProductToAdd = gson.toJson(productToAdd);
+
+        JSONArray jsonArrayProduct= new JSONArray();
+
+        try {
+            if(jsonSaved.length()!=0){
+                jsonArrayProduct = new JSONArray(jsonSaved);
+            }
+            jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //SAVE NEW ARRAY
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(PRODUCT_TAG, gson.toJson(jsonArrayProduct));
+        editor.commit();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

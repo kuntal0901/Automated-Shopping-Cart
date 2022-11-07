@@ -6,15 +6,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.example.shoppingcart.models.CartItem;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -26,6 +34,29 @@ public class itemlist extends AppCompatActivity {
 //    DatabaseReference database;
     MyAdapter myAdapter;
     ArrayList<Item> list;
+
+    private void getCartFromSharedPreferences(){
+
+        Gson gson = new Gson();
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
+        String jsonSaved = sharedPref.getString(ScanActivity.PRODUCT_TAG, "");
+        JSONArray jsonArrayProduct= new JSONArray();
+        try {
+            if(jsonSaved.length()!=0){
+                jsonArrayProduct = new JSONArray(jsonSaved);
+            }
+            for (:
+                 ) {
+                
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //get NEW ARRAY
+        
+        
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
