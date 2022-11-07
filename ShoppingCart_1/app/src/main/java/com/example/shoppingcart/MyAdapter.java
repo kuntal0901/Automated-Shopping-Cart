@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shoppingcart.models.CartListViewItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,7 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    List<Item> itemList;
+    List<CartListViewItem> itemList;
     Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -84,7 +86,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     }
 
-    public MyAdapter(@NonNull List<Item> mPItemList) {
+    public MyAdapter(@NonNull List<CartListViewItem> mPItemList) {
         this.itemList = mPItemList;
     }
 
@@ -101,10 +103,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item item = itemList.get(position);
+        CartListViewItem item = itemList.get(position);
 
-        holder.getItemTitleTextView().setText(item.getName());
-        holder.getItemPriceTextView().setText(Float.toString(item.getPrice()));
+        holder.getItemTitleTextView().setText(item.name);
+        holder.getItemPriceTextView().setText(item.getPrice());
 
     }
 

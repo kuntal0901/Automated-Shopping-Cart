@@ -40,6 +40,7 @@ import com.example.shoppingcart.ml.Efficentnetv2Augumented;
 import com.example.shoppingcart.ml.MobilenetAugumented;
 import com.example.shoppingcart.models.CartItem;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,9 +49,12 @@ import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ProgressDialog;
 import android.widget.Toast;
 
@@ -112,7 +116,7 @@ public class ScanActivity extends AppCompatActivity {
 //            startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
 //        }
         super.onCreate(savedInstanceState);
-
+        Log.d("tagged", "tags");
         setContentView(R.layout.activity_scan);
         arrli1.add(0.0f);
         pg=new ProgressDialog(this);
@@ -262,11 +266,13 @@ public class ScanActivity extends AppCompatActivity {
 //            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+Model_names[2]+" Gives Prediction: "+arr[class_model_3]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n";
 
             String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n";
-            Log.i("Action",res);
-
-            result.setText(res);
-            CartItem ci = new CartItem(res, 9.8f);
+            Log.d("check",res);
+            CartItem ci = new CartItem(arr[class_model_1], 9.8f);
+            Log.d("check2",res);
             addToCartSharedPreferences(ci);
+            Log.d("check3",res);
+            result.setText(res);
+
 //            pg.setTitle("Detecting Weight");
 //            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
 //
@@ -295,23 +301,24 @@ public class ScanActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(PREFS_TAG, Context.MODE_PRIVATE);
 
         String jsonSaved = sharedPref.getString(PRODUCT_TAG, "");
-        String jsonNewProductToAdd = gson.toJson(productToAdd);
+        List<CartItem> cartItemList = new ArrayList<CartItem>();
 
-        JSONArray jsonArrayProduct= new JSONArray();
 
-        try {
-            if(jsonSaved.length()!=0){
-                jsonArrayProduct = new JSONArray(jsonSaved);
-            }
-            jsonArrayProduct.put(new JSONObject(jsonNewProductToAdd));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(jsonSaved.length()!=0){
+            Type type = new TypeToken<List<CartItem>>() {
+            }.getType();
+            cartItemList = gson.fromJson(jsonSaved, type);
         }
+        cartItemList.add(productToAdd);
 
         //SAVE NEW ARRAY
+        Log.d("json", cartItemList.toString());
+        Log.d("json",  gson.toJson(cartItemList));
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(PRODUCT_TAG, gson.toJson(jsonArrayProduct));
-        editor.commit();
+        editor.putString(PRODUCT_TAG, gson.toJson(cartItemList));
+
+
+        editor.apply();
     }
 
     @Override
