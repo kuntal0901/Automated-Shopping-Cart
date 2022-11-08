@@ -33,17 +33,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="263dp"
-        android:layout_height="110dp"
+        android:layout_width="290dp"
+        android:layout_height="125dp"
         android:fontFamily="@font/akaya_telivigala"
         android:textColor="#3F51B5"
         android:textColorHighlight="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933" />
+        app:layout_constraintVertical_bias="0.936" />
 
     <Button
         android:id="@+id/back"
@@ -66,9 +66,8 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.956" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

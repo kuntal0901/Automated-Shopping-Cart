@@ -152,120 +152,230 @@ public class ConnecttoCartActivity extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     void openBT() throws IOException {
-//        Log.i("Action","Connect to cart : Inside Open Bluetooth");
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
-//        Log.i("Action","Connect to cart : Connected set to true");
         connected=true;
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
-        Log.i("Action", String.valueOf(mmInputStream.available()));
         progressDialog.dismiss();
         status.setText("Bluetooth Opened with "+mmDevice.getName());
-//        Log.i("Action","Connect to cart : End of bluetooth");
     }
 
-    void beginListenForData()
-    {
+//    void beginListenForData()
+//    {
+//        final Handler handler = new Handler();
+//        final byte delimiter = 10; //This is the ASCII code for a newline character
+//        stopWorker = false;
+//        readBufferPosition = 0;
+//        readBuffer = new byte[1024];
+//        workerThread = new Thread(new Runnable()
+//        {
+//            public void run()
+//            {
+//                Log.i("Action","Connect to cart : New THREAD initiated and run");
+//                try{
+//                handler.post(new Runnable() {
+//                    @Override
+//                    public void run()
+//                    {
+//                        while(!Thread.currentThread().isInterrupted() && !stopWorker)
+//                        {
+////                            try
+////                            {
+//
+////                                Log.i("Action","inside");
+//                                try
+//                                {
+//                                    int bytesAvailable= mmInputStream.available();
+////                                    Log.i("Action",String.valueOf(bytesAvailable));
+//                                    if(bytesAvailable > 0)
+//                                    {
+//                                        byte[] packetBytes = new byte[bytesAvailable];
+//                                        mmInputStream.read(packetBytes);
+//                                        ArrayList<Character>temp = new ArrayList(1);
+//                                        for(int i=0;i<bytesAvailable;i++)
+//                                        {
+//                                            byte b = packetBytes[i];
+//                                            if(b==10){
+////                                                Log.i("Action","Data is"+ temp.toString());
+//                                                String conv="";
+//                                                for(int temp_num=0;temp_num<temp.size();temp_num++)
+//                                                {
+//                                                    conv=conv+temp.get(temp_num);
+//                                                }
+////                                                Log.i("Action","Data is"+ conv);
+//                                                float converted=Float.parseFloat(conv);
+//                                                Log.i("Action","Converted to float is "+converted);
+////                                                if(ScanActivity.cont_data.size()>0)
+////                                                {
+////                                                    if(Math.abs(converted-ScanActivity.cont_data.get(ScanActivity.cont_data.size()-1))<50.0 && Math.abs(converted-ScanActivity.cart_preset.get(ScanActivity.cart_preset.size()-1))>150)
+////                                                    {
+////                                                        ScanActivity.cart_preset.add(converted);
+////                                                        ScanActivity.cont_data=new ArrayList<>(0);
+////                                                        Log.i("Action","New item Added with cart weight now as "+converted);
+////                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
+////                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
+////                                                    }
+////                                                    else{
+////                                                        ScanActivity.cart_preset.add(converted);
+////                                                        ScanActivity.cart_preset.remove(0);
+////                                                        Log.i("Action","Cart weight within 50gms so stabilized "+converted);
+////                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
+////                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
+////                                                    }
+////
+////                                                }
+////                                                else{
+////                                                    ScanActivity.cont_data.add(converted);
+////                                                }
+//                                                temp =new ArrayList<>(1);
+//                                            }
+//                                            else if(b==32){
+//
+//                                            }
+//                                            else{
+//                                                temp.add((char)b);
+//                                            }
+//                                        }
+//                                        stopWorker=true;
+//                                    }
+//                                }
+//                                catch (IOException e)
+//                                {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    });}
+//                    catch (Exception ex)
+//                    {
+//                        Log.i("Action Error","Connect to cart :"+ex.toString());
+//                        stopWorker = true;
+//                    }
+//                }
+////            }
+//        });
+//        try{
+//            workerThread.start();
+////            workerThread.stop();
+//        }
+//        catch (Exception e)
+//        {
+//            Log.i("Action",e.toString());
+//        }
+//    }
+    ArrayList<Float> beginListenForData() {
+        ArrayList<Float> li=new ArrayList<>(1);
         final Handler handler = new Handler();
         final byte delimiter = 10; //This is the ASCII code for a newline character
-//        Log.i("Action","Connect to cart : insidebeginListenForData");
         stopWorker = false;
         readBufferPosition = 0;
         readBuffer = new byte[1024];
-        workerThread = new Thread(new Runnable()
-        {
-
-            public void run()
-            {
-//                Log.i("Action","Connect to cart : New THREAD initiated and run insidebeginListenForData");
-                while(!Thread.currentThread().isInterrupted() && !stopWorker)
-                {
-//                    Log.i("Action","Connect to cart : Inside While loop insidebeginListenForData");
-                    try
+        int bytesAvailable = 0;
+        try {
+            bytesAvailable = mmInputStream.available();
+            if (bytesAvailable > 0) {
+                byte[] packetBytes = new byte[bytesAvailable];
+                mmInputStream.read(packetBytes);
+                ArrayList<Character> temp = new ArrayList(1);
+                for (int i = 0; i < bytesAvailable; i++) {
+                    byte b = packetBytes[i];
+                    if (b == 10)
                     {
-//                        Log.i("Action","Connect to cart : Inside try and run insidebeginListenForData");
-//                        int bytesAvailable=0;
-//                        try{
-                           int bytesAvailable= mmInputStream.available();
-                           Log.i("Action Done","Connect to Cart: "+mmInputStream.toString());
-//                           break;
-
-//                        catch(Exception e)
-//                        {
-////                            Log.i("Action Error","Error here");
-////                            Log.i("Action Exception",e.toString());
-//                        }
-//                        Log.i("Action","Connect to cart : After Available");
-                        if(bytesAvailable > 0)
+                        Log.i("Action", "Data is" + temp.toString());
+                        String conv = "";
+                        for (int temp_num = 0; temp_num < temp.size(); temp_num++)
                         {
-                            byte[] packetBytes = new byte[bytesAvailable];
-//                            Log.i("Action","Connect to cart : Before Read Data");
-                            mmInputStream.read(packetBytes);
-
-//                            Log.i("Action","Connect to cart : After Read Data");
-                            for(int i=0;i<bytesAvailable;i++)
-                            {
-                                byte b = packetBytes[i];
-                                if(b == delimiter)
-                                {
-//                                    Log.i("Action","Connect to cart : Delimiter Found");
-                                    byte[] encodedBytes = new byte[readBufferPosition];
-                                    System.arraycopy(readBuffer, 0, encodedBytes, 0, encodedBytes.length);
-                                    final String data = new String(encodedBytes, "US-ASCII");
-                                    readBufferPosition = 0;
-//                                    Log.i("Action","Connect to cart : Delimiter Found");
-                                    handler.postDelayed(new Runnable()
-                                    {
-                                        public void run()
-                                        {
-                                            Log.i("Action Weight","Connect to cart :"+data);
-                                            float temp=Float.parseFloat(data);
-                                            if(counter>=1)
-                                            {
-                                                prev=temp;
-                                            }
-                                            if(counter==0)
-                                            {
-                                                counter+=1;
-                                            }
-                                            if(temp-arrli.get(arrli.size()-1)>=150.0 && Math.abs(temp-prev)<=50.0)
-                                            {
-                                                arrli.add(temp);
-                                            }
-                                        }
-                                    },5000);
-                                }
-                                else
-                                {
-                                    readBuffer[readBufferPosition++] = b;
-                                }
-                            }
+                            conv = conv + temp.get(temp_num);
                         }
-//                        else{
-//                            Log.i("Action","Connect To cart: No data to work with");
-//                        }
-                    }
-                    catch (IOException ex)
-                    {
-//                        Log.i("Action Error","Connect to cart :"+ex.toString());
-                        stopWorker = true;
+                        float converted = Float.parseFloat(conv);
+                        Log.i("Action", "Converted to float is " + converted);
+                        li.add(converted);
+                        temp = new ArrayList<>(1);
+                    } else if (b == 32) {
+
+                    } else {
+                        temp.add((char) b);
                     }
                 }
             }
-        });
-        workerThread.start();
+            return li;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            li.add(1.0f);
+            return li;
+        }
     }
+//                                    Log.i("Action",String.valueOf(bytesAvailable));
+
+//                                            Log.i("Action","Converted to float is "+converted);
+//                                                if(ScanActivity.cont_data.size()>0)
+//                                                {
+//                                                    if(Math.abs(converted-ScanActivity.cont_data.get(ScanActivity.cont_data.size()-1))<50.0 && Math.abs(converted-ScanActivity.cart_preset.get(ScanActivity.cart_preset.size()-1))>150)
+//                                                    {
+//                                                        ScanActivity.cart_preset.add(converted);
+//                                                        ScanActivity.cont_data=new ArrayList<>(0);
+//                                                        Log.i("Action","New item Added with cart weight now as "+converted);
+//                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
+//                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
+//                                                    }
+//                                                    else{
+//                                                        ScanActivity.cart_preset.add(converted);
+//                                                        ScanActivity.cart_preset.remove(0);
+//                                                        Log.i("Action","Cart weight within 50gms so stabilized "+converted);
+//                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
+//                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
+//                                                    }
+//
+//                                                }
+//                                                else{
+//                                                    ScanActivity.cont_data.add(converted);
+//                                                }
+//                                            temp =new ArrayList<>(1);
+//                                        }
+//                                        else if(b==32){
+//
+//                                        }
+//                                        else{
+//                                            temp.add((char)b);
+//                                        }
+//                                    }
+//                                    stopWorker=true;
+//                                }
+//                            }
+//                            catch (IOException e)
+//                            {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                });}
+//            catch (Exception ex)
+//            {
+//                Log.i("Action Error","Connect to cart :"+ex.toString());
+//                stopWorker = true;
+//            }
+//        }
+////            }
+//    });
+//        try{
+//        workerThread.start();
+////            workerThread.stop();
+//    }
+//        catch (Exception e)
+//    {
+//        Log.i("Action",e.toString());
+//    }
+//}
 
     public void close_BT() throws IOException {
-
         stopWorker=true;
         mmOutputStream.close();
         mmInputStream.close();
         mmSocket.close();
-
     }
+
     public float return_last_val(){
 
         return arrli.get(arrli.size()-1);
