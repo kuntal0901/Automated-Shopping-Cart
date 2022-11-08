@@ -8,6 +8,21 @@
     tools:context=".HomeActivity">
 
     <View
+        android:id="@+id/status"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ellipse_3"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/homebar_ek1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
+
+    <View
         android:id="@+id/connectocart"
         android:layout_width="275dp"
         android:layout_height="100dp"
@@ -18,7 +33,8 @@
         app:layout_constraintEnd_toEndOf="@+id/ready_to_ad"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/ready_to_ad"
-        app:layout_constraintTop_toBottomOf="@+id/ready_to_ad" />
+        app:layout_constraintTop_toBottomOf="@+id/ready_to_ad"
+        />
 
     <View
         android:id="@+id/previousord"
@@ -48,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="@+id/connectocart"
         app:layout_constraintStart_toStartOf="@+id/connectocart"
         app:layout_constraintTop_toTopOf="@+id/connectocart"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.25"/>
 
     <TextView
         android:id="@+id/connect_to_"
@@ -56,6 +72,7 @@
         android:layout_height="17dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:background="@color/cardview_shadow_end_color"
         android:gravity="top"
         android:text="@string/connect_to_"
         android:textAppearance="@style/connect_to_"
@@ -251,7 +268,8 @@
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/homebar_ek1"
-        app:layout_constraintVertical_bias="0.644" />
+        app:layout_constraintVertical_bias="0.644"
+        />
 
     <ImageView
         android:id="@+id/inputscan"
@@ -277,6 +295,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047">
+
+
 
         <ImageView
             android:id="@+id/profilepic"

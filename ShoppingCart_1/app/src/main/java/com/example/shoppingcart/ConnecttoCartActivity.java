@@ -30,9 +30,12 @@ import java.util.Set;
 import java.util.UUID;
 
 public class ConnecttoCartActivity extends AppCompatActivity {
+
     @Override
     public void onBackPressed() {
+
         startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
     }
 
     private EditText cartname;
@@ -64,7 +67,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         if(connected)
         {
             Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Because You are connected to cart",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
         cartname = (EditText) findViewById(R.id.inputCartName);
         status = findViewById(R.id.statusText);
@@ -83,8 +86,8 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                     try {
                         openBT();
 //                        progressDialog.dismiss();
-                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                        Toast.makeText(ConnecttoCartActivity.this,"Moving to scan item page to add items to cart",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        Toast.makeText(ConnecttoCartActivity.this,"Connection Established",Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         status.setText("Failed");
 //                        progressDialog.dismiss();
@@ -94,13 +97,13 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                 {
                     if(connected)
                     {
-                        status.setText("You are already connected to app so taking u to add Scan Page");
+                        status.setText("You are already connected to app so still in the Home Page");
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        startActivity(new Intent(ConnecttoCartActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                     else{
                         status.setText("Device with given name not found");
@@ -267,7 +270,9 @@ public class ConnecttoCartActivity extends AppCompatActivity {
 
     }
     public float return_last_val(){
+
         return arrli.get(arrli.size()-1);
+
     }
 
 }

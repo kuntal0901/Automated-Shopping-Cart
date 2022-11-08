@@ -2,8 +2,10 @@ package com.example.shoppingcart;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +25,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView home,scan,cart,profile;
     private View connecttocart,previousorder,help;
+    View status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_activtiy);
         home = findViewById(R.id.home);
@@ -34,6 +38,13 @@ public class HomeActivity extends AppCompatActivity {
         previousorder = findViewById(R.id.previousord);
         help = findViewById(R.id.connectbutt3);
         profile=findViewById(R.id.profilepic);
+        status=findViewById(R.id.status);
+        if(ConnecttoCartActivity.connected){
+            status.setBackground(getResources().getDrawable(R.drawable.connected));
+        }
+        else{
+            status.setBackground(getResources().getDrawable(R.drawable.notconnected));
+        }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase db=FirebaseDatabase.getInstance();
         DatabaseReference root=db.getReference("users");

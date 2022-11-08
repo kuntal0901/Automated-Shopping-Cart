@@ -108,13 +108,6 @@ public class ScanActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-//        ConnecttoCartActivity ct=new ConnecttoCartActivity();
-        Log.i("Action","Scan Activity: On Create Inside here "+ct.connected);
-//        if(ct.connected==false){
-//            Toast.makeText(ScanActivity.this,"Moving to Connect to cart Page because you are not connected to cart",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(ScanActivity.this,ConnecttoCartActivity.class));
-//        }
         super.onCreate(savedInstanceState);
         Log.d("tagged", "tags");
         setContentView(R.layout.activity_scan);
