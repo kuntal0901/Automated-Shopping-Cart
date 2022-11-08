@@ -61,60 +61,57 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         arrli.add(0.0f);
-        progressDialog= new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_connectto_cart);
-        if(connected)
-        {
-            Toast.makeText(ConnecttoCartActivity.this,"Moving You to Scan Activity Because You are connected to cart",Toast.LENGTH_SHORT).show();
+        if (connected) {
+            Toast.makeText(ConnecttoCartActivity.this, "Already Connected to cart", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        }
-        cartname = (EditText) findViewById(R.id.inputCartName);
-        status = findViewById(R.id.statusText);
-        connect = (Button) findViewById(R.id.connect_cart);
-        connect.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View view) {
-                boolean findable=establishConnection();
-                if(findable && !connected)
-                {
-                    progressDialog.setMessage("Connecting to Bluetooth device ");
-                    progressDialog.setTitle("Connection");
-                    progressDialog.setCanceledOnTouchOutside(false);
-                    progressDialog.show();
-                    try {
-                        openBT();
-//                        progressDialog.dismiss();
-                        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                        Toast.makeText(ConnecttoCartActivity.this,"Connection Established",Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        status.setText("Failed");
-//                        progressDialog.dismiss();
-                    }
-                }
-                else
-                {
-                    if(connected)
-                    {
-                        status.setText("You are already connected to app so still in the Home Page");
+        } else {
+
+
+            setContentView(R.layout.activity_connectto_cart);
+
+            cartname = (EditText) findViewById(R.id.inputCartName);
+            status = findViewById(R.id.statusText);
+            connect = (Button) findViewById(R.id.connect_cart);
+            connect.setOnClickListener(new View.OnClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View view) {
+                    boolean findable = establishConnection();
+                    if (findable && !connected) {
+                        progressDialog.setMessage("Connecting to Bluetooth device ");
+                        progressDialog.setTitle("Connection");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.show();
                         try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            openBT();
+//                        progressDialog.dismiss();
+                            startActivity(new Intent(ConnecttoCartActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            Toast.makeText(ConnecttoCartActivity.this, "Connection Established", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            status.setText("Failed");
+//                        progressDialog.dismiss();
                         }
-                        startActivity(new Intent(ConnecttoCartActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    }
-                    else{
-                        status.setText("Device with given name not found");
+                    } else {
+                        if (connected) {
+                            status.setText("You are already connected to app so still in the Home Page");
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            startActivity(new Intent(ConnecttoCartActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        } else {
+                            status.setText("Device with given name not found");
+
+                        }
 
                     }
-
                 }
-            }
-        });
+            });
+        }
     }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     public boolean establishConnection() {
         String cart = cartname.getText().toString();

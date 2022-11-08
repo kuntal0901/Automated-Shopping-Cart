@@ -42,6 +42,7 @@ import com.example.shoppingcart.models.CartItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.checkerframework.checker.units.qual.C;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,6 +112,11 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("tagged", "tags");
         setContentView(R.layout.activity_scan);
+        if(!ConnecttoCartActivity.connected){
+            Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
+
         arrli1.add(0.0f);
         pg=new ProgressDialog(this);
         result = (TextView) findViewById(R.id.textView);
@@ -121,7 +127,6 @@ public class ScanActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                // Launch camera if we have permission
 
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
