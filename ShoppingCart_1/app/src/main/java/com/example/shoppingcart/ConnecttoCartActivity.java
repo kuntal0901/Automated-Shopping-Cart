@@ -38,7 +38,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     private EditText cartname;
     TextView status;
     Button connect;
-    public static boolean connected=false;
+    static boolean connected=false;
     static ProgressDialog progressDialog;
     static BluetoothAdapter mBluetoothAdapter;
     static BluetoothSocket mmSocket;
@@ -46,6 +46,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     static OutputStream mmOutputStream;
     static InputStream mmInputStream;
     static Thread workerThread;
+
     byte[] readBuffer;
     int readBufferPosition;
     int counter;
@@ -257,6 +258,14 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         workerThread.start();
     }
 
+    public void close_BT() throws IOException {
+
+        stopWorker=true;
+        mmOutputStream.close();
+        mmInputStream.close();
+        mmSocket.close();
+
+    }
     public float return_last_val(){
         return arrli.get(arrli.size()-1);
     }

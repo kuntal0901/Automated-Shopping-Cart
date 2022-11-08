@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
@@ -35,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
+import java.io.IOException;
 
 //@GlideModule
 //public final class MyAppGlideModule extends AppGlideModule {
@@ -52,6 +54,9 @@ public class ProfileActivity extends AppCompatActivity {
     TextView username,email;
     Button prevorder,editprof,logout;
     ProgressDialog pg;
+    FirebaseAuth mauth=FirebaseAuth.getInstance();
+//    ProgressDialog pg = new ProgressDialog(this);
+    ConnecttoCartActivity ct=new ConnecttoCartActivity();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -158,9 +163,55 @@ public class ProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,LogoutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                Log.i("Action ","Logout clicked");
+//                LogoutActivity lg=new LogoutActivity();
+                try{
+
+                    logouts();
+                }
+                catch (Exception e)
+                {
+                    Log.i("Action",e.toString());
+                }
+//                startActivity(new Intent(ProfileActivity.this,LogoutActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
+
+
     }
+    void logouts(){
+        Log.i("Action","Inside");
+        pg=new ProgressDialog(this);
+        pg.setTitle("Logout ");
+        pg.setMessage("Logging Out");
+        pg.show();
+        try{
+            mauth.signOut();
+        }
+        catch(Exception e)
+        {
+            Log.i("Action",e.toString());
+        }
+        Log.i("Action","Logged out");
+        pg.dismiss();
+        if(ConnecttoCartActivity.connected){
+            pg.setTitle("Closing Bluetooth ");
+            pg.setMessage("Disconnecting from cart");
+            pg.show();
+
+            try {
+                new ConnecttoCartActivity().close_BT();
+            } catch (IOException e) {
+                Toast.makeText(this,"Closing Bluetooth connection failes",Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+            pg.dismiss();
+        }
+        Log.i("Action","End");
+        startActivity(new Intent(this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK));
+        Toast.makeText(this,"Logout Successful",Toast.LENGTH_SHORT).show();
+
+    }
+
 }
