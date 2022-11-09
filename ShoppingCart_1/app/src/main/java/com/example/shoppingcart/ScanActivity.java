@@ -16,6 +16,7 @@
 package com.example.shoppingcart;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,9 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +67,7 @@ public class ScanActivity extends AppCompatActivity {
     public static final String PREFS_TAG = "Cart_Preference_tab_xx";
     public static final String PRODUCT_TAG = "Product_Preference_tab_xx";
     public static int counter=0;
+    public static boolean inprogress=false;
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
 //    public static ArrayList<Float> cont_data=new ArrayList<>(0);
     @Override
@@ -116,13 +121,17 @@ public class ScanActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         Log.d("tagged", "tags");
-        setContentView(R.layout.activity_scan);
-        if(!ConnecttoCartActivity.connected){
-            Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        }
+//        if(!ConnecttoCartActivity.connected){
+//            Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//        }
+//        if(ScanActivity.inprogress)
+//        {
+//            Toast.makeText(ScanActivity.this,"Old Detection in progress still!!",Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//        }
 
-//        arrli1.add(0.0f);
+        setContentView(R.layout.activity_scan);
         pg=new ProgressDialog(this);
         result = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -155,73 +164,81 @@ public class ScanActivity extends AppCompatActivity {
 
 
     public void classifyImage(Bitmap image){
-        try {
-            Log.i("Action", "Scan Activity: Inside classify Image");
-            pg.setTitle("Model Prediction");
-            pg.setMessage("Predicting .............");
-            Efficentnetv2Augumented model = Efficentnetv2Augumented.newInstance(getApplicationContext());
-            MobilenetAugumented model1 = MobilenetAugumented.newInstance(getApplicationContext());
+        if(ScanActivity.inprogress)
+        {
+            Toast.makeText(this,"Last adding to cart still in progress",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
+        else {
+
+            try {
+//                ScanActivity.inprogress = true;
+//            Log.i("Action", "Scan Activity: Inside classify Image");
+                pg.setTitle("Model Prediction");
+                pg.setMessage("Predicting .............");
+                Efficentnetv2Augumented model = Efficentnetv2Augumented.newInstance(getApplicationContext());
+                MobilenetAugumented model1 = MobilenetAugumented.newInstance(getApplicationContext());
 //            NasnetNonAugumented model2 = NasnetNonAugumented.newInstance(getApplicationContext());
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
+                TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
 
-            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
-            byteBuffer.order(ByteOrder.nativeOrder());
-            int[] intValues = new int[imageSize * imageSize];
-            image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
-            int pixel = 0;
-            for (int i = 0; i < imageSize; i++) {
-                for (int j = 0; j < imageSize; j++) {
-                    int val = intValues[pixel++]; // RGB
-                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255.f));
-                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255.f));
-                    byteBuffer.putFloat((val & 0xFF) * (1.f / 255.f));
+                ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
+                byteBuffer.order(ByteOrder.nativeOrder());
+                int[] intValues = new int[imageSize * imageSize];
+                image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
+                int pixel = 0;
+                for (int i = 0; i < imageSize; i++) {
+                    for (int j = 0; j < imageSize; j++) {
+                        int val = intValues[pixel++]; // RGB
+                        byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255.f));
+                        byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255.f));
+                        byteBuffer.putFloat((val & 0xFF) * (1.f / 255.f));
+                    }
                 }
-            }
 
-            inputFeature0.loadBuffer(byteBuffer);
+                inputFeature0.loadBuffer(byteBuffer);
 
-            // Runs model inference and gets result.
-            Efficentnetv2Augumented.Outputs outputs = model.process(inputFeature0);
-            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            MobilenetAugumented.Outputs outputs1 = model1.process(inputFeature0);
-            TensorBuffer outputFeature1 = outputs1.getOutputFeature0AsTensorBuffer();
+                // Runs model inference and gets result.
+                Efficentnetv2Augumented.Outputs outputs = model.process(inputFeature0);
+                TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+                MobilenetAugumented.Outputs outputs1 = model1.process(inputFeature0);
+                TensorBuffer outputFeature1 = outputs1.getOutputFeature0AsTensorBuffer();
 //            NasnetNonAugumented.Outputs outputs2 = model2.process(inputFeature0);
 //            TensorBuffer outputFeature2 = outputs2.getOutputFeature0AsTensorBuffer();
 
-            float[] data = outputFeature0.getFloatArray();
-            float[] data1 = outputFeature1.getFloatArray();
-            Log.i("Action", "Prediction Done");
+                float[] data = outputFeature0.getFloatArray();
+                float[] data1 = outputFeature1.getFloatArray();
+//            Log.i("Action", "Prediction Done");
 //            float[] data2=outputFeature2.getFloatArray();
-            double[] finaldata = new double[data.length];
-            double[] weights = {0.50, 0.50};
-            String[] arr = {"Baby Potato", "Banana", "Beetroot", "Bittergourd", "Black brinjal", "Broad Beans", "Brown Coconut", "Cabbage", "CauliFlower", "Custard apple", "Dragonfruit", "Drumstick", "French Beans", "Garlic", "Ginger", "Green Apple", "Green Capscium", "Green Chilli", "Green Grapes", "Green Pumpkin", "Green Zuchini", "Guava", "JackFruit", "Kiran Watermelon", "Kiwi", "Lemon", "Mango", "Mango Raw", "Muskmelon", "Okra", "Onion", "Ooty Carrot", "Orange", "Orange Carrot", "Papaya", "Pear", "Pineapple", "Pointed gourd", "Potato", "Radish", "Red Apple", "Red Capscium", "Ridge gourd", "Strawberry", "Sweet Potato", "Sweet lime", "Tomato", "Yam", "Yellaki Banana", "Yellow Capscium", "Yellow Zuchini"};
+                double[] finaldata = new double[data.length];
+                double[] weights = {0.50, 0.50};
+                String[] arr = {"Baby Potato", "Banana", "Beetroot", "Bittergourd", "Black brinjal", "Broad Beans", "Brown Coconut", "Cabbage", "CauliFlower", "Custard apple", "Dragonfruit", "Drumstick", "French Beans", "Garlic", "Ginger", "Green Apple", "Green Capscium", "Green Chilli", "Green Grapes", "Green Pumpkin", "Green Zuchini", "Guava", "JackFruit", "Kiran Watermelon", "Kiwi", "Lemon", "Mango", "Mango Raw", "Muskmelon", "Okra", "Onion", "Ooty Carrot", "Orange", "Orange Carrot", "Papaya", "Pear", "Pineapple", "Pointed gourd", "Potato", "Radish", "Red Apple", "Red Capscium", "Ridge gourd", "Strawberry", "Sweet Potato", "Sweet lime", "Tomato", "Yam", "Yellaki Banana", "Yellow Capscium", "Yellow Zuchini"};
 //            String [] Model_names={"EfficientNetV2 With Augumentation","MobileNet V2 with Augumentation","NasnetNonAugumented"};
-            String[] Model_names = {"EfficientNetV2 With Augumentation", "MobileNet V2 with Augumentation"};
-            int i;
-            double maxval;
-            maxval = -1000000.0;
-            i = 0;
-            int class_model_1 = 0;
-            int class_model_2 = 0;
-            int class_model_3 = 0;
-            int final_pred = 0;
-            for (i = 0; i < data.length; i++) {
-                data[i] = 2 * (data[i] - min(data)) / (max(data) - min(data)) - 1;
-                if (data[i] > maxval) {
-                    maxval = data[i];
-                    class_model_1 = i;
+                String[] Model_names = {"EfficientNetV2 With Augumentation", "MobileNet V2 with Augumentation"};
+                int i;
+                double maxval;
+                maxval = -1000000.0;
+                i = 0;
+                int class_model_1 = 0;
+                int class_model_2 = 0;
+                int class_model_3 = 0;
+                int final_pred = 0;
+                for (i = 0; i < data.length; i++) {
+                    data[i] = 2 * (data[i] - min(data)) / (max(data) - min(data)) - 1;
+                    if (data[i] > maxval) {
+                        maxval = data[i];
+                        class_model_1 = i;
+                    }
                 }
-            }
 
-            maxval = -1000000.0;
-            i = 0;
-            for (i = 0; i < data1.length; i++) {
-                data1[i] = 2 * (data1[i] - min(data1)) / (max(data1) - min(data1)) - 1;
-                if (data1[i] > maxval) {
-                    maxval = data1[i];
-                    class_model_2 = i;
+                maxval = -1000000.0;
+                i = 0;
+                for (i = 0; i < data1.length; i++) {
+                    data1[i] = 2 * (data1[i] - min(data1)) / (max(data1) - min(data1)) - 1;
+                    if (data1[i] > maxval) {
+                        maxval = data1[i];
+                        class_model_2 = i;
+                    }
                 }
-            }
 
 //            maxval=-1000000.0;
 //            i=0;
@@ -236,115 +253,138 @@ public class ScanActivity extends AppCompatActivity {
 //            }
 
 
-            for (i = 0; i < data.length; i++) {
+                for (i = 0; i < data.length; i++) {
 //                finaldata[i]=(weights[0]*data[i])+(weights[1]*data1[i])+(weights[2]*data2[i]);
-                finaldata[i] = (weights[0] * data[i]) + (weights[1] * data1[i]);
-            }
-
-
-            maxval = -1000000.0;
-            i = 0;
-            for (i = 0; i < data.length; i++) {
-                if (finaldata[i] > maxval) {
-                    maxval = finaldata[i];
-                    final_pred = i;
+                    finaldata[i] = (weights[0] * data[i]) + (weights[1] * data1[i]);
                 }
-            }
 
 
-            // Releases model resources if no longer used.
-            model.close();
-            model1.close();
-            pg.dismiss();
-            Log.i("Action", "Model closed");
-//            model2.close();
-//            String res=Model_names[0]+" Gives Prediction: "+arr[class_model_1]+"\n"+Model_names[1]+" Gives Prediction: "+arr[class_model_2]+"\n"+Model_names[2]+" Gives Prediction: "+arr[class_model_3]+"\n"+"Combined Model Gives Prediction: "+arr[final_pred]+"\n";
-
-
-            String res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
-//            result.setText(res);
-
-
-//            Log.d("check",res);
-//            CartItem ci = new CartItem(arr[class_model_1], 9.8f);
-//            Log.d("check2",res);
-//            addToCartSharedPreferences(ci);
-//            Log.d("check3",res);
-            result.setText(res);
-            Thread.sleep(15000);
-            pg.setTitle("Detecting Weight");
-            pg.setMessage("Waiting to detect an change in weight of atleast 150gms");
-            counter += 1;
-            ArrayList<Float> datas = ct.beginListenForData();
-            Log.i("Action", "Data is" + datas);
-            float first_ele = datas.get(0);
-            float last_ele = datas.get(datas.size() - 1);
-            Log.i("Action",String.valueOf(last_ele));
-            Log.i("Action","cart_preset is "+cart_preset.toString());
-            float new_item_weight = 0.0f;
-            try {
-                while (true) {
-                    if (Math.abs(last_ele - first_ele) < 50) {
-                        if (last_ele - cart_preset.get(cart_preset.size() - 1) > 150) {
-                            new_item_weight = last_ele - cart_preset.get(cart_preset.size() - 1);
-                            Toast.makeText(this, "Item has been added as per the weighs received ", Toast.LENGTH_SHORT).show();
-                            break;
-                        } else {
-                            Toast.makeText(this, "No item has been added as per the weighs received please add an item", Toast.LENGTH_SHORT).show();
-                            try {
-                                Thread.sleep(5000);
-                                datas = ct.beginListenForData();
-                                first_ele = datas.get(0);
-                                last_ele = datas.get(datas.size() - 1);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } else {
-                        float last_second_element = datas.get(datas.size() - 2);
-                        if (Math.abs(last_ele - last_second_element) < 50) {
-                            if (last_ele - cart_preset.get(cart_preset.size() - 1) >= 150) {
-                                new_item_weight = last_ele - cart_preset.get(cart_preset.size() - 1);
-                                Toast.makeText(this, "Item has been added as per the weighs received ", Toast.LENGTH_SHORT).show();
-                                break;
-                            } else {
-                                Toast.makeText(this, "Weight Still increasing so waiting", Toast.LENGTH_SHORT).show();
-                                first_ele = last_second_element;
-                                try {
-                                    Thread.sleep(5000);
-                                    datas = ct.beginListenForData();
-                                    last_ele = datas.get(datas.size() - 1);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        } else {
-//                        Toast.makeText(this,"Faulty Reading detected by load cell please visit supervisor ",Toast.LENGTH_SHORT).show();
-                            new_item_weight = -99999;
-                            break;
-                        }
-
-
+                maxval = -1000000.0;
+                i = 0;
+                for (i = 0; i < data.length; i++) {
+                    if (finaldata[i] > maxval) {
+                        maxval = finaldata[i];
+                        final_pred = i;
                     }
                 }
-                if (new_item_weight == -99999) {
-                    startActivity(new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                    new ProfileActivity().logouts();
-//                Toast.makeText(this,"Faulty Reading detected by load cell please visit supervisor so logged out",Toast.LENGTH_SHORT).show();
-                }
-                cart_preset.add(last_ele);
-                pg.dismiss();
-                res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n" + "Combined Model Gives Prediction: " + arr[final_pred] + "\n" + "Weight as received is " + new_item_weight + "\n";
-                result.setText(res);
-//            (ct.return_last_val()-arrli1.get(arrli1.size()-1))>=150
-            } catch (Exception e) {
-                // TODO Handle the exception
-                Log.i("Action error",e.toString());
-            }
-        }
-        catch(Exception e){
 
+
+                // Releases model resources if no longer used.
+                model.close();
+                model1.close();
+                pg.dismiss();
+
+                String res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
+            result.setText(res);
+
+
+            Log.d("check",res);
+            CartItem ci = new CartItem(arr[class_model_1], 9.8f);
+            Log.d("check2",res);
+            addToCartSharedPreferences(ci);
+            Log.d("check3",res);
+//                result.setText(res);
+
+//                Thread th1 = new Thread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            Thread.sleep(7000);
+//                        } catch (InterruptedException e) {
+//
+//                        }
+//                        try {
+//                            Handler h1 = new Handler(Looper.getMainLooper());
+//                            h1.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    ArrayList<Float> datas = ct.beginListenForData();
+//                                    boolean something_happened = false;
+//                                    Log.i("Action", "Data is" + datas.toString());
+//                                    Log.i("Action", "cart_preset is " + cart_preset.toString());
+//                                    for (int temp = 1; temp < datas.size(); temp++) {
+//                                        float cur = datas.get(temp);
+//                                        float prev = datas.get(temp - 1);
+//                                        if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50) {
+//                                            float new_item_weight = cur - cart_preset.get(cart_preset.size() - 1);
+//                                            Log.i("Action", cart_preset.toString());
+//                                            Log.i("Action", "New item weight is" + String.valueOf(new_item_weight));
+//                                            if (new_item_weight > 0) {
+//                                                cart_preset.add(cur);
+//                                                Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight, Toast.LENGTH_SHORT).show();
+//                                                something_happened = true;
+//                                                break;
+//                                            } else {
+//                                                cart_preset.add(cur);
+//                                                Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
+//                                                something_happened = true;
+//                                                break;
+//                                            }
+//                                        }
+//                                    }
+//                                    if (!something_happened) {
+//                                        runOnUiThread(new Runnable() {
+//                                            @Override
+//                                            public void run() {
+//                                                Toast.makeText(ScanActivity.this, "No weight detected so waiting for another 10 seconds", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        });
+//                                        try {
+//                                            Thread.sleep(10000);
+//                                        } catch (InterruptedException e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                        ArrayList<Float> datas1 = ct.beginListenForData();
+//                                        boolean something_happened1 = false;
+//                                        datas.addAll(datas1);
+//                                        Log.i("Action", "Data is" + datas1.toString());
+//                                        Log.i("Action", "cart_preset is " + cart_preset.toString());
+//
+//                                        for (int temp = 1; temp < datas.size(); temp++) {
+//                                            float cur = datas.get(temp);
+//                                            float prev = datas.get(temp - 1);
+//                                            if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50) {
+//
+//                                                float new_item_weight1 = cur - cart_preset.get(cart_preset.size() - 1);
+//                                                Log.i("Action", cart_preset.toString());
+//                                                Log.i("Action", "New item weight is" + String.valueOf(new_item_weight1));
+//                                                if (new_item_weight1 > 0) {
+//                                                    cart_preset.add(cur);
+//                                                    Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight1, Toast.LENGTH_SHORT).show();
+//                                                    something_happened1 = true;
+//                                                    break;
+//                                                } else {
+//                                                    cart_preset.add(cur);
+//                                                    Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
+//                                                    something_happened1 = true;
+//                                                    break;
+//                                                }
+//                                            }
+//                                        }
+//                                        if (!something_happened1) {
+//                                            Toast.makeText(ScanActivity.this, "Removing the last scanned item as no weight detected", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//
+//
+//                                    Log.i("Action", "Data is" + datas.toString());
+//                                }
+//                            });
+//
+//                        } catch (Exception e) {
+//                            Log.i("Action", e.toString());
+//                        }
+//
+//                        ScanActivity.inprogress = false;
+//                    }
+//                });
+//                th1.start();
+//                Toast.makeText(this, "Weight Detection Left will update status wait a message", Toast.LENGTH_SHORT).show();
+//
+            } catch (Exception e) {
+
+            }
         }
     }
 

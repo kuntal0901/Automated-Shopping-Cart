@@ -162,109 +162,6 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         status.setText("Bluetooth Opened with "+mmDevice.getName());
     }
 
-//    void beginListenForData()
-//    {
-//        final Handler handler = new Handler();
-//        final byte delimiter = 10; //This is the ASCII code for a newline character
-//        stopWorker = false;
-//        readBufferPosition = 0;
-//        readBuffer = new byte[1024];
-//        workerThread = new Thread(new Runnable()
-//        {
-//            public void run()
-//            {
-//                Log.i("Action","Connect to cart : New THREAD initiated and run");
-//                try{
-//                handler.post(new Runnable() {
-//                    @Override
-//                    public void run()
-//                    {
-//                        while(!Thread.currentThread().isInterrupted() && !stopWorker)
-//                        {
-////                            try
-////                            {
-//
-////                                Log.i("Action","inside");
-//                                try
-//                                {
-//                                    int bytesAvailable= mmInputStream.available();
-////                                    Log.i("Action",String.valueOf(bytesAvailable));
-//                                    if(bytesAvailable > 0)
-//                                    {
-//                                        byte[] packetBytes = new byte[bytesAvailable];
-//                                        mmInputStream.read(packetBytes);
-//                                        ArrayList<Character>temp = new ArrayList(1);
-//                                        for(int i=0;i<bytesAvailable;i++)
-//                                        {
-//                                            byte b = packetBytes[i];
-//                                            if(b==10){
-////                                                Log.i("Action","Data is"+ temp.toString());
-//                                                String conv="";
-//                                                for(int temp_num=0;temp_num<temp.size();temp_num++)
-//                                                {
-//                                                    conv=conv+temp.get(temp_num);
-//                                                }
-////                                                Log.i("Action","Data is"+ conv);
-//                                                float converted=Float.parseFloat(conv);
-//                                                Log.i("Action","Converted to float is "+converted);
-////                                                if(ScanActivity.cont_data.size()>0)
-////                                                {
-////                                                    if(Math.abs(converted-ScanActivity.cont_data.get(ScanActivity.cont_data.size()-1))<50.0 && Math.abs(converted-ScanActivity.cart_preset.get(ScanActivity.cart_preset.size()-1))>150)
-////                                                    {
-////                                                        ScanActivity.cart_preset.add(converted);
-////                                                        ScanActivity.cont_data=new ArrayList<>(0);
-////                                                        Log.i("Action","New item Added with cart weight now as "+converted);
-////                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
-////                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
-////                                                    }
-////                                                    else{
-////                                                        ScanActivity.cart_preset.add(converted);
-////                                                        ScanActivity.cart_preset.remove(0);
-////                                                        Log.i("Action","Cart weight within 50gms so stabilized "+converted);
-////                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
-////                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
-////                                                    }
-////
-////                                                }
-////                                                else{
-////                                                    ScanActivity.cont_data.add(converted);
-////                                                }
-//                                                temp =new ArrayList<>(1);
-//                                            }
-//                                            else if(b==32){
-//
-//                                            }
-//                                            else{
-//                                                temp.add((char)b);
-//                                            }
-//                                        }
-//                                        stopWorker=true;
-//                                    }
-//                                }
-//                                catch (IOException e)
-//                                {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    });}
-//                    catch (Exception ex)
-//                    {
-//                        Log.i("Action Error","Connect to cart :"+ex.toString());
-//                        stopWorker = true;
-//                    }
-//                }
-////            }
-//        });
-//        try{
-//            workerThread.start();
-////            workerThread.stop();
-//        }
-//        catch (Exception e)
-//        {
-//            Log.i("Action",e.toString());
-//        }
-//    }
     ArrayList<Float> beginListenForData() {
         ArrayList<Float> li=new ArrayList<>(1);
         final Handler handler = new Handler();
@@ -283,14 +180,14 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                     byte b = packetBytes[i];
                     if (b == 10)
                     {
-                        Log.i("Action", "Data is" + temp.toString());
+//                        Log.i("Action", "Data is" + temp.toString());
                         String conv = "";
                         for (int temp_num = 0; temp_num < temp.size(); temp_num++)
                         {
                             conv = conv + temp.get(temp_num);
                         }
                         float converted = Float.parseFloat(conv);
-                        Log.i("Action", "Converted to float is " + converted);
+//                        Log.i("Action", "Converted to float is " + converted);
                         li.add(converted);
                         temp = new ArrayList<>(1);
                     } else if (b == 32) {
@@ -307,67 +204,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
             return li;
         }
     }
-//                                    Log.i("Action",String.valueOf(bytesAvailable));
 
-//                                            Log.i("Action","Converted to float is "+converted);
-//                                                if(ScanActivity.cont_data.size()>0)
-//                                                {
-//                                                    if(Math.abs(converted-ScanActivity.cont_data.get(ScanActivity.cont_data.size()-1))<50.0 && Math.abs(converted-ScanActivity.cart_preset.get(ScanActivity.cart_preset.size()-1))>150)
-//                                                    {
-//                                                        ScanActivity.cart_preset.add(converted);
-//                                                        ScanActivity.cont_data=new ArrayList<>(0);
-//                                                        Log.i("Action","New item Added with cart weight now as "+converted);
-//                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
-//                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
-//                                                    }
-//                                                    else{
-//                                                        ScanActivity.cart_preset.add(converted);
-//                                                        ScanActivity.cart_preset.remove(0);
-//                                                        Log.i("Action","Cart weight within 50gms so stabilized "+converted);
-//                                                        Log.i("Action","Cart Preset is "+ScanActivity.cart_preset.toString());
-//                                                        Log.i("Action","Cont data is "+ScanActivity.cont_data.toString());
-//                                                    }
-//
-//                                                }
-//                                                else{
-//                                                    ScanActivity.cont_data.add(converted);
-//                                                }
-//                                            temp =new ArrayList<>(1);
-//                                        }
-//                                        else if(b==32){
-//
-//                                        }
-//                                        else{
-//                                            temp.add((char)b);
-//                                        }
-//                                    }
-//                                    stopWorker=true;
-//                                }
-//                            }
-//                            catch (IOException e)
-//                            {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }
-//                });}
-//            catch (Exception ex)
-//            {
-//                Log.i("Action Error","Connect to cart :"+ex.toString());
-//                stopWorker = true;
-//            }
-//        }
-////            }
-//    });
-//        try{
-//        workerThread.start();
-////            workerThread.stop();
-//    }
-//        catch (Exception e)
-//    {
-//        Log.i("Action",e.toString());
-//    }
-//}
 
     public void close_BT() throws IOException {
         stopWorker=true;
