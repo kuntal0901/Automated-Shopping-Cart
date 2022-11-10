@@ -311,7 +311,7 @@ public class ScanActivity extends AppCompatActivity {
                         ScanActivity.cli=true;
                         Log.i("Action","ScanActivity.cli"+ScanActivity.cli);
                         Log.d("check",res);
-                        CartItem ci = new CartItem(arr[final_pred], 9.8f);
+                        CartItem ci = new CartItem(arr[final_pred], 2.4f);
                         Log.d("check2",res);
                         addToCartSharedPreferences(ci);
                         Log.d("check3",res);

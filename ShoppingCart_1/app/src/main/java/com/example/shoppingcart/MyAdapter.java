@@ -66,6 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView itemTitleTextView;
         private final TextView itemPriceTextView;
+        private final TextView itemWeightTextView;
+        private final TextView itemSubTotalTextView;
 //        private final ImageView bookCoverImageView;
 
         public TextView getItemTitleTextView() {
@@ -75,12 +77,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView getItemPriceTextView() {
             return itemPriceTextView;
         }
+        public TextView getItemWeightTextView() {
+            return itemWeightTextView;
+        }
+        public TextView getItemSubTotalTextView() {
+            return itemSubTotalTextView;
+        }
+
 
         public ViewHolder(View view) {
             super(view);
-
+            itemWeightTextView = view.findViewById(R.id.mdQuantity);
             itemTitleTextView = view.findViewById(R.id.mdName);
             itemPriceTextView = view.findViewById(R.id.mdPrice);
+            itemSubTotalTextView = view.findViewById(R.id.mdSubTotal);
         }
 
 
@@ -107,7 +117,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         holder.getItemTitleTextView().setText(item.name);
         holder.getItemPriceTextView().setText(item.getPrice());
-
+        holder.getItemWeightTextView().setText(item.getQuantity());
+        holder.getItemWeightTextView().setText(item.getTotalPrice());
     }
 
     @Override
