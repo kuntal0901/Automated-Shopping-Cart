@@ -60,6 +60,8 @@ public class ScanActivity extends AppCompatActivity {
     public static boolean inprogress=false;
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
     static boolean cli=false;
+    String res;
+    int final_pred;
 //    public static ArrayList<Float> cont_data=new ArrayList<>(0);
     @Override
     public void onBackPressed() {
@@ -217,7 +219,7 @@ public class ScanActivity extends AppCompatActivity {
                 int class_model_1 = 0;
                 int class_model_2 = 0;
                 int class_model_3 = 0;
-                int final_pred = 0;
+                final_pred = 0;
                 for (i = 0; i < data.length; i++) {
                     data[i] = 2 * (data[i] - min(data)) / (max(data) - min(data)) - 1;
                     if (data[i] > maxval) {
@@ -270,7 +272,7 @@ public class ScanActivity extends AppCompatActivity {
                 model1.close();
                 pg.dismiss();
 
-                String res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
+                res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
             Log.i("ActionResultScan",res);
                 res = "Predicted class is "+arr[final_pred]+"\nChoose yes or no on the buttons below to confirm your acceptance";
 
@@ -295,7 +297,7 @@ public class ScanActivity extends AppCompatActivity {
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(ScanActivity.this,"",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScanActivity.this,"Discarding Last item predicted",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 });
@@ -305,17 +307,24 @@ public class ScanActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        cli=true;
+                        Log.i("Action","In");
+                        ScanActivity.cli=true;
+                        Log.i("Action","ScanActivity.cli"+ScanActivity.cli);
+                        Log.d("check",res);
+                        CartItem ci = new CartItem(arr[final_pred], 9.8f);
+                        Log.d("check2",res);
+                        addToCartSharedPreferences(ci);
+                        Log.d("check3",res);
                     }
                 });
-
-                if(cli){
-                    Log.d("check",res);
-                    CartItem ci = new CartItem(arr[class_model_1], 9.8f);
-                    Log.d("check2",res);
-                    addToCartSharedPreferences(ci);
-                    Log.d("check3",res);
-                }
+//                Log.i("Action","ScanActivity.cli"+ScanActivity.cli);
+//                if(ScanActivity.cli){
+//                    Log.d("check",res);
+//                    CartItem ci = new CartItem(arr[class_model_1], 9.8f);
+//                    Log.d("check2",res);
+//                    addToCartSharedPreferences(ci);
+//                    Log.d("check3",res);
+//                }
 
 
 
