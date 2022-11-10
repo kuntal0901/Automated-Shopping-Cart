@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnlogin;
     String EmailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
-
+    TextView forgot;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     @Override
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail = findViewById(R.id.inputCartName);
         inputPassword = findViewById(R.id.inputPassword);
         btnlogin = findViewById(R.id.connect_cart);
-
+        forgot=findViewById(R.id.forgot_password);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -51,6 +51,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+            }
+        });
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,Forgotpassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }

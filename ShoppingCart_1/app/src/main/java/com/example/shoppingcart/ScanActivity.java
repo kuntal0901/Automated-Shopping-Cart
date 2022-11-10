@@ -15,8 +15,6 @@
 
 package com.example.shoppingcart;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,9 +28,6 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -46,14 +41,9 @@ import com.example.shoppingcart.models.CartItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.checkerframework.checker.units.qual.C;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -69,6 +59,7 @@ public class ScanActivity extends AppCompatActivity {
     public static int counter=0;
     public static boolean inprogress=false;
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
+    static boolean cli=false;
 //    public static ArrayList<Float> cont_data=new ArrayList<>(0);
     @Override
     public void onBackPressed() {
@@ -79,6 +70,7 @@ public class ScanActivity extends AppCompatActivity {
     TextView result;
     ImageView imageView;
     Button picture,back;
+    Button yes,no;
     int imageSize = 224;
     ProgressDialog pg;
 //    int counter=0;
@@ -135,8 +127,12 @@ public class ScanActivity extends AppCompatActivity {
         pg=new ProgressDialog(this);
         result = (TextView) findViewById(R.id.textView);
         imageView = (ImageView) findViewById(R.id.imageView);
-        picture = (Button) findViewById(R.id.button);
+        picture = (Button) findViewById(R.id.send_email);
         back=(Button)findViewById(R.id.back);
+        yes=(Button)findViewById(R.id.yes);
+        no=(Button)findViewById(R.id.no);
+        yes.setVisibility(View.INVISIBLE);
+        no.setVisibility(View.INVISIBLE);
         picture.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -275,14 +271,54 @@ public class ScanActivity extends AppCompatActivity {
                 pg.dismiss();
 
                 String res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
-            result.setText(res);
+            Log.i("ActionResultScan",res);
+                res = "Predicted class is "+arr[final_pred]+"\nChoose yes or no on the buttons below to confirm your acceptance";
+
+                back.setVisibility(View.INVISIBLE);
+                back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+                picture.setVisibility(View.INVISIBLE);
+                picture.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+                yes.setVisibility(View.VISIBLE);
+                no.setVisibility(View.VISIBLE);
+                no.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(ScanActivity.this,"",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                });
+
+                result.setText(res);
+
+                yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cli=true;
+                    }
+                });
+
+                if(cli){
+                    Log.d("check",res);
+                    CartItem ci = new CartItem(arr[class_model_1], 9.8f);
+                    Log.d("check2",res);
+                    addToCartSharedPreferences(ci);
+                    Log.d("check3",res);
+                }
 
 
-            Log.d("check",res);
-            CartItem ci = new CartItem(arr[class_model_1], 9.8f);
-            Log.d("check2",res);
-            addToCartSharedPreferences(ci);
-            Log.d("check3",res);
+
 //                result.setText(res);
 
 //                Thread th1 = new Thread(new Runnable() {

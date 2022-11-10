@@ -129,7 +129,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register"
+        android:id="@+id/send_email"
         android:layout_width="166dp"
         android:layout_height="54dp"
         android:background="@drawable/rectangle_2_shape"
