@@ -315,7 +315,7 @@ public class ScanActivity extends AppCompatActivity {
                         Log.d("check2",res);
                         addToCartSharedPreferences(ci);
                         Log.d("check3",res);
-                        startActivity(new Intent(ScanActivity.this, CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//                        startActivity(new Intent(ScanActivity.this, CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
                     }
                 });

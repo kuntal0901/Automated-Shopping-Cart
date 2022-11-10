@@ -60,7 +60,52 @@
                 android:textSize="26sp" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantity: "
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/mdQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.5kg"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Item Subtotal: "
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/mdSubTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
