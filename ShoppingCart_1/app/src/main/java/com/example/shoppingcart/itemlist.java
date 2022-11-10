@@ -105,6 +105,7 @@ public class itemlist extends AppCompatActivity {
                         CartListViewItem newItem = new CartListViewItem(i.name, itemPriceMap.get(i.name), i.weight);
                         cartListViewItems.add(newItem);
 
+
                     }
                 }
                 Log.d("cart local", "printed");

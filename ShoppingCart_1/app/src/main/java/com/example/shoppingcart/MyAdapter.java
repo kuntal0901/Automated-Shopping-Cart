@@ -118,7 +118,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.getItemTitleTextView().setText(item.name);
         holder.getItemPriceTextView().setText(item.getPrice());
         holder.getItemWeightTextView().setText(item.getQuantity());
-        holder.getItemWeightTextView().setText(item.getTotalPrice());
+        holder.getItemSubTotalTextView().setText(item.getTotalPrice());
     }
 
     @Override
