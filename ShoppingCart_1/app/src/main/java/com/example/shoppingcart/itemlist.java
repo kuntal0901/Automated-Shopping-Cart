@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.shoppingcart.models.CartItem;
 import com.example.shoppingcart.models.CartListViewItem;
@@ -35,6 +36,7 @@ import java.util.Objects;
 public class itemlist extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    TextView finalPriceTextView;
     //    FirebaseFirestore db = FirebaseFirestore.getInstance();
 //    DatabaseReference database;
     MyAdapter myAdapter;
@@ -65,10 +67,11 @@ public class itemlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e("logging", "logged");
         setContentView(R.layout.activity_itemlist);
-
+        final float[] total = {0.0f};
         getCartFromSharedPreferences();
 
         recyclerView = findViewById(R.id.itemList);
+        finalPriceTextView =  findViewById(R.id.cartListTotal);
 //        database = FirebaseDatabase.getInstance().getReference("Items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -104,12 +107,15 @@ public class itemlist extends AppCompatActivity {
                     if( itemPriceMap.containsKey(i.name)){
                         CartListViewItem newItem = new CartListViewItem(i.name, itemPriceMap.get(i.name), i.weight);
                         cartListViewItems.add(newItem);
+                        total[0] += i.weight * itemPriceMap.get(i.name);
 
 
                     }
                 }
                 Log.d("cart local", "printed");
                 myAdapter.notifyDataSetChanged();
+                finalPriceTextView.setText("Total: "+ total[0]);
+
             }
 
             @Override
