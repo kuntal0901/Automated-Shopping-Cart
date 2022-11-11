@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,6 +46,7 @@ public class itemlist extends AppCompatActivity {
     ArrayList<Item> list;
     ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
     ArrayList<CartListViewItem> cartListViewItems = new ArrayList<CartListViewItem>();
+
 
     private void getCartFromSharedPreferences(){
 
@@ -81,8 +85,17 @@ public class itemlist extends AppCompatActivity {
         myAdapter = new MyAdapter(cartListViewItems);
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
+        Button paymentButton = (Button) findViewById(R.id.payButton);;
 
-        reference.addValueEventListener(new ValueEventListener() {
+        paymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PaymentActivity.class));
+
+            }
+
+
+        });        reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -122,9 +135,12 @@ public class itemlist extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
 
 
 
     }
+
 }
