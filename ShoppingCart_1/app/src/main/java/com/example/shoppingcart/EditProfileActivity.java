@@ -141,21 +141,32 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot x: snapshot.getChildren()){
                     dataholder temp=x.getValue(dataholder.class);
-                    if(temp.getProfilephoto().isEmpty()){
-                        Glide.with(EditProfileActivity.this)
-                                .load(R.drawable.blankprofile)
-                                .override(500, 500)
-                                .fitCenter() // scale to fit entire image within ImageView
-                                .into(profile);
+//                    Log.i("Action",temp.toString());
+                    if(temp.getName().equals(user.getDisplayName())){
+                        try{
+                            if(temp.getProfilephoto().isEmpty()){
+                                Glide.with(EditProfileActivity.this)
+                                        .load(R.drawable.blankprofile)
+                                        .override(500, 500)
+                                        .fitCenter() // scale to fit entire image within ImageView
+                                        .into(profile);
+
+                            }
+                            else{
+                                Glide.with(EditProfileActivity.this)
+                                        .load(Uri.parse(temp.getProfilephoto()))
+                                        .override(500, 500)
+                                        .fitCenter() // scale to fit entire image within ImageView
+                                        .into(profile);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.i("ActionError","Exception is"+e.toString());
+                        }
 
                     }
-                    else{
-                        Glide.with(EditProfileActivity.this)
-                                .load(Uri.parse(temp.getProfilephoto()))
-                                .override(500, 500)
-                                .fitCenter() // scale to fit entire image within ImageView
-                                .into(profile);
-                    }
+
                 }
             }
 
@@ -340,7 +351,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 uploadtofirebase();
             }
             catch (Exception ex){
-
+                Log.i("Action","Exception raised"+ex.toString());
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -367,6 +378,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 for(DataSnapshot x: snapshot.getChildren()){
                                     dataholder temp=x.getValue(dataholder.class);
                                     if(temp.getName().equals(user.getDisplayName())){
+                                        root.child(user.getDisplayName()).orderByChild("name").equalTo(user.getDisplayName()).getRef().removeValue();
                                         temp.setProfilephoto(uri.toString());
                                         root.child(user.getDisplayName()).setValue(temp);
                                         break;

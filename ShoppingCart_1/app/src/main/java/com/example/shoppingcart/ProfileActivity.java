@@ -90,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.i("Action","Profile Page Username is"+user.getDisplayName()+"temp username is"+temp.getName()+"comp is"+String.valueOf(user.getDisplayName().equals(temp.getName())));
                     if(temp.getName().equals(user.getDisplayName()))
                     {
+                        try{
                         if(temp.getProfilephoto().isEmpty())
                         {
 //                            Log.i("Action","in");
@@ -107,9 +108,13 @@ public class ProfileActivity extends AppCompatActivity {
                                     .into(profile);
                         }
                     }
+                        catch (Exception e)
+                        {
+                            Log.i("ActionError","Exception is"+e.toString());
+                        }
 
                 }
-            }
+            }}
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
