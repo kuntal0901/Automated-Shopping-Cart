@@ -7,29 +7,37 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="783dp"
-        android:layout_height="228dp"
+        android:layout_width="401dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="30dp"
         android:text="Are you sure you want to pay now?"
-        android:textSize="60sp"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/yes_Button"
-        android:layout_width="167dp"
-        android:layout_height="111dp"
+        android:layout_width="135dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="92dp"
         android:text="YES"
         android:textSize="50sp"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="676dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
         android:id="@+id/no_Button"
-        android:layout_width="167dp"
-        android:layout_height="111dp"
+        android:layout_width="135dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="92dp"
         android:text="NO"
         android:textSize="50sp"
-        tools:layout_editor_absoluteX="681dp"
-        tools:layout_editor_absoluteY="671dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
