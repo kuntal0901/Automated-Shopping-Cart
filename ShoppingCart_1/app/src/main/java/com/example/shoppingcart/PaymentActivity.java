@@ -19,6 +19,13 @@ public class PaymentActivity extends AppCompatActivity {
         ProgressDialog pg = new ProgressDialog(this);
         yesButton = (Button) findViewById(R.id.yes_Button);
         noButton = (Button) findViewById(R.id.no_Button);
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 //    protected void
     }
 }

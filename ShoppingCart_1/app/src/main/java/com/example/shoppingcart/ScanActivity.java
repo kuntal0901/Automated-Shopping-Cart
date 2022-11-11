@@ -65,7 +65,8 @@ public class ScanActivity extends AppCompatActivity {
 //    public static ArrayList<Float> cont_data=new ArrayList<>(0);
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        finish();
     }
 //    ArrayList <Float> arrli1=new ArrayList<>(1);
     ConnecttoCartActivity ct=new ConnecttoCartActivity();
@@ -298,7 +299,8 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(ScanActivity.this,"Discarding Last item predicted",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//                        startActivity(new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        finish();
                     }
                 });
 
