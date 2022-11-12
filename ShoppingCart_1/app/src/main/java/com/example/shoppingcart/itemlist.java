@@ -9,10 +9,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -85,7 +87,17 @@ public class itemlist extends AppCompatActivity {
         myAdapter = new MyAdapter(cartListViewItems);
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
-        Button paymentButton = (Button) findViewById(R.id.payButton);;
+        Button paymentButton = (Button) findViewById(R.id.payButton);
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+//        setContentView(R.layout.)
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(itemlist.this, temp.class));
+            }
+        });
+
 
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
