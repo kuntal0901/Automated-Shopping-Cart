@@ -73,6 +73,11 @@
             android:clearTaskOnLaunch="true"
             android:exported="false" />
         <activity
+            android:name=".temp"
+            android:clearTaskOnLaunch="true"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name=".LoginActivity"
             android:clearTaskOnLaunch="true"
             android:exported="true">

@@ -26,6 +26,13 @@ public class PaymentActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 //    protected void
     }
 }
