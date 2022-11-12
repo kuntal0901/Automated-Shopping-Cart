@@ -75,19 +75,26 @@ public class HomeActivity extends AppCompatActivity {
                     dataholder temp = x.getValue(dataholder.class);
 //                    Log.i("Action", "Home Activity Username is" + user.getDisplayName() + "temp username is" + temp.getName() + "comp is" + String.valueOf(user.getDisplayName().equals(temp.getName())));
                     if (temp.getName().equals(user.getDisplayName())) {
-                        if (temp.getProfilephoto().isEmpty()) {
-                            Glide.with(HomeActivity.this)
-                            .load(R.drawable.blankprofile)
-                            .override(200, 200)
-                            .fitCenter() // scale to fit entire image within ImageView
-                            .into(profile);
-                        } else {
-                            Glide.with(HomeActivity.this)
-                            .load(Uri.parse(temp.getProfilephoto()))
-                            .override(200, 200)
-                            .fitCenter() // scale to fit entire image within ImageView
-                            .into(profile);
+                        try{
+                            if (temp.getProfilephoto().isEmpty()) {
+                                Glide.with(HomeActivity.this)
+                                        .load(R.drawable.blankprofile)
+                                        .override(200, 200)
+                                        .fitCenter() // scale to fit entire image within ImageView
+                                        .into(profile);
+                            } else {
+                                Glide.with(HomeActivity.this)
+                                        .load(Uri.parse(temp.getProfilephoto()))
+                                        .override(200, 200)
+                                        .fitCenter() // scale to fit entire image within ImageView
+                                        .into(profile);
+                            }
                         }
+                        catch (Exception e)
+                        {
+                            Log.i("ActionError","Exception is"+e.toString());
+                        }
+
                     }
             }
         }

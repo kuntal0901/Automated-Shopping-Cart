@@ -28,6 +28,8 @@ import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -56,19 +58,16 @@ import android.widget.Toast;
 public class ScanActivity extends AppCompatActivity {
     public static final String PREFS_TAG = "Cart_Preference_tab_xx";
     public static final String PRODUCT_TAG = "Product_Preference_tab_xx";
-    public static int counter=0;
     public static boolean inprogress=false;
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
-    static boolean cli=false;
     String res;
     int final_pred;
-//    public static ArrayList<Float> cont_data=new ArrayList<>(0);
+    boolean hc05_present=false;
     @Override
     public void onBackPressed() {
 //        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
-//    ArrayList <Float> arrli1=new ArrayList<>(1);
     ConnecttoCartActivity ct=new ConnecttoCartActivity();
     TextView result;
     ImageView imageView;
@@ -116,15 +115,19 @@ public class ScanActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         Log.d("tagged", "tags");
-//        if(!ConnecttoCartActivity.connected){
-//            Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//        }
-//        if(ScanActivity.inprogress)
-//        {
-//            Toast.makeText(ScanActivity.this,"Old Detection in progress still!!",Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//        }
+        if(hc05_present)
+        {
+            if(!ConnecttoCartActivity.connected){
+                Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        }
+
+        if(ScanActivity.inprogress)
+        {
+            Toast.makeText(ScanActivity.this,"Old Detection in progress still!!",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
 
         setContentView(R.layout.activity_scan);
         pg=new ProgressDialog(this);
@@ -299,7 +302,6 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(ScanActivity.this,"Discarding Last item predicted",Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }
                 });
@@ -309,128 +311,119 @@ public class ScanActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.i("Action","In");
-                        ScanActivity.cli=true;
-                        Log.i("Action","ScanActivity.cli"+ScanActivity.cli);
-                        Log.d("check",res);
-                        CartItem ci = new CartItem(arr[final_pred], 2.4f);
-                        Log.d("check2",res);
-                        addToCartSharedPreferences(ci);
-                        Log.d("check3",res);
-//                        startActivity(new Intent(ScanActivity.this, CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        if (!hc05_present) {
+                            Log.i("Action","In");
+                            Log.d("check",res);
+                            CartItem ci = new CartItem(arr[final_pred], 2.4f);
+                            Log.d("check2",res);
+                            addToCartSharedPreferences(ci);
+                            Log.d("check3",res);
+                        } else {
+                            Thread th1 = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Thread.sleep(7000);
+                                    } catch (InterruptedException e) {
 
+                                    }
+                                    try {
+                                        Handler h1 = new Handler(Looper.getMainLooper());
+                                        h1.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ArrayList<Float> datas = ct.beginListenForData();
+                                                boolean something_happened = false;
+                                                Log.i("Action", "Data is" + datas.toString());
+                                                Log.i("Action", "cart_preset is " + cart_preset.toString());
+                                                for (int temp = 2; temp < datas.size(); temp++) {
+                                                    float next = datas.get(temp);
+                                                    float cur = datas.get(temp - 1);
+                                                    float prev = datas.get(temp - 2);
+                                                    if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50 && Math.abs(next - cur) < 50) {
+                                                        float new_item_weight = cur - cart_preset.get(cart_preset.size() - 1);
+                                                        Log.i("Action", cart_preset.toString());
+                                                        Log.i("Action", "New item weight is" + String.valueOf(new_item_weight));
+                                                        if (new_item_weight > 0) {
+                                                            cart_preset.add(cur);
+                                                            Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight, Toast.LENGTH_SHORT).show();
+                                                            CartItem ci = new CartItem(arr[final_pred], 2.4f);
+                                                            addToCartSharedPreferences(ci);
+                                                            something_happened = true;
+                                                            break;
+                                                        } else {
+                                                            cart_preset.add(cur);
+                                                            Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
+                                                            something_happened = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (!something_happened) {
+                                                    runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(ScanActivity.this, "No weight detected so waiting for another 10 seconds", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                    try {
+                                                        Thread.sleep(10000);
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    ArrayList<Float> datas1 = ct.beginListenForData();
+                                                    boolean something_happened1 = false;
+                                                    datas.addAll(datas1);
+                                                    Log.i("Action", "Data is" + datas1.toString());
+                                                    Log.i("Action", "cart_preset is " + cart_preset.toString());
+
+                                                    for (int temp = 2; temp < datas.size(); temp++) {
+                                                        float next = datas.get(temp);
+                                                        float cur = datas.get(temp - 1);
+                                                        float prev = datas.get(temp - 2);
+                                                        if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50 && Math.abs(cur - prev) < 50 && Math.abs(next - cur) < 50) {
+
+                                                            float new_item_weight1 = cur - cart_preset.get(cart_preset.size() - 1);
+                                                            Log.i("Action", cart_preset.toString());
+                                                            Log.i("Action", "New item weight is" + String.valueOf(new_item_weight1));
+                                                            if (new_item_weight1 > 0) {
+                                                                cart_preset.add(cur);
+                                                                Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight1, Toast.LENGTH_SHORT).show();
+                                                                CartItem ci = new CartItem(arr[final_pred], 2.4f);
+                                                                addToCartSharedPreferences(ci);
+                                                                something_happened1 = true;
+                                                                break;
+                                                            } else {
+                                                                cart_preset.add(cur);
+                                                                Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
+                                                                something_happened1 = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (!something_happened1) {
+                                                        Toast.makeText(ScanActivity.this, "Removing the last scanned item as no weight detected", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+
+
+                                                Log.i("Action", "Data is" + datas.toString());
+                                            }
+                                        });
+
+                                    } catch (Exception e) {
+                                        Log.i("Action", e.toString());
+                                    }
+
+                                    ScanActivity.inprogress = false;
+                                }
+                            });
+                            th1.start();
+                            Toast.makeText(ScanActivity.this, "Weight Detection Left will update status wait a message", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
-                });
-//                Log.i("Action","ScanActivity.cli"+ScanActivity.cli);
-//                if(ScanActivity.cli){
-//                    Log.d("check",res);
-//                    CartItem ci = new CartItem(arr[class_model_1], 9.8f);
-//                    Log.d("check2",res);
-//                    addToCartSharedPreferences(ci);
-//                    Log.d("check3",res);
-//                }
-
-
-
-//                result.setText(res);
-
-//                Thread th1 = new Thread(new Runnable() {
-//
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            Thread.sleep(7000);
-//                        } catch (InterruptedException e) {
-//
-//                        }
-//                        try {
-//                            Handler h1 = new Handler(Looper.getMainLooper());
-//                            h1.post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    ArrayList<Float> datas = ct.beginListenForData();
-//                                    boolean something_happened = false;
-//                                    Log.i("Action", "Data is" + datas.toString());
-//                                    Log.i("Action", "cart_preset is " + cart_preset.toString());
-//                                    for (int temp = 1; temp < datas.size(); temp++) {
-//                                        float cur = datas.get(temp);
-//                                        float prev = datas.get(temp - 1);
-//                                        if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50) {
-//                                            float new_item_weight = cur - cart_preset.get(cart_preset.size() - 1);
-//                                            Log.i("Action", cart_preset.toString());
-//                                            Log.i("Action", "New item weight is" + String.valueOf(new_item_weight));
-//                                            if (new_item_weight > 0) {
-//                                                cart_preset.add(cur);
-//                                                Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight, Toast.LENGTH_SHORT).show();
-//                                                something_happened = true;
-//                                                break;
-//                                            } else {
-//                                                cart_preset.add(cur);
-//                                                Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
-//                                                something_happened = true;
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
-//                                    if (!something_happened) {
-//                                        runOnUiThread(new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                Toast.makeText(ScanActivity.this, "No weight detected so waiting for another 10 seconds", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        });
-//                                        try {
-//                                            Thread.sleep(10000);
-//                                        } catch (InterruptedException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        ArrayList<Float> datas1 = ct.beginListenForData();
-//                                        boolean something_happened1 = false;
-//                                        datas.addAll(datas1);
-//                                        Log.i("Action", "Data is" + datas1.toString());
-//                                        Log.i("Action", "cart_preset is " + cart_preset.toString());
-//
-//                                        for (int temp = 1; temp < datas.size(); temp++) {
-//                                            float cur = datas.get(temp);
-//                                            float prev = datas.get(temp - 1);
-//                                            if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50) {
-//
-//                                                float new_item_weight1 = cur - cart_preset.get(cart_preset.size() - 1);
-//                                                Log.i("Action", cart_preset.toString());
-//                                                Log.i("Action", "New item weight is" + String.valueOf(new_item_weight1));
-//                                                if (new_item_weight1 > 0) {
-//                                                    cart_preset.add(cur);
-//                                                    Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight1, Toast.LENGTH_SHORT).show();
-//                                                    something_happened1 = true;
-//                                                    break;
-//                                                } else {
-//                                                    cart_preset.add(cur);
-//                                                    Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
-//                                                    something_happened1 = true;
-//                                                    break;
-//                                                }
-//                                            }
-//                                        }
-//                                        if (!something_happened1) {
-//                                            Toast.makeText(ScanActivity.this, "Removing the last scanned item as no weight detected", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//
-//
-//                                    Log.i("Action", "Data is" + datas.toString());
-//                                }
-//                            });
-//
-//                        } catch (Exception e) {
-//                            Log.i("Action", e.toString());
-//                        }
-//
-//                        ScanActivity.inprogress = false;
-//                    }
-//                });
-//                th1.start();
-//                Toast.makeText(this, "Weight Detection Left will update status wait a message", Toast.LENGTH_SHORT).show();
-//
+                    });
             } catch (Exception e) {
 
             }
