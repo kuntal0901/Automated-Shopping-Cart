@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +20,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
     String EmailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
-
+    ArrayList<String> pres_users=new ArrayList<>(1);
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     @Override
@@ -47,6 +52,21 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+        FirebaseDatabase dt=FirebaseDatabase.getInstance();
+        DatabaseReference root=dt.getReference("users");
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot x:snapshot.getChildren()){
+                    pres_users.add(x.getValue(dataholder.class).getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +82,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
     private void PerformAuth() {
-
+        Log.i("Action",pres_users.toString());
         String email =inputEmail.getText().toString();
         String Password = inputPassword.getText().toString();
         String ConfirmPassword = inputConfirmPassword.getText().toString();
         String username=inputUsername.getText().toString();
+
         if (!email.matches(EmailPattern)){
             showError(inputEmail,"Your email is invalid!");
         }
@@ -75,6 +96,13 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else if(ConfirmPassword.isEmpty() || !ConfirmPassword.equals(Password)){
             showError(inputConfirmPassword,"Password not match!");
+        }
+        else if(username.isEmpty())
+        {
+            showError(inputUsername,"Username cannot be empty");
+        }
+        else if(pres_users.contains(username)){
+            showError(inputUsername,"Username already exists");
         }
         else
         {
