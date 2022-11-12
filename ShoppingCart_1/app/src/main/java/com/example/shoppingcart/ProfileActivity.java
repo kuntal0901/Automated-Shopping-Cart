@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         username.setText(user.getDisplayName());
         email.setText(user.getEmail());
-        root.addValueEventListener(new ValueEventListener() {
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot x: snapshot.getChildren()){

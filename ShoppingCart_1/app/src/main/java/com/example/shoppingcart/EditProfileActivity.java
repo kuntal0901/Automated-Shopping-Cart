@@ -136,7 +136,7 @@ public class EditProfileActivity extends AppCompatActivity {
          * Set the profile image of user as set in his database
          * */
 
-        root.addValueEventListener(new ValueEventListener() {
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot x: snapshot.getChildren()){

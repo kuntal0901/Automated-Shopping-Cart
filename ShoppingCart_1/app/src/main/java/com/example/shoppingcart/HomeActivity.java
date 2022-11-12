@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase db=FirebaseDatabase.getInstance();
         DatabaseReference root=db.getReference("users");
-        root.addValueEventListener(new ValueEventListener() {
+        root.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user.reload();
