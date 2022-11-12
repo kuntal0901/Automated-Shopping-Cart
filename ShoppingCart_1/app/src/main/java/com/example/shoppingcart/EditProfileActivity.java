@@ -372,24 +372,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         pg.dismiss();
-                        root.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot x: snapshot.getChildren()){
-                                    dataholder temp=x.getValue(dataholder.class);
-                                    if(temp.getName().equals(user.getDisplayName())){
-                                        root.child(user.getDisplayName()).orderByChild("name").equalTo(user.getDisplayName()).getRef().removeValue();
-                                        temp.setProfilephoto(uri.toString());
-                                        root.child(user.getDisplayName()).setValue(temp);
-                                        break;
-                                    }
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        root.child(user.getDisplayName()).child("profilephoto").setValue(uri.toString());
                         Log.i("Action",root.toString());
                         Toast.makeText(getApplicationContext(),"Uploaded",Toast.LENGTH_LONG).show();
                     }
