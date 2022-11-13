@@ -1,6 +1,7 @@
 package com.example.shoppingcart;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,9 +11,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,9 +51,12 @@ public class itemlist extends AppCompatActivity {
     ArrayList<Item> list;
     ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
     ArrayList<CartListViewItem> cartListViewItems = new ArrayList<CartListViewItem>();
+    HashMap<String, Float> itemPriceMap = new HashMap<String, Float>(); //name, price pairs
+    final float[] total = {0.0f};
+    View.OnClickListener deleteOnClickListener;
 
 
-    private void getCartFromSharedPreferences(){
+    private void getCartFromSharedPreferences() {
 
         Gson gson = new Gson();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
@@ -59,13 +65,29 @@ public class itemlist extends AppCompatActivity {
 //        List<CartItem> cartItemList = new ArrayList<CartItem>();
 
 
-        if(jsonSaved.length()!=0){
+        if (jsonSaved.length() != 0) {
             Type type = new TypeToken<List<CartItem>>() {
             }.getType();
             Log.d("json", jsonSaved);
             cartItemList = gson.fromJson(jsonSaved, type);
         }
-        
+
+    }
+
+
+    private void refreshTotal() {
+        total[0] = 0;
+        for (CartItem i : cartItemList) {
+            if (itemPriceMap.containsKey(i.name)) {
+
+                total[0] += i.weight * itemPriceMap.get(i.name);
+
+
+            }
+        }
+        Log.d("cart local", "printed");
+        Log.d("total", String.valueOf(total[0]));
+        finalPriceTextView.setText("Total: " + total[0]);
     }
 
     @Override
@@ -73,30 +95,32 @@ public class itemlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e("logging", "logged");
         setContentView(R.layout.activity_itemlist);
-        final float[] total = {0.0f};
+
         getCartFromSharedPreferences();
 
         recyclerView = findViewById(R.id.itemList);
-        finalPriceTextView =  findViewById(R.id.cartListTotal);
+
+
+
+        finalPriceTextView = findViewById(R.id.cartListTotal);
 //        database = FirebaseDatabase.getInstance().getReference("Items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<String> items = new ArrayList<>();
         list = new ArrayList<>();
-        HashMap<String, Float> itemPriceMap = new HashMap<String, Float>(); //name, price pairs
-        myAdapter = new MyAdapter(cartListViewItems);
+
+        myAdapter = new MyAdapter(cartListViewItems, cartItemList, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshTotal();
+            }
+        });
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
         Button paymentButton = (Button) findViewById(R.id.payButton);
-        Button deleteButton = (Button) findViewById(R.id.deleteButton);
-//        setContentView(R.layout.)
-        deleteButton.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(itemlist.this, temp.class));
-            }
-        });
+//        setContentView(R.layout.)
+
 
 
         paymentButton.setOnClickListener(new View.OnClickListener() {
@@ -107,29 +131,30 @@ public class itemlist extends AppCompatActivity {
             }
 
 
-        });        reference.addValueEventListener(new ValueEventListener() {
+        });
+        reference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 list.clear();
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 //                    Log.d("s4",snapshot.toString() );
                     double price_kg = 0.0;
-                    try{
+                    try {
                         // stored data is exactly a double
-                        price_kg = (double)snapshot.getValue();
+                        price_kg = (double) snapshot.getValue();
                     } catch (Exception ex) {
                         // stored data is exactly an integer
-                        price_kg = (double)((long)snapshot.getValue());
+                        price_kg = (double) ((long) snapshot.getValue());
                     }
-                    itemPriceMap.put(snapshot.getKey(),(float) price_kg);
+                    itemPriceMap.put(snapshot.getKey(), (float) price_kg);
 //                    float price = ((Double) Objects.requireNonNull(snapshot.getValue())).floatValue();
 //                    list.add(new Item(snapshot.getKey(), (float) price_kg));
                 }
 
-                for(CartItem i:cartItemList){
-                    if( itemPriceMap.containsKey(i.name)){
+                for (CartItem i : cartItemList) {
+                    if (itemPriceMap.containsKey(i.name)) {
                         CartListViewItem newItem = new CartListViewItem(i.name, itemPriceMap.get(i.name), i.weight);
                         cartListViewItems.add(newItem);
                         total[0] += i.weight * itemPriceMap.get(i.name);
@@ -138,9 +163,8 @@ public class itemlist extends AppCompatActivity {
                     }
                 }
                 Log.d("cart local", "printed");
-                myAdapter.notifyDataSetChanged();
-                finalPriceTextView.setText("Total: "+ total[0]);
-
+                Log.d("total", String.valueOf(total[0]));
+                finalPriceTextView.setText("Total: " + total[0]);
             }
 
             @Override
@@ -150,6 +174,7 @@ public class itemlist extends AppCompatActivity {
 
 
         });
+
 
 
 

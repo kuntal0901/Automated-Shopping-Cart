@@ -115,19 +115,19 @@
             </LinearLayout>
 
         </LinearLayout>
-
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"></Space>
         <Button
-            android:id="@+id/deleteButton"
+            android:id="@+id/mdDeleteButton"
             android:layout_width="0.2sp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#00009688"
             android:drawableLeft="@android:drawable/ic_menu_delete" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1"></Space>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
