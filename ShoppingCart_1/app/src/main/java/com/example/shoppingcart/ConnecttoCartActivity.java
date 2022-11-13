@@ -1,5 +1,7 @@
 package com.example.shoppingcart;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -25,6 +27,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -212,6 +215,8 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         mmInputStream.close();
         mmSocket.close();
     }
+
+
 
     public float return_last_val(){
 
