@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     View status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_activtiy);
         home = findViewById(R.id.home);

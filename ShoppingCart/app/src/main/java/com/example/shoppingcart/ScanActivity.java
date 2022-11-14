@@ -124,6 +124,7 @@ public class ScanActivity extends AppCompatActivity {
                 Toast.makeText(this,"Not connected to cart so taking you there",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this,ConnecttoCartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
+//            ScanActivity.inprogress=false;
         }
 
         if(ScanActivity.inprogress)
@@ -327,6 +328,7 @@ public class ScanActivity extends AppCompatActivity {
                             Log.d("check2",res);
                             addToCartSharedPreferences(ci);
                             Log.d("check3",res);
+                            ScanActivity.inprogress=false;
                         }
                         else
                         {
