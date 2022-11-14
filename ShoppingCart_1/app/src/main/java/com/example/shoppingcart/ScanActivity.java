@@ -20,6 +20,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,6 +50,8 @@ import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -277,7 +280,7 @@ public class ScanActivity extends AppCompatActivity {
                 pg.dismiss();
 
                 res = Model_names[0] + " Gives Prediction: " + arr[class_model_1] + "\n" + Model_names[1] + " Gives Prediction: " + arr[class_model_2] + "\n";
-            Log.i("ActionResultScan",res);
+                Log.i("ActionResultScan",res);
                 res = "Predicted class is "+arr[final_pred]+"\nChoose yes or no on the buttons below to confirm your acceptance";
 
                 back.setVisibility(View.INVISIBLE);
@@ -309,8 +312,11 @@ public class ScanActivity extends AppCompatActivity {
                 result.setText(res);
 
                 yes.setOnClickListener(new View.OnClickListener() {
+                    @SuppressLint("NewApi")
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View view)
+                    {
+                        WeightService.item_pred.put(LocalTime.now(),arr[final_pred]);
                         if (!hc05_present) {
                             Log.i("Action","In");
                             Log.d("check",res);
@@ -319,111 +325,38 @@ public class ScanActivity extends AppCompatActivity {
                             addToCartSharedPreferences(ci);
                             Log.d("check3",res);
                         } else {
-                            Thread th1 = new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Thread.sleep(7000);
-                                    } catch (InterruptedException e) {
-
-                                    }
-                                    try {
-                                        Handler h1 = new Handler(Looper.getMainLooper());
-                                        h1.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                ArrayList<Float> datas = ct.beginListenForData();
-                                                boolean something_happened = false;
-                                                Log.i("Action", "Data is" + datas.toString());
-                                                Log.i("Action", "cart_preset is " + cart_preset.toString());
-                                                for (int temp = 2; temp < datas.size(); temp++) {
-                                                    float next = datas.get(temp);
-                                                    float cur = datas.get(temp - 1);
-                                                    float prev = datas.get(temp - 2);
-                                                    if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50 && Math.abs(next - cur) < 50) {
-                                                        float new_item_weight = cur - cart_preset.get(cart_preset.size() - 1);
-                                                        Log.i("Action", cart_preset.toString());
-                                                        Log.i("Action", "New item weight is" + String.valueOf(new_item_weight));
-                                                        if (new_item_weight > 0) {
-                                                            cart_preset.add(cur);
-                                                            Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight, Toast.LENGTH_SHORT).show();
-                                                            CartItem ci = new CartItem(arr[final_pred], 2.4f);
-                                                            addToCartSharedPreferences(ci);
-                                                            something_happened = true;
-                                                            break;
-                                                        } else {
-                                                            cart_preset.add(cur);
-                                                            Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
-                                                            something_happened = true;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                                if (!something_happened) {
-                                                    runOnUiThread(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            Toast.makeText(ScanActivity.this, "No weight detected so waiting for another 10 seconds", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                                    try {
-                                                        Thread.sleep(10000);
-                                                    } catch (InterruptedException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    ArrayList<Float> datas1 = ct.beginListenForData();
-                                                    boolean something_happened1 = false;
-                                                    datas.addAll(datas1);
-                                                    Log.i("Action", "Data is" + datas1.toString());
-                                                    Log.i("Action", "cart_preset is " + cart_preset.toString());
-
-                                                    for (int temp = 2; temp < datas.size(); temp++) {
-                                                        float next = datas.get(temp);
-                                                        float cur = datas.get(temp - 1);
-                                                        float prev = datas.get(temp - 2);
-                                                        if (Math.abs(cur - cart_preset.get(cart_preset.size() - 1)) > 150 && Math.abs(cur - prev) < 50 && Math.abs(cur - prev) < 50 && Math.abs(next - cur) < 50) {
-
-                                                            float new_item_weight1 = cur - cart_preset.get(cart_preset.size() - 1);
-                                                            Log.i("Action", cart_preset.toString());
-                                                            Log.i("Action", "New item weight is" + String.valueOf(new_item_weight1));
-                                                            if (new_item_weight1 > 0) {
-                                                                cart_preset.add(cur);
-                                                                Toast.makeText(ScanActivity.this, "Item added with weight" + new_item_weight1, Toast.LENGTH_SHORT).show();
-                                                                CartItem ci = new CartItem(arr[final_pred], 2.4f);
-                                                                addToCartSharedPreferences(ci);
-                                                                something_happened1 = true;
-                                                                break;
-                                                            } else {
-                                                                cart_preset.add(cur);
-                                                                Toast.makeText(ScanActivity.this, "Some Item has been removed", Toast.LENGTH_SHORT).show();
-                                                                something_happened1 = true;
-                                                                break;
-                                                            }
-                                                        }
-                                                    }
-                                                    if (!something_happened1) {
-                                                        Toast.makeText(ScanActivity.this, "Removing the last scanned item as no weight detected", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-
-
-                                                Log.i("Action", "Data is" + datas.toString());
-                                            }
-                                        });
-
-                                    } catch (Exception e) {
-                                        Log.i("Action", e.toString());
-                                    }
-
-                                    ScanActivity.inprogress = false;
+                            LocalTime tempo_time=LocalTime.now();
+                            WeightService.item_pred.put(tempo_time,arr[final_pred]);
+                            LocalTime[]last_diff_arr =WeightService.diff_weight.keySet().toArray(new LocalTime[WeightService.diff_weight.size()]);
+                            LocalTime last_diff=last_diff_arr[last_diff_arr.length-1];
+                            LocalTime current=LocalTime.now();
+                            long diff= Duration.between(last_diff,current).getSeconds();
+                            if(diff<=20)
+                            {
+                                float new_item_weight=WeightService.diff_weight.get(last_diff);
+                                if(new_item_weight>0)
+                                {
+                                    Toast.makeText(ScanActivity.this,arr[final_pred]+" has been added to the cart",Toast.LENGTH_SHORT).show();
+                                    CartItem ci = new CartItem(arr[final_pred], new_item_weight);
+                                    addToCartSharedPreferences(ci);
                                 }
-                            });
-                            th1.start();
-                            Toast.makeText(ScanActivity.this, "Weight Detection Left will update status wait a message", Toast.LENGTH_SHORT).show();
+                                else
+                                {
+                                    float weight_removed_item=Math.abs(new_item_weight);
+                                    Toast.makeText(ScanActivity.this,"X"+" has been removed from the cart",Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                            else
+                            {
+                                Toast.makeText(ScanActivity.this,arr[final_pred]+" ,i.e Last prediction has been removed since no weight change detected ",Toast.LENGTH_SHORT).show();
+                                WeightService.item_pred.remove(tempo_time);
+                            }
 
                         }
+                        
                     }
-                    });
+                });
             } catch (Exception e) {
 
             }
