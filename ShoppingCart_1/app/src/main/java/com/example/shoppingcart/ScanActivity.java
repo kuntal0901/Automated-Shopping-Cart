@@ -314,8 +314,7 @@ public class ScanActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @SuppressLint("NewApi")
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         WeightService.item_pred.put(LocalTime.now(),arr[final_pred]);
                         if (!hc05_present) {
                             Log.i("Action","In");
@@ -354,7 +353,6 @@ public class ScanActivity extends AppCompatActivity {
                             }
 
                         }
-                        
                     }
                 });
             } catch (Exception e) {

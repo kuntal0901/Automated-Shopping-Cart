@@ -45,10 +45,6 @@
             android:clearTaskOnLaunch="true"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="false" />
-        <activity
             android:name=".ConnecttoCartActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />
@@ -87,6 +83,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".WeightService"/>
     </application>
 
 </manifest>
