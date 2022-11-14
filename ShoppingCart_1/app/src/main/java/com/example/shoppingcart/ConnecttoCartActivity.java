@@ -17,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,7 +79,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
             status = findViewById(R.id.statusText);
             connect = (Button) findViewById(R.id.connect_cart);
             connect.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
                     boolean findable = establishConnection();
@@ -115,7 +116,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
             });
         }
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean establishConnection() {
         String cart = cartname.getText().toString();
         boolean findable = findBT(cart);
@@ -123,7 +124,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         return findable;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     boolean findBT(String cart) {
         boolean found = false;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -153,17 +154,74 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
     void openBT() throws IOException {
         UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //Standard SerialPortService ID
         mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
         mmSocket.connect();
-        connected=true;
+        connected = true;
         mmOutputStream = mmSocket.getOutputStream();
         mmInputStream = mmSocket.getInputStream();
         progressDialog.dismiss();
-        status.setText("Bluetooth Opened with "+mmDevice.getName());
+        status.setText("Bluetooth Opened with " + mmDevice.getName());
+        Log.i("Action", "Here");
+        if(WeightService.item_added.size()==0)
+        {
+            WeightService.item_added.put(java.time.LocalTime.now(),0.0f);
+            Log.i("ActionOne",WeightService.item_added.toString());
+        }
+        if(WeightService.item_removed.size()==0)
+        {
+            WeightService.item_removed.put(java.time.LocalTime.now(),0.0f);
+            Log.i("ActionOne",WeightService.item_removed.toString());
+        }
+        if(WeightService.item_pred.size()==0)
+        {
+            WeightService.item_pred.put(java.time.LocalTime.now()," ");
+            Log.i("ActionOne","Empty string added");
+        }
+        Thread th1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        Thread.sleep(2000);
+                    }
+                    catch (InterruptedException e) {
+
+                    }
+                    try {
+                        Handler h1 = new Handler(Looper.getMainLooper());
+                        h1.post(new Runnable() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
+                            @Override
+                            public void run()
+                            {
+                                ArrayList<Float> datas = beginListenForData();
+                                if(datas.size()>0)
+                                {
+                                    WeightService.li.addAll(datas);
+                                    if(WeightService.shopping_cart_weights.size()==0)
+                                    {
+                                        WeightService.shopping_cart_weights.add(WeightService.li.get(0));
+                                        Log.i("ActionOne",WeightService.shopping_cart_weights.toString());
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    catch (Exception e) {
+
+                    }
+                }
+            }
+        });
+        th1.start();
+        Intent in=new Intent(ConnecttoCartActivity.this,WeightService.class);
+        startService(in);
     }
+
 
     ArrayList<Float> beginListenForData() {
         ArrayList<Float> li=new ArrayList<>(1);
