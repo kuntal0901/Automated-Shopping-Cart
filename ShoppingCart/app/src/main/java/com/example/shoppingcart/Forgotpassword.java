@@ -55,7 +55,7 @@ public class Forgotpassword extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Forgotpassword.this,"User doesnt exist with the given mail id ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Forgotpassword.this,"User doesn't exist with the given mail id ",Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

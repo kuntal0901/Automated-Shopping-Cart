@@ -174,8 +174,9 @@ public class ScanActivity extends AppCompatActivity {
             Toast.makeText(this,"Last adding to cart still in progress",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
-        else {
-
+        else
+        {
+            ScanActivity.inprogress=true;
             try {
 //                ScanActivity.inprogress = true;
 //            Log.i("Action", "Scan Activity: Inside classify Image");
@@ -314,18 +315,22 @@ public class ScanActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @SuppressLint("NewApi")
                     @Override
-                    public void onClick(View view) {
-                        WeightService.item_pred.put(LocalTime.now(),arr[final_pred]);
-                        if (!hc05_present) {
+                    public void onClick(View view)
+                    {
+                        final LocalTime tempo_time=LocalTime.now();
+                        WeightService.item_pred.put(tempo_time,arr[final_pred]);
+                        if (!hc05_present)
+                        {
                             Log.i("Action","In");
                             Log.d("check",res);
                             CartItem ci = new CartItem(arr[final_pred], 2.4f);
                             Log.d("check2",res);
                             addToCartSharedPreferences(ci);
                             Log.d("check3",res);
-                        } else {
-                            LocalTime tempo_time=LocalTime.now();
-                            WeightService.item_pred.put(tempo_time,arr[final_pred]);
+                        }
+                        else
+                        {
+
                             LocalTime[]last_diff_arr =WeightService.diff_weight.keySet().toArray(new LocalTime[WeightService.diff_weight.size()]);
                             LocalTime last_diff=last_diff_arr[last_diff_arr.length-1];
                             LocalTime current=LocalTime.now();
@@ -339,26 +344,56 @@ public class ScanActivity extends AppCompatActivity {
                                     CartItem ci = new CartItem(arr[final_pred], new_item_weight);
                                     addToCartSharedPreferences(ci);
                                 }
-                                else
-                                {
-                                    float weight_removed_item=Math.abs(new_item_weight);
-                                    Toast.makeText(ScanActivity.this,"X"+" has been removed from the cart",Toast.LENGTH_SHORT).show();
-                                }
-
+                                ScanActivity.inprogress=false;
                             }
                             else
                             {
-                                Toast.makeText(ScanActivity.this,arr[final_pred]+" ,i.e Last prediction has been removed since no weight change detected ",Toast.LENGTH_SHORT).show();
-                                WeightService.item_pred.remove(tempo_time);
+                                Thread waiter=new Thread(new Runnable() {
+                                    @Override
+                                    public void run()
+                                    {
+                                        try
+                                        {
+                                            Thread.sleep(20000);
+                                            LocalTime[]last_diff_arr =WeightService.diff_weight.keySet().toArray(new LocalTime[WeightService.diff_weight.size()]);
+                                            LocalTime last_diff=last_diff_arr[last_diff_arr.length-1];
+                                            LocalTime current=LocalTime.now();
+                                            long diff= Duration.between(last_diff,current).getSeconds();
+                                            if(diff<=20)
+                                            {
+                                                float new_item_weight=WeightService.diff_weight.get(last_diff);
+                                                if(new_item_weight>0)
+                                                {
+                                                    Toast.makeText(ScanActivity.this,arr[final_pred]+" has been added to the cart",Toast.LENGTH_SHORT).show();
+                                                    CartItem ci = new CartItem(arr[final_pred], new_item_weight);
+                                                    addToCartSharedPreferences(ci);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(ScanActivity.this,arr[final_pred]+" ,i.e Last prediction has been removed since no weight change detected ",Toast.LENGTH_SHORT).show();
+                                                WeightService.item_pred.remove(tempo_time);
+                                            }
+                                        }
+                                        catch (InterruptedException e)
+                                        {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                waiter.start();
+                                ScanActivity.inprogress=false;
                             }
-
                         }
                     finish();
                     }
                 });
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
 
             }
+
         }
     }
 

@@ -34,7 +34,6 @@ public class WeightService extends Service {
             {
                 while(true)
                 {
-
                     try
                     {
                         Thread.sleep(2000);
@@ -43,8 +42,8 @@ public class WeightService extends Service {
                     {
                         e.printStackTrace();
                     }
-
-                    if(li.size()>3){
+                    if(li.size()>3)
+                    {
                         int size=li.size();
                         float first=shopping_cart_weights.get(0);
                         float prev=li.get(size-3)-first;
@@ -58,15 +57,14 @@ public class WeightService extends Service {
                             float cart_last_weights=shopping_cart_weights.get(shopping_cart_weights.size()-1)-first;
                             if(Math.abs(mid- cart_last_weights)>100)
                             {
-
                                 if(mid-cart_last_weights>0)
                                 {
+                                    //Item Added
                                     Log.i("Action","Increase Detected in weights");
                                     LocalTime[]last_time_arr =item_pred.keySet().toArray(new LocalTime[item_pred.size()]);
                                     LocalTime last_time=last_time_arr[last_time_arr.length-1];
                                     LocalTime current=LocalTime.now();
                                     long diff=Duration.between(last_time,current).getSeconds();
-
                                     if(diff>=20)
                                     {
                                         new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -77,7 +75,6 @@ public class WeightService extends Service {
                                             }
                                         });
                                     }
-                                    //Item Added
                                     diff_weight.put(LocalTime.now(),mid-cart_last_weights);
                                     shopping_cart_weights.add(mid);
                                     try {
@@ -91,6 +88,13 @@ public class WeightService extends Service {
                                     //Item Removed
                                     diff_weight.put(LocalTime.now(),mid-cart_last_weights);
                                     shopping_cart_weights.add(mid);
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(WeightService.this,"Decrease in weight detected Taking you to Cart Page to delete needed item",Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(WeightService.this,CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                        }
+                                    });
                                 }
                             }
                             else
@@ -98,6 +102,14 @@ public class WeightService extends Service {
                                 Log.i("Action","Stable weights nothing added");
                             }
                         }
+                        else
+                        {
+                            Log.i("Action","Increase or decrease in progress");
+                        }
+                    }
+                    else
+                    {
+                        Log.i("Action","Callibration In Progress");
                     }
                 }
             }
