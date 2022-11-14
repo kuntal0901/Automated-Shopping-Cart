@@ -98,8 +98,6 @@ public class WeightService extends Service {
                                 Log.i("Action","Stable weights nothing added");
                             }
                         }
-
-
                     }
                 }
             }
