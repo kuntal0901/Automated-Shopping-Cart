@@ -25,10 +25,6 @@
             android:name=".itemlist"
             android:exported="false" />
         <activity
-            android:name=".LogoutActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="false" />
-        <activity
             android:name=".PreviousOrderActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />
@@ -46,6 +42,10 @@
             android:exported="false" />
         <activity
             android:name=".ConnecttoCartActivity"
+            android:clearTaskOnLaunch="true"
+            android:exported="false" />
+        <activity
+            android:name=".ScanActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />
         <activity
