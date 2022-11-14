@@ -353,6 +353,7 @@ public class ScanActivity extends AppCompatActivity {
                             }
 
                         }
+                    finish();
                     }
                 });
             } catch (Exception e) {
