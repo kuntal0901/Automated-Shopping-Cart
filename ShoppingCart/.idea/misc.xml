@@ -3,8 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_connectto_cart.xml" value="0.17118055555555556" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_edit_profile.xml" value="0.17118055555555556" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_forgotpassword.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_help.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_home_activtiy.xml" value="0.25" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_itemlist.xml" value="0.20208333333333334" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_login.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_ordersactivity.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_payment.xml" value="0.17118055555555556" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_previous_order.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_profile.xml" value="0.17118055555555556" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_register.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_scan.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_temp.xml" value="0.17118055555555556" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/item.xml" value="0.2368659420289855" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/drawable/ic_logo.xml" value="0.2445" />
         <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_cart.xml" value="0.25677083333333334" />
         <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_itemlist.xml" value="0.25677083333333334" />
+        <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_login.xml" value="0.23854166666666668" />
         <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_ordersactivity.xml" value="0.25677083333333334" />
         <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_register.xml" value="0.25677083333333334" />
         <entry key="..\:/College/Sem6/Capstone/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/layout/activity_scan.xml" value="0.25677083333333334" />
@@ -52,21 +69,17 @@
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_cart.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_connectto_cart.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_edit_profile.xml" value="0.264" />
-        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_forgotpassword.xml" value="0.264" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_help.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_home_activtiy.xml" value="0.25" />
-        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_itemlist.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_logout.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_ordersactivity.xml" value="0.25" />
-        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_payment.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_previous_order.xml" value="0.2359375" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_scan.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/activity_trial.xml" value="0.25" />
-        <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart/app/src/main/res/layout/item.xml" value="0.25" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/drawable/circle.xml" value="0.121" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/drawable/cirle.xml" value="0.12" />
         <entry key="..\:/Users/santo/OneDrive - PESUNIVERSITY/Desktop/Santosh/PESU/3rd Year/6th Sem/Capstone/Captone_Git/Automated-Shopping-Cart/ShoppingCart_1/app/src/main/res/drawable/connected.xml" value="0.12" />

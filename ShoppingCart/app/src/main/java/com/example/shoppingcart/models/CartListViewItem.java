@@ -13,7 +13,8 @@ public class CartListViewItem {
     }
 
     public String getTotalPrice(){
-        return String.valueOf((price * quantity));
+        float total_price = (float) (Math.round((price * quantity) * 100.0) / 100.0);
+        return String.valueOf(total_price);
     }
     public String getQuantity(){
         return String.valueOf(quantity);

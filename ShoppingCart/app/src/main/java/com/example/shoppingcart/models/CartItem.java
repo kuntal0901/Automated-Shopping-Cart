@@ -6,6 +6,6 @@ public class CartItem {
 
     public CartItem(String name, float weight) {
         this.name = name;
-        this.weight = weight;
+        this.weight = (float) (Math.round(weight * 100.0) / 100.0);
     }
 }
