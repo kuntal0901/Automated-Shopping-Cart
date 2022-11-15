@@ -129,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
                         DatabaseReference root=db.getReference("users");
                         Map<String,Map<String,Integer>> ma=new HashMap<String, Map<String, Integer>>();
                         dataholder.Orders x=new dataholder.Orders();
-                        x.setOrderid(0);
+                        x.setOrderid("");
                         dataholder obj=new dataholder();
                         obj.setName(inputUsername.getText().toString());
                         obj.setProfilephoto("");

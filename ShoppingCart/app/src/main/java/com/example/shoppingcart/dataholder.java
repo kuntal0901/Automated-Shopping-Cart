@@ -11,17 +11,17 @@ public class dataholder {
 
     }
     public static class Orders{
-        int orderid;
+        String orderid;
 
         public Orders() {
 
         }
 
-        public int getOrderid() {
+        public String getOrderid() {
             return orderid;
         }
 
-        public void setOrderid(int orderid) {
+        public void setOrderid(String orderid) {
             this.orderid = orderid;
         }
     }
