@@ -65,7 +65,7 @@ public class ScanActivity extends AppCompatActivity {
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
     String res;
     int final_pred;
-    boolean hc05_present=true;
+    boolean hc05_present=false;
     @Override
     public void onBackPressed() {
 //        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -134,11 +134,11 @@ public class ScanActivity extends AppCompatActivity {
             LocalTime last_time=last_time_arr[last_time_arr.length-1];
             LocalTime current=LocalTime.now();
             long diff=Duration.between(last_time,current).getSeconds();
-            if(diff<35 && !hc05_present)
-            {
-                Toast.makeText(ScanActivity.this,"Calibration in progress ",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
+//            if(diff<35 && !hc05_present)
+//            {
+//                Toast.makeText(ScanActivity.this,"Calibration in progress ",Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//            }
         }
 
         if(ScanActivity.inprogress)
