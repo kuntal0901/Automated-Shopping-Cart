@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
+    android:background="@color/white"
+    app:cardBackgroundColor="@color/ellipse_8_color"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 
@@ -30,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Appal"
-                    android:textColor="@color/black"
+                    android:textColor="@color/_bg__profilepage_ek2_color"
                     android:textSize="20sp" />
 
             </LinearLayout>
