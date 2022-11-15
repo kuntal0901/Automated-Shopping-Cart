@@ -53,7 +53,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
     static OutputStream mmOutputStream;
     static InputStream mmInputStream;
     static Thread workerThread;
-
+    static Intent ins;
     byte[] readBuffer;
     int readBufferPosition;
     int counter;
@@ -181,6 +181,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
             WeightService.item_pred.put(java.time.LocalTime.now()," ");
             Log.i("ActionOne","Empty string added");
         }
+
         Thread th1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -218,8 +219,9 @@ public class ConnecttoCartActivity extends AppCompatActivity {
             }
         });
         th1.start();
-        Intent in=new Intent(ConnecttoCartActivity.this,WeightService.class);
-        startService(in);
+        ins=new Intent(ConnecttoCartActivity.this,WeightService.class);
+        startService(ins);
+
     }
 
 
