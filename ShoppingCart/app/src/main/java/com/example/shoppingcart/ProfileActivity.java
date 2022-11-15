@@ -62,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getSupportActionBar().hide();
         profile=(ImageView) findViewById(R.id.profilepic);
         home=(ImageView) findViewById(R.id.home);
         scan=(ImageView) findViewById(R.id.inputscan2);
