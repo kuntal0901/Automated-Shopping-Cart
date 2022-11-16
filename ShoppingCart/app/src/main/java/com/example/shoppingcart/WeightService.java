@@ -162,7 +162,7 @@ public class WeightService extends Service {
                                         @Override
                                         public void run() {
                                             Toast.makeText(WeightService.this,"Decrease in weight detected Taking you to Cart Page to delete needed item",Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(WeightService.this,CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                            startActivity(new Intent(WeightService.this,itemlist.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                         }
                                     });
                                 }
