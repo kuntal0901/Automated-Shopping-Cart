@@ -62,7 +62,7 @@ public class PaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ProgressDialog pg;
-                if(ScanActivity.hc05_present)
+                if(ConnecttoCartActivity.connected && ScanActivity.hc05_present)
                 {
                     stopService(ConnecttoCartActivity.ins);
                 }
@@ -80,6 +80,7 @@ public class PaymentActivity extends AppCompatActivity {
 
                     try {
                         new ConnecttoCartActivity().close_BT();
+                        ConnecttoCartActivity.connected=false;
                     } catch (IOException e) {
                         Toast.makeText(PaymentActivity.this,"Closing Bluetooth connection fails",Toast.LENGTH_SHORT).show();
                         e.printStackTrace();

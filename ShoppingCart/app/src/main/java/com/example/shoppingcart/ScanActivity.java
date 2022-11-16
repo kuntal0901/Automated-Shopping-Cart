@@ -65,7 +65,7 @@ public class ScanActivity extends AppCompatActivity {
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
     String res;
     int final_pred;
-    static boolean hc05_present=false;
+    static boolean hc05_present=true;
     @Override
     public void onBackPressed() {
 //        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -134,11 +134,11 @@ public class ScanActivity extends AppCompatActivity {
             LocalTime last_time=last_time_arr[last_time_arr.length-1];
             LocalTime current=LocalTime.now();
             long diff=Duration.between(last_time,current).getSeconds();
-//            if(diff<35 && !hc05_present)
-//            {
-//                Toast.makeText(ScanActivity.this,"Calibration in progress ",Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//            }
+            if(diff<35 && hc05_present)
+            {
+                Toast.makeText(ScanActivity.this,"Calibration in progress ",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
         }
 
         if(ScanActivity.inprogress)
@@ -321,6 +321,7 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(ScanActivity.this,"Discarding Last item predicted",Toast.LENGTH_SHORT).show();
+                        ScanActivity.inprogress=false;
                         finish();
                     }
                 });
@@ -354,9 +355,11 @@ public class ScanActivity extends AppCompatActivity {
                                 LocalTime last_diff=last_diff_arr[last_diff_arr.length-1];
                                 LocalTime current=LocalTime.now();
                                 long diff= Duration.between(last_diff,current).getSeconds();
+                                Log.i("Action","Scan Activity diff is"+String.valueOf(diff));
                                 if(diff<=35)
                                 {
                                     float new_item_weight=WeightService.diff_weight.get(last_diff);
+                                    Log.i("Action","New item weight is"+String.valueOf(new_item_weight));
                                     if(new_item_weight>0)
                                     {
                                         Toast.makeText(ScanActivity.this,arr[final_pred]+" has been added to the cart",Toast.LENGTH_SHORT).show();
@@ -383,15 +386,26 @@ public class ScanActivity extends AppCompatActivity {
                                                     float new_item_weight=WeightService.diff_weight.get(last_diff);
                                                     if(new_item_weight>0)
                                                     {
-                                                        Toast.makeText(ScanActivity.this,arr[final_pred]+" has been added to the cart",Toast.LENGTH_SHORT).show();
-                                                        CartItem ci = new CartItem(arr[final_pred], new_item_weight/1000);
-                                                        addToCartSharedPreferences(ci);
+                                                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Toast.makeText(ScanActivity.this, arr[final_pred] + " has been added to the cart", Toast.LENGTH_SHORT).show();
+                                                                CartItem ci = new CartItem(arr[final_pred], new_item_weight / 1000);
+                                                                addToCartSharedPreferences(ci);
+                                                            }
+                                                        });
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    Toast.makeText(ScanActivity.this,arr[final_pred]+" ,i.e Last prediction has been removed since no weight change detected ",Toast.LENGTH_SHORT).show();
-                                                    WeightService.item_pred.remove(tempo_time);
+                                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            Toast.makeText(ScanActivity.this,arr[final_pred]+" ,i.e Last prediction has been removed since no weight change detected ",Toast.LENGTH_SHORT).show();
+                                                            WeightService.item_pred.remove(tempo_time);
+                                                        }
+                                                    });
+
                                                 }
                                             }
                                             catch (InterruptedException e)

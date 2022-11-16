@@ -185,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
     void logouts(){
-        if(ScanActivity.hc05_present){
+        if(ConnecttoCartActivity.connected && ScanActivity.hc05_present ){
             stopService(ConnecttoCartActivity.ins);
         }
         Log.i("Action","Inside");
@@ -209,6 +209,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             try {
                 new ConnecttoCartActivity().close_BT();
+                ConnecttoCartActivity.connected=false;
             } catch (IOException e) {
                 Toast.makeText(this,"Closing Bluetooth connection failes",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
