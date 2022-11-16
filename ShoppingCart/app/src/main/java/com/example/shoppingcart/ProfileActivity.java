@@ -185,7 +185,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
     void logouts(){
-        stopService(ConnecttoCartActivity.ins);
+        if(ScanActivity.hc05_present){
+            stopService(ConnecttoCartActivity.ins);
+        }
         Log.i("Action","Inside");
         pg=new ProgressDialog(this);
         pg.setTitle("Logout ");

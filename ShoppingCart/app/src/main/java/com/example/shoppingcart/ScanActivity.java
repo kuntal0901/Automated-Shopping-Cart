@@ -65,7 +65,7 @@ public class ScanActivity extends AppCompatActivity {
     public ArrayList<Float> cart_preset=new ArrayList<>(1);
     String res;
     int final_pred;
-    boolean hc05_present=false;
+    static boolean hc05_present=false;
     @Override
     public void onBackPressed() {
 //        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

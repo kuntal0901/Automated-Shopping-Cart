@@ -37,10 +37,6 @@
             android:clearTaskOnLaunch="true"
             android:exported="false" />
         <activity
-            android:name=".OrdersActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="false" />
-        <activity
             android:name=".ConnecttoCartActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />
