@@ -123,7 +123,7 @@ public class PaymentActivity extends AppCompatActivity {
 
                             Random rd = new Random();
 
-                            String generatedString = String.valueOf(rd.nextInt());
+                            String generatedString = String.valueOf(Math.abs(rd.nextInt()));
                             ordersMap.put(generatedString, jsonSaved);
                             database.child(userId).child("prevorder").setValue(ordersMap);
                             SharedPreferences.Editor editor = sharedPref.edit();
