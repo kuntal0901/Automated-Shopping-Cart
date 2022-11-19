@@ -22,13 +22,11 @@ void setup()
   delay(1000);
   ble_device.begin(57600);
   Serial.begin(57600);
-
   EEPROM.get(addr1,y1);
   addr1+=sizeof(float);
   EEPROM.get(addr1,x0);
   addr1+=sizeof(float);
   EEPROM.get(addr1,x1);
-
   Serial.print("X0 value is ");
   Serial.println(x0);
   Serial.print("X1 value is ");
