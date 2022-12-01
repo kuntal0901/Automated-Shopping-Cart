@@ -199,7 +199,7 @@ public class EditProfileActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(EditProfileActivity.this,CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(EditProfileActivity.this,itemlist.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 

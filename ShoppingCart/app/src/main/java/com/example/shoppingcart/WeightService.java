@@ -26,6 +26,7 @@ public class WeightService extends Service {
     public static LinkedHashMap<LocalTime,Float> diff_weight=new LinkedHashMap<>();
     static int counter=0;
     static boolean start_stop=true;
+    static float removed_weight;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
@@ -140,7 +141,8 @@ public class WeightService extends Service {
                                 {
 
                                     //Item Removed
-                                    diff_weight.put(LocalTime.now(),mid-cart_last_weights);
+                                    removed_weight=mid-cart_last_weights;
+                                    diff_weight.put(LocalTime.now(),removed_weight);
                                     shopping_cart_weights.add(mid+first);
                                     Log.i("Action",shopping_cart_weights.toString());
                                     new Handler(Looper.getMainLooper()).post(new Runnable() {

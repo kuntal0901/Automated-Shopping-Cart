@@ -34,7 +34,7 @@ public class HelpActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HelpActivity.this,CartActivity.class);
+                Intent intent = new Intent(HelpActivity.this,itemlist.class);
                 startActivity(intent);
             }
         });

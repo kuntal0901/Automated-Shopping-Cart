@@ -49,10 +49,6 @@
             android:clearTaskOnLaunch="true"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="false" />
-        <activity
             android:name=".HomeActivity"
             android:clearTaskOnLaunch="true"
             android:exported="false" />

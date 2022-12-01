@@ -511,8 +511,6 @@ public class ScanActivity extends AppCompatActivity {
         Log.d("json",  gson.toJson(cartItemList));
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(PRODUCT_TAG, gson.toJson(cartItemList));
-
-
         editor.apply();
     }
 

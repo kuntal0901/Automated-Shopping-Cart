@@ -146,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this,CartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(ProfileActivity.this,itemlist.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 

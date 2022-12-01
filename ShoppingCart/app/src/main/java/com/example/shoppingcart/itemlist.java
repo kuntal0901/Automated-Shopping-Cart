@@ -55,25 +55,19 @@ public class itemlist extends AppCompatActivity {
     final float[] total = {0.0f};
     View.OnClickListener deleteOnClickListener;
 
-
-    private void getCartFromSharedPreferences() {
-
+    private void getCartFromSharedPreferences(){
         Gson gson = new Gson();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
 
         String jsonSaved = sharedPref.getString(ScanActivity.PRODUCT_TAG, "");
 //        List<CartItem> cartItemList = new ArrayList<CartItem>();
-
-
         if (jsonSaved.length() != 0) {
             Type type = new TypeToken<List<CartItem>>() {
             }.getType();
             Log.d("json", jsonSaved);
             cartItemList = gson.fromJson(jsonSaved, type);
         }
-
     }
-
 
     private void refreshTotal() {
         total[0] = 0;
@@ -81,8 +75,6 @@ public class itemlist extends AppCompatActivity {
             if (itemPriceMap.containsKey(i.name)) {
 
                 total[0] += i.weight * itemPriceMap.get(i.name);
-
-
             }
         }
         Log.d("cart local", "printed");
@@ -95,13 +87,8 @@ public class itemlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e("logging", "logged");
         setContentView(R.layout.activity_itemlist);
-
         getCartFromSharedPreferences();
-
         recyclerView = findViewById(R.id.itemList);
-
-
-
         finalPriceTextView = findViewById(R.id.cartListTotal);
 //        database = FirebaseDatabase.getInstance().getReference("Items");
         recyclerView.setHasFixedSize(true);
@@ -118,10 +105,7 @@ public class itemlist extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
         Button paymentButton = (Button) findViewById(R.id.payButton);
-
-//        setContentView(R.layout.)
-
-
+        //        setContentView(R.layout.)
 
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,12 +155,12 @@ public class itemlist extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
         });
+    }
 
-
-
+    public void delete_which_to()
+    {
+        float weight_remove=Math.abs(WeightService.removed_weight);
 
     }
 
