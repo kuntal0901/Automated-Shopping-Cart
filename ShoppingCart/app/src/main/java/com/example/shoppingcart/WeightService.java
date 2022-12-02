@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.shoppingcart.models.CartItem;
+import com.example.shoppingcart.models.CartListViewItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -153,12 +154,13 @@ public class WeightService extends Service {
                                     removed_weight=mid-cart_last_weights;
                                     diff_weight.put(LocalTime.now(),removed_weight);
                                     shopping_cart_weights.add(mid+first);
-                                    float temp=Math.abs(removed_weight);
-                                    Log.i("Action",shopping_cart_weights.toString());
+                                    float temp=Math.abs(removed_weight)/1000;
+//                                    Log.i("Action",shopping_cart_weights.toString());
+                                    Log.i("Action","Weight reduced is"+String.valueOf(Math.abs(removed_weight)));
                                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(WeightService.this,"Decrease in weight detected Taking you to Cart Page to delete needed item",Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(WeightService.this,"Decrease in weight detected Taking you to Cart Page to delete needed item",Toast.LENGTH_SHORT).show();
                                                 ArrayList<CartItem> cartItemListhere = new ArrayList<CartItem>();
                                                 Gson gson = new Gson();
                                                 SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
@@ -171,15 +173,19 @@ public class WeightService extends Service {
                                             }
                                             if(cartItemListhere.size()>0)
                                             {
+
                                                 ArrayList<CartItem> removablechoices = new ArrayList<CartItem>();
                                                 int counter=0;
                                                 for(CartItem i:cartItemListhere){
-                                                    if(temp-50<i.weight && i.weight<temp+50)
+                                                    Log.i("Action","cartItemListhere is "+i.name+" with weight "+i.weight);
+                                                    if(temp-0.05<i.weight && i.weight<temp+0.05)
                                                     {
                                                         counter+=1;
                                                         removablechoices.add(i);
                                                     }
+
                                                 }
+//                                                Log.i("Action","Removing this"+removablechoices.toString());
                                                 if(counter>1)
                                                 {
                                                     Toast.makeText(WeightService.this,"More than one item found with close weights as detected.Requests Manual Deletion",Toast.LENGTH_SHORT).show();
@@ -187,13 +193,28 @@ public class WeightService extends Service {
                                                     i.putExtra("del",true);
                                                     startActivity(i);
                                                 }
-                                                else
+                                                else if(counter>0)
                                                 {
+                                                    String names=removablechoices.get(0).name;
+//                                                    Log.i("Tempnow",names);
+                                                    ArrayList<CartListViewItem> cartListViewItemstemp = new ArrayList<CartListViewItem>();
+                                                    for(CartListViewItem i:itemlist.cartListViewItems)
+                                                    {
+//                                                        Log.i("Tempo","NAME IS "+i.name);
+                                                        if(!i.name.equals(names))
+                                                        {
+//                                                            Log.i("Tempo","Insidebdkeb");
+                                                            cartListViewItemstemp.add(i);
+                                                        }
+                                                    }
+//                                                    Log.i("Tempnow","Weight Service cartListViewItemstemp "+cartListViewItemstemp.toString());
+                                                    itemlist.cartListViewItems=cartListViewItemstemp;
                                                     cartItemListhere.remove(removablechoices.get(0));
                                                     SharedPreferences.Editor editor = sharedPref.edit();
                                                     editor.putString(ScanActivity.PRODUCT_TAG, gson.toJson(cartItemListhere));
                                                     editor.apply();
                                                     Toast.makeText(WeightService.this,removablechoices.get(0).name+" has been removed from cart as weight reduction noticed",Toast.LENGTH_SHORT).show();
+                                                    itemlist.myAdapter.notifyDataSetChanged();
 //                                                    startActivity(new Intent(WeightService.this,itemlist.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                                 }
                                             }
@@ -221,7 +242,7 @@ public class WeightService extends Service {
                     }
                     else
                     {
-                        Log.i("Action","Calibration In Progress");
+//                        Log.i("Action","Calibration In Progress");
                     }
                 }
             }

@@ -134,7 +134,7 @@ public class ScanActivity extends AppCompatActivity {
             LocalTime last_time=last_time_arr[last_time_arr.length-1];
             LocalTime current=LocalTime.now();
             long diff=Duration.between(last_time,current).getSeconds();
-            if(diff<35 && hc05_present)
+            if(diff<35 && hc05_present && last_time_arr.length==1)
             {
                 Toast.makeText(ScanActivity.this,"Calibration in progress ",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));

@@ -45,7 +45,7 @@ public class itemlist extends AppCompatActivity {
 
     RecyclerView recyclerView;
     TextView finalPriceTextView;
-    MyAdapter myAdapter;
+    public static MyAdapter myAdapter;
     ArrayList<Item> list;
     public static ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
     public static ArrayList<CartListViewItem> cartListViewItems = new ArrayList<CartListViewItem>();
@@ -56,14 +56,16 @@ public class itemlist extends AppCompatActivity {
     private void getCartFromSharedPreferences(){
         Gson gson = new Gson();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
-
         String jsonSaved = sharedPref.getString(ScanActivity.PRODUCT_TAG, "");
-        Log.i("Action",jsonSaved);
+//        Log.i("Action",jsonSaved);
+//        Log.i("Temp Json","Len is"+String.valueOf(jsonSaved.length()));
+//        Log.i("Temp Json","Json saved is "+jsonSaved);
         if (jsonSaved.length() != 0) {
             Type type = new TypeToken<List<CartItem>>() {
             }.getType();
-            Log.d("Temp json", jsonSaved);
+//            Log.d("Temp json", jsonSaved);
             cartItemList = gson.fromJson(jsonSaved, type);
+//            Log.d("Temp json", cartItemList.toString());
         }
     }
 
@@ -93,22 +95,24 @@ public class itemlist extends AppCompatActivity {
         getCartFromSharedPreferences();
         recyclerView = findViewById(R.id.itemList);
         finalPriceTextView = findViewById(R.id.cartListTotal);
-//        database = FirebaseDatabase.getInstance().getReference("Items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        ArrayList<String> items = new ArrayList<>();
         list = new ArrayList<>();
+        Log.d("Temp Json","cartListViewItems is "+cartListViewItems.toString());
+        Log.d("Temp Json","cartItemList is "+cartItemList.toString());
 
         myAdapter = new MyAdapter(cartListViewItems, cartItemList, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 refreshTotal();
+//                MyAdapter.notifyDataSetChanged();
+
             }
         });
+        myAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(myAdapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items");
         Button paymentButton = (Button) findViewById(R.id.payButton);
-        //        setContentView(R.layout.)
 
         paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +123,7 @@ public class itemlist extends AppCompatActivity {
 
 
         });
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -139,16 +143,18 @@ public class itemlist extends AppCompatActivity {
 //                    float price = ((Double) Objects.requireNonNull(snapshot.getValue())).floatValue();
 //                    list.add(new Item(snapshot.getKey(), (float) price_kg));
                 }
-
+                cartListViewItems=new ArrayList<>();
                 for (CartItem i : cartItemList) {
                     if (itemPriceMap.containsKey(i.name)) {
                         CartListViewItem newItem = new CartListViewItem(i.name, itemPriceMap.get(i.name), i.weight);
+                        Log.i("Bomb","This is getting added");
                         cartListViewItems.add(newItem);
                         total[0] += i.weight * itemPriceMap.get(i.name);
 
 
                     }
                 }
+
                 Log.d("cart local", "printed");
                 Log.d("total", String.valueOf(total[0]));
                 finalPriceTextView.setText("Total: " + total[0]);

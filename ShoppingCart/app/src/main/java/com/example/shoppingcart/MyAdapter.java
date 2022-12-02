@@ -73,13 +73,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.itemList = mPItemList;
         this.mPCartItems = mpCartListItems;
         this.deleteListener = deleteListener;
-
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.i("Action","This Happens inside onCreateViewHolder"+String.valueOf(viewType));
         this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item, parent, false);
@@ -90,6 +90,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CartListViewItem i = itemList.get(position);
+        Log.i("Action","This Happens inside onBindViewHolder"+String.valueOf(position));
         DeleteListener dl = new DeleteListener(new View.OnClickListener(){
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -111,6 +112,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.getItemPriceTextView().setText(i.getPrice());
         holder.getItemWeightTextView().setText(i.getQuantity());
         holder.getItemSubTotalTextView().setText(i.getTotalPrice());
+//        holder.getItemDelete().setOnClickListener(dl);
         if(itemlist.deleteable)
         {
             holder.getItemDelete().setOnClickListener(dl);
