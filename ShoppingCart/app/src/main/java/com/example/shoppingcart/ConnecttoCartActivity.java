@@ -185,6 +185,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
         Thread th1 = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 while(true){
                     try {
                         Thread.sleep(2000);
@@ -199,6 +200,7 @@ public class ConnecttoCartActivity extends AppCompatActivity {
                             @Override
                             public void run()
                             {
+//                                Log.i("Action","Running");
                                 ArrayList<Float> datas = beginListenForData();
                                 if(datas.size()>0)
                                 {

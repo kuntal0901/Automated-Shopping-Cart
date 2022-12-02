@@ -45,26 +45,24 @@ public class itemlist extends AppCompatActivity {
 
     RecyclerView recyclerView;
     TextView finalPriceTextView;
-    //    FirebaseFirestore db = FirebaseFirestore.getInstance();
-//    DatabaseReference database;
     MyAdapter myAdapter;
     ArrayList<Item> list;
-    ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
-    ArrayList<CartListViewItem> cartListViewItems = new ArrayList<CartListViewItem>();
+    public static ArrayList<CartItem> cartItemList = new ArrayList<CartItem>();
+    public static ArrayList<CartListViewItem> cartListViewItems = new ArrayList<CartListViewItem>();
     HashMap<String, Float> itemPriceMap = new HashMap<String, Float>(); //name, price pairs
     final float[] total = {0.0f};
     View.OnClickListener deleteOnClickListener;
-
+    static boolean deleteable=false;
     private void getCartFromSharedPreferences(){
         Gson gson = new Gson();
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(ScanActivity.PREFS_TAG, Context.MODE_PRIVATE);
 
         String jsonSaved = sharedPref.getString(ScanActivity.PRODUCT_TAG, "");
-//        List<CartItem> cartItemList = new ArrayList<CartItem>();
+        Log.i("Action",jsonSaved);
         if (jsonSaved.length() != 0) {
             Type type = new TypeToken<List<CartItem>>() {
             }.getType();
-            Log.d("json", jsonSaved);
+            Log.d("Temp json", jsonSaved);
             cartItemList = gson.fromJson(jsonSaved, type);
         }
     }
@@ -87,13 +85,18 @@ public class itemlist extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.e("logging", "logged");
         setContentView(R.layout.activity_itemlist);
+        Bundle data_passed=getIntent().getExtras();
+        if(data_passed!=null)
+        {
+            deleteable=true;
+        }
         getCartFromSharedPreferences();
         recyclerView = findViewById(R.id.itemList);
         finalPriceTextView = findViewById(R.id.cartListTotal);
 //        database = FirebaseDatabase.getInstance().getReference("Items");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<String> items = new ArrayList<>();
+//        ArrayList<String> items = new ArrayList<>();
         list = new ArrayList<>();
 
         myAdapter = new MyAdapter(cartListViewItems, cartItemList, new View.OnClickListener() {

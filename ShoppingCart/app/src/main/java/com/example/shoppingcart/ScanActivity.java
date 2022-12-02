@@ -118,7 +118,7 @@ public class ScanActivity extends AppCompatActivity {
             cart_preset.add(0.0f);
         }
         super.onCreate(savedInstanceState);
-        Log.d("tagged", "tags");
+//        Log.d("tagged", "tags");
         if(hc05_present)
         {
             if(!ConnecttoCartActivity.connected){

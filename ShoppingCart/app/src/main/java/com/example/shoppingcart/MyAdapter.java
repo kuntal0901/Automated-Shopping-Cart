@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -110,7 +111,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.getItemPriceTextView().setText(i.getPrice());
         holder.getItemWeightTextView().setText(i.getQuantity());
         holder.getItemSubTotalTextView().setText(i.getTotalPrice());
-        holder.getItemDelete().setOnClickListener(dl);
+        if(itemlist.deleteable)
+        {
+            holder.getItemDelete().setOnClickListener(dl);
+        }
+
     }
 
     @Override
