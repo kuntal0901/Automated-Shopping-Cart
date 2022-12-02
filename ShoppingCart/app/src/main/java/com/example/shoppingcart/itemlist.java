@@ -91,6 +91,7 @@ public class itemlist extends AppCompatActivity {
         if(data_passed!=null)
         {
             deleteable=true;
+            Log.i("Deletable","True");
         }
         getCartFromSharedPreferences();
         recyclerView = findViewById(R.id.itemList);
@@ -105,8 +106,6 @@ public class itemlist extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 refreshTotal();
-//                MyAdapter.notifyDataSetChanged();
-
             }
         });
         myAdapter.notifyDataSetChanged();
