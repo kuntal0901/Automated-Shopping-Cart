@@ -7,7 +7,6 @@ float y1; // calibrated mass to be added
 long x1 = 0L;
 long x0 = 0L;
 int avg_size = 15; // amount of averages for each mass measurement
-
 int addr1=0;
 
 Q2HX711 hx711(hx711_data_pin, hx711_clock_pin); // prep hx711

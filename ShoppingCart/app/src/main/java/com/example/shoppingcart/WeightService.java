@@ -35,6 +35,7 @@ public class WeightService extends Service {
     public static LinkedHashMap<LocalTime,Float> diff_weight=new LinkedHashMap<>();
     static int counter=0;
     static boolean start_stop=true;
+    static  boolean thread_active=true;
     static float removed_weight;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -55,7 +56,9 @@ public class WeightService extends Service {
 //                    Log.i("Action Data","succesfully_added is"+succesfully_added.toString());
                     try
                     {
+//                        thread_active=false;
                         Thread.sleep(2000);
+//                        thread_active=true;
                     }
                     catch (InterruptedException e)
                     {
@@ -102,7 +105,9 @@ public class WeightService extends Service {
                                                     @Override
                                                     public void run() {
                                                         Toast.makeText(WeightService.this,"Increase in weight detected Taking you to Scan to add new item",Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(WeightService.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK ));
+                                                        Intent in=new Intent(WeightService.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                                                        in.putExtra("from","Service");
+                                                        startActivity(in);
                                                     }
                                                 });
                                             }
@@ -118,7 +123,9 @@ public class WeightService extends Service {
                                                 });
                                             }
                                             try {
+                                                thread_active=false;
                                                 Thread.sleep(30000);
+
                                             } catch (InterruptedException e) {
                                                 e.printStackTrace();
                                             }
@@ -127,6 +134,7 @@ public class WeightService extends Service {
                                             current=LocalTime.now();
                                             diff=Duration.between(last_time,current).getSeconds();
                                             counter+=1;
+                                            thread_active=true;
 
                                         }
                                         shopping_cart_weights.add(mid+first);
@@ -139,10 +147,13 @@ public class WeightService extends Service {
                                         shopping_cart_weights.add(mid+first);
                                         Log.i("Action",shopping_cart_weights.toString());
                                         try {
+                                            thread_active=false;
                                             Thread.sleep(35000);
+
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
+                                        thread_active=true;
                                     }
                                     counter=0;
 //
@@ -217,12 +228,18 @@ public class WeightService extends Service {
                                                     itemlist.myAdapter.notifyDataSetChanged();
 //                                                    startActivity(new Intent(WeightService.this,itemlist.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                                 }
+                                                else
+                                                {
+                                                    Toast.makeText(WeightService.this,"Unusual Activity detected",Toast.LENGTH_SHORT).show();
+                                                    new ProfileActivity().logouts();
+                                                }
                                             }
                                             else
                                             {
                                                 Toast.makeText(WeightService.this,"Unusual Activity detected",Toast.LENGTH_SHORT).show();
                                                 new ProfileActivity().logouts();
                                             }
+
 
                                         }
                                     });

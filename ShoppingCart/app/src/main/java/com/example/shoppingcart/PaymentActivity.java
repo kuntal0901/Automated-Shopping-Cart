@@ -68,10 +68,9 @@ public class PaymentActivity extends AppCompatActivity {
                 }
                 Log.i("Action","Inside");
                 pg=new ProgressDialog(PaymentActivity.this);
-                pg.setTitle("Logout ");
-                pg.setMessage("Logging Out");
                 pg.show();
-                Log.i("Action","Logged out");
+                itemlist.cartListViewItems=new ArrayList<>();
+                itemlist.cartItemList=new ArrayList<>();
                 pg.dismiss();
                 if(ConnecttoCartActivity.connected){
                     pg.setTitle("Closing Bluetooth ");

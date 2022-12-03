@@ -101,7 +101,6 @@ public class itemlist extends AppCompatActivity {
         list = new ArrayList<>();
         Log.d("Temp Json","cartListViewItems is "+cartListViewItems.toString());
         Log.d("Temp Json","cartItemList is "+cartItemList.toString());
-
         myAdapter = new MyAdapter(cartListViewItems, cartItemList, new View.OnClickListener() {
             @Override
             public void onClick(View view) {

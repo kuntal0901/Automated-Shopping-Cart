@@ -21,7 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -59,6 +61,7 @@ import android.app.ProgressDialog;
 import android.widget.Toast;
 
 public class ScanActivity extends AppCompatActivity {
+
     public static final String PREFS_TAG = "Cart_Preference_tab_xx";
     public static final String PRODUCT_TAG = "Product_Preference_tab_xx";
     public static boolean inprogress=false;
@@ -66,10 +69,10 @@ public class ScanActivity extends AppCompatActivity {
     String res;
     int final_pred;
     static boolean hc05_present=true;
+    static boolean this_thread=true;
     @Override
     public void onBackPressed() {
 //        startActivity(new Intent(ScanActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-        finish();
     }
     ConnecttoCartActivity ct=new ConnecttoCartActivity();
     TextView result;
@@ -113,6 +116,8 @@ public class ScanActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle bt=getIntent().getExtras();
+
         if(cart_preset.size()==0)
         {
             cart_preset.add(0.0f);
@@ -140,8 +145,8 @@ public class ScanActivity extends AppCompatActivity {
                 startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         }
-
-        if(ScanActivity.inprogress)
+        Log.i("threadsleep","Scanactivity.inprogress is "+ScanActivity.inprogress+" WeightService.thread is "+WeightService.thread_active+" This Thread is "+this_thread);
+        if(ScanActivity.inprogress || (!WeightService.thread_active&& !(bt!=null)) || !this_thread)
         {
             Toast.makeText(ScanActivity.this,"Old Detection in progress still!!",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -193,8 +198,6 @@ public class ScanActivity extends AppCompatActivity {
         {
             ScanActivity.inprogress=true;
             try {
-//                ScanActivity.inprogress = true;
-//            Log.i("Action", "Scan Activity: Inside classify Image");
                 pg.setTitle("Model Prediction");
                 pg.setMessage("Predicting .............");
                 Efficentnetv2Augumented model = Efficentnetv2Augumented.newInstance(getApplicationContext());
@@ -376,7 +379,9 @@ public class ScanActivity extends AppCompatActivity {
                                         {
                                             try
                                             {
+                                                this_thread=false;
                                                 Thread.sleep(35000);
+                                                this_thread=true;
                                                 LocalTime[]last_diff_arr =WeightService.diff_weight.keySet().toArray(new LocalTime[WeightService.diff_weight.size()]);
                                                 LocalTime last_diff=last_diff_arr[last_diff_arr.length-1];
                                                 LocalTime current=LocalTime.now();
@@ -392,6 +397,7 @@ public class ScanActivity extends AppCompatActivity {
                                                                 Toast.makeText(ScanActivity.this, arr[final_pred] + " has been added to the cart", Toast.LENGTH_SHORT).show();
                                                                 CartItem ci = new CartItem(arr[final_pred], new_item_weight / 1000);
                                                                 addToCartSharedPreferences(ci);
+                                                                ScanActivity.inprogress=false;
                                                             }
                                                         });
                                                     }
@@ -415,7 +421,6 @@ public class ScanActivity extends AppCompatActivity {
                                         }
                                     });
                                     waiter.start();
-                                    ScanActivity.inprogress=false;
                                 }
                             }
                             else
@@ -426,7 +431,9 @@ public class ScanActivity extends AppCompatActivity {
                                     {
                                         try
                                         {
+                                            this_thread=false;
                                             Thread.sleep(35000);
+                                            this_thread=true;
                                             LocalTime[]last_diff_arr =WeightService.diff_weight.keySet().toArray(new LocalTime[WeightService.diff_weight.size()]);
                                             if(last_diff_arr.length>0)
                                             {
@@ -444,6 +451,7 @@ public class ScanActivity extends AppCompatActivity {
                                                                 Toast.makeText(ScanActivity.this,arr[final_pred]+" has been added to the cart",Toast.LENGTH_SHORT).show();
                                                                 CartItem ci = new CartItem(arr[final_pred], new_item_weight/1000);
                                                                 addToCartSharedPreferences(ci);
+                                                                ScanActivity.inprogress=false;
                                                             }
                                                         });
 
@@ -475,7 +483,6 @@ public class ScanActivity extends AppCompatActivity {
                                     }
                                 });
                                 waiter.start();
-                                ScanActivity.inprogress=false;
                             }
                         }
                     finish();

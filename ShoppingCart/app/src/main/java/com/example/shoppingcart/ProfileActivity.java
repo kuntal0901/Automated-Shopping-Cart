@@ -189,7 +189,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
     void logouts(){
         if(ConnecttoCartActivity.connected && ScanActivity.hc05_present ){
-            stopService(ConnecttoCartActivity.ins);
+            if(ConnecttoCartActivity.ins!=null)
+            {
+                stopService(ConnecttoCartActivity.ins);
+            }
         }
         Log.i("Action","Inside");
         pg=new ProgressDialog(this);
