@@ -323,9 +323,12 @@ public class ScanActivity extends AppCompatActivity {
                 no.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(ScanActivity.this,"Discarding Last item predicted",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScanActivity.this,"Discarding Last item predicted So request new image",Toast.LENGTH_SHORT).show();
                         ScanActivity.inprogress=false;
-                        finish();
+//                        this_thread=false;
+                        Intent in=new Intent(ScanActivity.this,ScanActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                        in.putExtra("from","Service");
+                        startActivity(in);
                     }
                 });
 

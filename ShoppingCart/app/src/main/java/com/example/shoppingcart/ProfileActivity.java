@@ -89,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
                 for(DataSnapshot x: snapshot.getChildren()){
                     dataholder temp=x.getValue(dataholder.class);
 //                    Log.i("Action",String.valueOf(temp.getProfilephoto().isEmpty()));
-                    Log.i("Action","Profile Page Username is"+user.getDisplayName()+"temp username is"+temp.getName()+"comp is"+String.valueOf(user.getDisplayName().equals(temp.getName())));
+//                    Log.i("Action","Profile Page Username is"+user.getDisplayName()+"temp username is"+temp.getName()+"comp is"+String.valueOf(user.getDisplayName().equals(temp.getName())));
                     if(temp.getName().equals(user.getDisplayName()))
                     {
                         try{
@@ -170,7 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Action ","Logout clicked");
+//                Log.i("Action ","Logout clicked");
 //                LogoutActivity lg=new LogoutActivity();
                 try{
 
@@ -194,7 +194,7 @@ public class ProfileActivity extends AppCompatActivity {
                 stopService(ConnecttoCartActivity.ins);
             }
         }
-        Log.i("Action","Inside");
+//        Log.i("Action","Inside");
         pg=new ProgressDialog(this);
         pg.setTitle("Logout ");
         pg.setMessage("Logging Out");
@@ -210,9 +210,9 @@ public class ProfileActivity extends AppCompatActivity {
         }
         catch(Exception e)
         {
-            Log.i("Action",e.toString());
+//            Log.i("Action",e.toString());
         }
-        Log.i("Action","Logged out");
+//        Log.i("Action","Logged out");
         pg.dismiss();
         if(ConnecttoCartActivity.connected){
             pg.setTitle("Closing Bluetooth ");
@@ -228,7 +228,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
             pg.dismiss();
         }
-        Log.i("Action","End");
+//        Log.i("Action","End");
         startActivity(new Intent(this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK));
         Toast.makeText(this,"Logout Successful",Toast.LENGTH_SHORT).show();
 

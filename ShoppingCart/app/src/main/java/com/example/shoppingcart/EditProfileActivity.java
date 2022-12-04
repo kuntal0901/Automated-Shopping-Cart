@@ -223,7 +223,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                     if(!name_updates.equals(user.getDisplayName()))
                     {
-                        root.addValueEventListener(new ValueEventListener() {
+                        root.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                                root.
@@ -232,9 +232,17 @@ public class EditProfileActivity extends AppCompatActivity {
                                     dataholder temp=x.getValue(dataholder.class);
                                     if(temp.getName().equals(user.getDisplayName())){
                                         temp.setName(name_updates);
+                                        if(temp.getPrevorder() == null)
+                                        {
+                                            dataholder.Orders x1=new dataholder.Orders();
+                                            x1.setOrderid("");
+                                            temp.setPrevorder(x1);
+                                        }
+                                        Log.i("Action","Before Class objects is "+temp.getPrevorder());
                                         root.child(user.getDisplayName()).orderByChild("name").equalTo(user.getDisplayName()).getRef().removeValue();
                                         root.child(name_updates).setValue(temp);
                                         Log.i("Action","Username in db updated");
+                                        Log.i("Action","Class objects is "+temp.getPrevorder());
                                         UserProfileChangeRequest updates=new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(name_updates)
                                                 .build();
