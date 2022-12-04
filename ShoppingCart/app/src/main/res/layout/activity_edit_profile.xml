@@ -175,6 +175,7 @@
         android:id="@+id/username"
         android:layout_width="175dp"
         android:layout_height="41dp"
+        android:editable="false"
         android:fontFamily="sans-serif"
         android:textAlignment="center"
         android:textColor="#14274E"

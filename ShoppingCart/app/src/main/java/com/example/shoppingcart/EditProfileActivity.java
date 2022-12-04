@@ -231,18 +231,19 @@ public class EditProfileActivity extends AppCompatActivity {
                                 for(DataSnapshot x:snapshot.getChildren()){
                                     dataholder temp=x.getValue(dataholder.class);
                                     if(temp.getName().equals(user.getDisplayName())){
-                                        temp.setName(name_updates);
+
                                         if(temp.getPrevorder() == null)
                                         {
                                             dataholder.Orders x1=new dataholder.Orders();
                                             x1.setOrderid("");
                                             temp.setPrevorder(x1);
                                         }
-                                        Log.i("Action","Before Class objects is "+temp.getPrevorder());
+                                        Log.i("Action","Before Class objects is "+temp.getPrevorder().getOrderid()+" Name is"+temp.getName());
+                                        temp.setName(name_updates);
                                         root.child(user.getDisplayName()).orderByChild("name").equalTo(user.getDisplayName()).getRef().removeValue();
                                         root.child(name_updates).setValue(temp);
                                         Log.i("Action","Username in db updated");
-                                        Log.i("Action","Class objects is "+temp.getPrevorder());
+                                        Log.i("Action","Class objects is "+temp.getPrevorder().getOrderid());
                                         UserProfileChangeRequest updates=new UserProfileChangeRequest.Builder()
                                                 .setDisplayName(name_updates)
                                                 .build();
@@ -297,49 +298,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 }
 //
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                boolean pass_set=false;
-//                if(reset_enable.isChecked()){
-//                    String pass1=password.getText().toString();
-//                    String pass2=retype_password.getText().toString();
-//                    if(pass1.isEmpty()||pass2.isEmpty()||pass1.length()<8 || pass2.length()<8 || !pass1.equals(pass2)){
-//                        Toast.makeText(EditProfileActivity.this,"Password Not updated",Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                    {
-//                        pass_set=true;
-//                        user.updatePassword(pass1);
-//                        Toast.makeText(EditProfileActivity.this,"Password Updated",Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                else{
-//                    pass_set=true;
-//                }
-//                if((!name_updates.equals(user.getDisplayName())||(!email_updated.equals(user.getEmail()))&& pass_set))
-//                {
-//                    if(!name_updates.equals(user.getDisplayName()) && !email_updated.equals(user.getEmail())){
-//                        user.updateEmail(email_updated);
-//                        Toast.makeText(EditProfileActivity.this,"Both username and email cant be changed at the same time so email has been updated only",Toast.LENGTH_LONG).show();
-//                    }
-//                    else if(!name_updates.equals(user.getDisplayName()))
-//                    {
-//                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                                .setDisplayName(name_updates)
-//                                .setPhotoUri(null)
-//                                .build();
-//                        user.updateProfile(profileUpdates);
-//                    }
-//                    else{
-//                        user.updateEmail(email_updated);
-//                    }
-//                    startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 //
-//                }
-//                else{
-//                    if(pass_set){
-//                        startActivity(new Intent(EditProfileActivity.this,HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                    }
-//                }
 
 
             }
